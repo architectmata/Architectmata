@@ -1,0 +1,2 @@
+import type { Config } from 'tailwindcss';
+export default {darkMode:'class',content:['./app/**/*.{js,ts,jsx,tsx,mdx}','./components/**/*.{js,ts,jsx,tsx,mdx}'],theme:{extend:{colors:{paper:'#F7F4EC',ink:'#28322D',moss:'#65745E',clay:'#B86F52',sun:'#E7B75F',sky:'#AFC8C4',rose:'#D9AEA0'},fontFamily:{sans:['var(--font-sans)'],serif:['var(--font-serif)']},boxShadow:{soft:'0 18px 60px rgba(40,50,45,.10)'},borderRadius:{'4xl':'2rem'}}},plugins:[]} satisfies Config;
