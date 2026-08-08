@@ -1,0 +1,649 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f6efe3;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(91, 54, 37, 0.18) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91, 54, 37, 0.12) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 86%, transparent);
+}
+
+::selection {
+  background: #d99b22;
+  color: #241409;
+}
+
+@layer components {
+  .reveal {
+    animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .section-shell {
+    @apply mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8;
+  }
+
+  .notebook-hero {
+    @apply relative bg-plaster bg-paper dark:bg-[#12150f];
+  }
+
+  .hero-immersive {
+    @apply relative min-h-[94vh] overflow-hidden bg-teak pt-24 text-limewash;
+  }
+
+  .hero-shade {
+    @apply absolute inset-0 bg-[linear-gradient(90deg,rgba(36,20,9,.9),rgba(36,20,9,.58)_42%,rgba(36,20,9,.08))];
+  }
+
+  .hero-frame {
+    @apply relative mx-auto grid min-h-[calc(94vh-6rem)] max-w-7xl items-center gap-8 px-4 pb-24 pt-16 sm:px-6 lg:grid-cols-[1fr_20rem] lg:px-8;
+  }
+
+  .hero-immersive .museum-caption {
+    @apply text-marigold;
+  }
+
+  .hero-immersive .hero-copy h1 {
+    @apply max-w-4xl text-limewash;
+  }
+
+  .hero-immersive .hero-statement {
+    @apply border-marigold/70 text-limewash/90;
+  }
+
+  .hero-immersive .hero-statement p + p {
+    @apply text-marigold;
+  }
+
+  .hero-note {
+    @apply hidden self-end border border-limewash/40 bg-limewash/10 p-5 font-serif text-lg italic leading-8 text-limewash/80 backdrop-blur-sm lg:grid;
+  }
+
+  .hero-note span {
+    @apply border-b border-limewash/20 py-2;
+  }
+
+  .notebook-hero::before {
+    content: "";
+    @apply absolute inset-y-0 left-0 hidden w-20 border-r border-teak/10 bg-limewash/35 dark:border-plaster/10 dark:bg-plaster/5 lg:block;
+  }
+
+  .museum-caption {
+    @apply text-xs font-semibold uppercase tracking-[0.24em] text-terracotta dark:text-marigold;
+  }
+
+  .hero-copy h1 {
+    @apply mt-5 max-w-4xl font-serif text-5xl font-semibold leading-[0.98] sm:text-6xl lg:text-7xl;
+  }
+
+  .hero-statement {
+    @apply mt-8 max-w-2xl border-l-2 border-terracotta/60 pl-5 text-lg leading-8 text-teak/80 dark:text-plaster/80;
+  }
+
+  .hero-statement p + p {
+    @apply mt-4 font-serif text-2xl text-sienna dark:text-marigold;
+  }
+
+  .button-primary,
+  .button-outline {
+    @apply inline-flex min-h-11 items-center gap-2 border px-5 py-3 text-sm font-semibold transition focus:outline-none focus:ring-2 focus:ring-marigold focus:ring-offset-2 focus:ring-offset-plaster dark:focus:ring-offset-[#12150f];
+  }
+
+  .button-primary {
+    @apply border-terracotta bg-terracotta text-limewash hover:bg-sienna;
+  }
+
+  .button-outline {
+    @apply border-teak/30 bg-limewash/45 text-teak hover:border-terracotta hover:text-terracotta dark:border-plaster/25 dark:bg-plaster/5 dark:text-plaster dark:hover:border-marigold dark:hover:text-marigold;
+  }
+
+  .hero-immersive .button-outline {
+    @apply border-limewash/55 bg-limewash/10 text-limewash hover:border-marigold hover:text-marigold;
+  }
+
+  .dark-button {
+    @apply bg-plaster/70 dark:bg-[#12150f]/45;
+  }
+
+  .field-board {
+    @apply relative min-h-[560px] border border-teak/15 bg-limewash/70 p-4 shadow-[0_24px_70px_rgba(91,54,37,0.15)] dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .field-board::before {
+    content: "";
+    @apply absolute -left-4 top-10 h-24 w-10 border-y border-l border-teak/20 dark:border-plaster/20;
+  }
+
+  .board-image {
+    @apply absolute inset-4 overflow-hidden border border-teak/20 dark:border-plaster/20;
+  }
+
+  .board-image::after {
+    content: "";
+    @apply absolute inset-0 bg-[linear-gradient(110deg,rgba(246,239,227,.18),transparent_38%,rgba(20,55,86,.12))];
+  }
+
+  .trace-layer {
+    @apply absolute z-10 border border-teak/20 bg-limewash/45 backdrop-blur-[1px] dark:border-plaster/20 dark:bg-plaster/10;
+  }
+
+  .trace-one {
+    @apply -right-5 top-16 h-44 w-48 rotate-3;
+  }
+
+  .trace-two {
+    @apply -bottom-6 left-12 h-32 w-64 -rotate-2;
+  }
+
+  .section-drawing {
+    @apply absolute right-4 top-10 z-20 grid h-36 w-44 grid-cols-3 items-end gap-3 border-b border-teak/50 px-5 dark:border-plaster/50;
+  }
+
+  .section-drawing span {
+    @apply block border-x border-t border-teak/45 dark:border-plaster/45;
+  }
+
+  .section-drawing span:nth-child(1) {
+    height: 72px;
+  }
+
+  .section-drawing span:nth-child(2) {
+    height: 112px;
+  }
+
+  .section-drawing span:nth-child(3) {
+    height: 88px;
+  }
+
+  .annotation {
+    @apply absolute z-20 max-w-48 bg-limewash/85 px-3 py-2 font-serif text-sm italic text-teak/70 shadow-line dark:bg-[#12150f]/75 dark:text-plaster/70;
+  }
+
+  .annotation::before {
+    content: "";
+    @apply absolute h-px w-12 bg-teak/40 dark:bg-plaster/40;
+  }
+
+  .annotation-top {
+    @apply left-8 top-9;
+  }
+
+  .annotation-top::before {
+    @apply -right-12 top-1/2;
+  }
+
+  .annotation-bottom {
+    @apply bottom-9 right-8;
+  }
+
+  .annotation-bottom::before {
+    @apply -left-12 top-1/2;
+  }
+
+  .field-strip {
+    @apply grid gap-4 border-y border-teak/15 py-6 dark:border-plaster/15 md:grid-cols-3;
+  }
+
+  .visual-band {
+    @apply bg-limewash/70 bg-paper dark:bg-plaster/5;
+  }
+
+  .visual-band-grid {
+    @apply grid gap-5 lg:grid-cols-[1.1fr_.8fr_.8fr] lg:grid-rows-[auto_auto];
+  }
+
+  .visual-story {
+    @apply border-l-4 border-terracotta bg-plaster/70 p-6 dark:bg-[#12150f]/45 lg:row-span-2;
+  }
+
+  .visual-story h2 {
+    @apply mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .visual-story p {
+    @apply mt-5 max-w-xl leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .field-strip-item {
+    @apply relative overflow-hidden border border-teak/15 bg-limewash/70 p-3 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .field-strip-item::before {
+    content: "";
+    @apply absolute left-7 top-0 z-10 h-5 w-16 bg-marigold/35;
+  }
+
+  .field-strip-item img,
+  .field-strip-protected {
+    @apply aspect-[4/3] w-full border border-teak/10 object-cover dark:border-plaster/10;
+  }
+
+  .field-item-1 {
+    @apply lg:row-span-2;
+  }
+
+  .field-item-1 img {
+    @apply lg:aspect-[4/5];
+  }
+
+  .field-strip-protected {
+    @apply relative bg-cover bg-center opacity-100;
+  }
+
+  .field-strip-protected::after {
+    content: "(c) Manasi Chaudhari / Architectmata";
+    @apply absolute bottom-2 right-2 bg-limewash/75 px-2 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-teak/70;
+  }
+
+  .field-strip-item p {
+    @apply mt-3 text-xs uppercase tracking-[0.16em] text-teak/60 dark:text-plaster/60;
+  }
+
+  .sketch-divider {
+    @apply mb-7 flex items-center gap-4 text-xs uppercase tracking-[0.24em] text-teak/55 dark:text-plaster/55;
+  }
+
+  .sketch-divider::before,
+  .sketch-divider::after {
+    content: "";
+    @apply h-px flex-1 bg-teak/20 dark:bg-plaster/20;
+  }
+
+  .archive-grid {
+    @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .archive-header {
+    @apply mb-8 max-w-4xl;
+  }
+
+  .archive-header h2 {
+    @apply font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .archive-grid-finished {
+    @apply lg:grid-cols-6;
+  }
+
+  .archive-grid-finished .archive-slip {
+    @apply lg:col-span-2;
+  }
+
+  .archive-grid-finished .archive-slip:nth-child(1),
+  .archive-grid-finished .archive-slip:nth-child(5) {
+    @apply lg:col-span-3;
+  }
+
+  .archive-slip {
+    @apply relative min-h-56 border border-teak/15 bg-limewash/70 p-5 shadow-line dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .archive-slip::after {
+    content: "";
+    @apply absolute -top-3 left-10 h-6 w-20 rotate-[-2deg] bg-marigold/30;
+  }
+
+  .archive-mark {
+    @apply absolute right-4 top-4 font-serif text-5xl text-teak/10 dark:text-plaster/10;
+  }
+
+  .archive-slip h2 {
+    @apply mt-10 max-w-xs font-serif text-2xl font-semibold leading-tight;
+  }
+
+  .archive-slip p {
+    @apply mt-5 text-sm leading-6 text-teak/70 dark:text-plaster/70;
+  }
+
+  .drawing-details-intro {
+    @apply max-w-3xl border-l-4 border-indigo pl-6 dark:border-marigold;
+  }
+
+  .drawing-exhibit {
+    @apply bg-[#ece1d1] dark:bg-teak/25;
+  }
+
+  .drawing-exhibit-grid {
+    @apply grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:items-center;
+  }
+
+  .drawing-details-intro h2 {
+    @apply mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .drawing-details-intro p {
+    @apply mt-5 leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .drawing-gallery {
+    @apply grid gap-5 md:grid-cols-3;
+  }
+
+  .threshold-heading {
+    @apply max-w-4xl border-l-4 border-terracotta pl-6 dark:border-marigold;
+  }
+
+  .about-layout {
+    @apply grid gap-8 border-y border-teak/15 py-12 dark:border-plaster/15 lg:grid-cols-[.85fr_1fr_.72fr] lg:items-stretch;
+  }
+
+  .about-image {
+    @apply min-h-80 overflow-hidden border border-teak/15 bg-limewash/60 p-3 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .about-copy h2 {
+    @apply mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .about-copy p {
+    @apply mt-5 max-w-3xl leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .credential-sheet {
+    @apply grid gap-6 border border-teak/15 bg-limewash/70 p-6 shadow-line dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .credential-sheet p {
+    @apply mt-3 text-sm leading-6 text-teak/70 dark:text-plaster/70;
+  }
+
+  .threshold-heading h2,
+  .section-kicker h2,
+  .resource-heading h2,
+  .newsletter-layout h2,
+  .studio-copy h2 {
+    @apply mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .idea-grid {
+    @apply mt-12 grid gap-4 lg:grid-cols-5;
+  }
+
+  .idea-card {
+    @apply relative min-h-[25rem] border border-teak/15 bg-limewash/60 p-5 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .idea-card::before {
+    content: "";
+    @apply absolute inset-x-5 top-16 h-px bg-teak/15 dark:bg-plaster/15;
+  }
+
+  .idea-icon {
+    @apply grid h-11 w-11 place-items-center border bg-plaster/60 dark:bg-[#12150f]/35;
+  }
+
+  .idea-number {
+    @apply absolute right-4 top-4 font-serif text-4xl text-teak/10 dark:text-plaster/10;
+  }
+
+  .idea-card h3 {
+    @apply mt-12 font-serif text-4xl font-semibold;
+  }
+
+  .idea-card h4 {
+    @apply mt-4 text-sm font-semibold uppercase tracking-[0.12em] text-teak/70 dark:text-plaster/70;
+  }
+
+  .idea-card p {
+    @apply mt-5 text-sm leading-7 text-teak/70 dark:text-plaster/70;
+  }
+
+  .idea-card a,
+  .travel-card a {
+    @apply mt-7 inline-flex items-center gap-2 text-sm font-semibold text-terracotta hover:text-sienna dark:text-marigold;
+  }
+
+  .wide-band {
+    @apply bg-limewash/60 bg-paper dark:bg-plaster/[0.04];
+  }
+
+  .section-kicker {
+    @apply max-w-3xl;
+  }
+
+  .section-kicker p {
+    @apply mt-4 leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .book-grid {
+    @apply mt-10 grid gap-5 lg:grid-cols-3;
+  }
+
+  .book-card {
+    @apply grid gap-5 border border-teak/15 bg-plaster/70 p-4 dark:border-plaster/15 dark:bg-[#12150f]/45 sm:grid-cols-[8rem_1fr] lg:grid-cols-1;
+  }
+
+  .book-cover {
+    @apply grid aspect-[3/4] min-h-40 place-items-end border border-teak/20 bg-[linear-gradient(160deg,#143756,#117488_45%,#d99b22)] p-3 text-limewash dark:border-plaster/20;
+  }
+
+  .book-cover span {
+    @apply text-xs uppercase tracking-[0.2em];
+  }
+
+  .book-card h3,
+  .travel-card h3,
+  .entry-card h3,
+  .resource-card h3 {
+    @apply mt-3 font-serif text-2xl font-semibold leading-tight;
+  }
+
+  .book-card p,
+  .travel-card p,
+  .entry-card p {
+    @apply mt-4 leading-7 text-teak/70 dark:text-plaster/70;
+  }
+
+  .book-card strong {
+    @apply mt-5 block border-t border-teak/15 pt-4 text-sm leading-6 text-sienna dark:border-plaster/15 dark:text-marigold;
+  }
+
+  .story-grid {
+    @apply mt-10 grid gap-5 lg:grid-cols-3;
+  }
+
+  .travel-card {
+    @apply min-h-72 border-l-2 border-olive bg-limewash/55 p-6 shadow-line dark:bg-plaster/5;
+  }
+
+  .studio-section {
+    @apply grid gap-8 border-y border-teak/15 py-12 dark:border-plaster/15 lg:grid-cols-[1fr_.9fr] lg:items-center;
+  }
+
+  .studio-copy p,
+  .newsletter-layout p {
+    @apply mt-5 max-w-2xl leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .studio-facts {
+    @apply mt-6 flex flex-wrap gap-2;
+  }
+
+  .studio-facts span {
+    @apply border border-teak/20 bg-limewash/70 px-3 py-2 text-xs font-semibold uppercase tracking-[0.16em] dark:border-plaster/20 dark:bg-plaster/5;
+  }
+
+  .program-list {
+    @apply grid gap-3;
+  }
+
+  .program-list div {
+    @apply flex min-h-16 items-center gap-4 border border-teak/15 bg-limewash/65 px-4 font-semibold dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .resource-heading {
+    @apply flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between;
+  }
+
+  .resource-grid {
+    @apply mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+  }
+
+  .resource-card {
+    @apply grid min-h-28 grid-cols-[auto_1fr_auto] items-center gap-4 border border-teak/15 bg-plaster/70 p-4 transition hover:border-terracotta hover:text-terracotta dark:border-plaster/15 dark:bg-[#12150f]/45 dark:hover:border-marigold dark:hover:text-marigold;
+  }
+
+  .resource-card p {
+    @apply mt-1 text-xs uppercase tracking-[0.16em] text-teak/60 dark:text-plaster/60;
+  }
+
+  .entry-grid {
+    @apply mt-10 grid gap-5 lg:grid-cols-3;
+  }
+
+  .entry-card {
+    @apply min-h-72 border border-teak/15 bg-limewash/60 p-6 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .sandstone-band {
+    @apply bg-sandstone/20 dark:bg-teak/30;
+  }
+
+  .newsletter-layout {
+    @apply grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center;
+  }
+
+  .newsletter-panel {
+    @apply border border-teak/15 bg-limewash/75 p-6 dark:border-plaster/15 dark:bg-plaster/5 sm:p-8;
+  }
+
+  .newsletter-panel label,
+  .contact-form label {
+    @apply text-sm font-semibold;
+  }
+
+  .newsletter-panel input,
+  .contact-form input,
+  .contact-form textarea {
+    @apply mt-2 w-full border border-teak/20 bg-plaster px-4 py-3 text-base outline-none transition placeholder:text-teak/40 focus:border-terracotta dark:border-plaster/20 dark:bg-[#12150f] dark:placeholder:text-plaster/40;
+  }
+
+  .newsletter-panel button,
+  .contact-form button {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 border border-indigo bg-indigo px-6 font-semibold text-limewash transition hover:bg-peacock;
+  }
+
+  .contact-grid {
+    @apply grid gap-10 border-y border-teak/15 py-12 dark:border-plaster/15 lg:grid-cols-[.9fr_1.1fr] lg:items-start;
+  }
+
+  .contact-grid h2 {
+    @apply mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight;
+  }
+
+  .contact-form {
+    @apply grid gap-4 border border-teak/15 bg-limewash/65 p-5 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .footer-links {
+    @apply mt-8 flex flex-col gap-3 sm:flex-row;
+  }
+
+  .footer-links a {
+    @apply inline-flex min-h-12 items-center gap-2 border border-teak/20 px-4 font-semibold transition hover:border-terracotta hover:text-terracotta dark:border-plaster/20 dark:hover:border-marigold dark:hover:text-marigold;
+  }
+
+  .image-rules {
+    @apply mt-8 grid gap-2 border border-teak/15 bg-limewash/60 p-4 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .image-rules p {
+    @apply text-sm leading-6 text-teak/70 dark:text-plaster/70;
+  }
+
+  .protected-drawing {
+    @apply select-none;
+  }
+
+  .protected-drawing-frame {
+    @apply relative overflow-hidden border border-teak/20 bg-limewash/70 p-3 dark:border-plaster/20 dark:bg-plaster/5;
+  }
+
+  .protected-drawing-image {
+    @apply aspect-[4/3] bg-cover bg-center opacity-100;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+
+  .protected-drawing-watermark {
+    @apply pointer-events-none absolute bottom-5 right-5 z-10 bg-limewash/80 px-2 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-teak/70 dark:bg-[#12150f]/75 dark:text-plaster/70;
+  }
+
+  .protected-drawing figcaption {
+    @apply mt-3 text-xs uppercase tracking-[0.16em] text-teak/60 dark:text-plaster/60;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .section-shell {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .hero-copy h1 {
+    font-size: 3rem;
+  }
+
+  .field-board {
+    min-height: 460px;
+  }
+
+  .threshold-heading h2,
+  .section-kicker h2,
+  .resource-heading h2,
+  .newsletter-layout h2,
+  .studio-copy h2,
+  .contact-grid h2 {
+    font-size: 2.25rem;
+  }
+}
+
