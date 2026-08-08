@@ -1,125 +1,59 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type {ReactNode} from 'react';
-import {ArrowRight,ArrowUpRight,Instagram} from '@/components/icons';
-import {Eyebrow} from '@/components/ui';
+import {ArrowRight, Instagram} from '@/components/icons';
+import {books, destinations, posts} from '@/lib/data';
+import {Eyebrow, Newsletter, PlaceholderImage, SectionHead} from '@/components/ui';
 
-const shopMyBase = 'https://shopmy.us/architectmata';
-
-const quickLinks = [
-  {
-    title: 'Shop the current favorites',
-    note: 'The links most people ask for after seeing a Reel or TikTok.',
-    href: shopMyBase,
-    tone: 'bg-ink text-paper',
-  },
-  {
-    title: 'Kids books worth owning',
-    note: 'Beautiful picture books, early readers, and family read-alouds.',
-    href: `${shopMyBase}/collections/kids-books`,
-    tone: 'bg-sun text-ink',
-  },
-  {
-    title: 'Art supplies we actually use',
-    note: 'Open-ended materials for weekends, quiet afternoons, and classes.',
-    href: `${shopMyBase}/collections/art-supplies`,
-    tone: 'bg-sky text-ink',
-  },
-  {
-    title: 'Family travel kit',
-    note: 'Small things that make museums, road trips, and walks easier.',
-    href: `${shopMyBase}/collections/family-travel`,
-    tone: 'bg-clay text-paper',
-  },
+const chapters = [
+  {name: 'Observe', note: 'Look closely at the ordinary', href: '/architecture', mark: '01', className: 'bg-sky/40'},
+  {name: 'Read', note: 'Books as doors into place', href: '/books', mark: '02', className: 'bg-rose/35'},
+  {name: 'Explore', note: 'Field notes for going out', href: '/travel', mark: '03', className: 'bg-sun/40'},
+  {name: 'Create', note: 'Make with curious hands', href: '/art-classes', mark: '04', className: 'bg-clay/25'},
+  {name: 'Remember', note: 'Carry stories forward', href: '/explorer-club', mark: '05', className: 'bg-moss/20'},
 ];
 
-const collections = [
-  {
-    name: 'Kids Books',
-    dek: 'Stories that build observation, language, and a sense of place.',
-    href: `${shopMyBase}/collections/kids-books`,
-    color: 'bg-sun/45',
-    items: ['Architecture', 'Nature', 'Marathi', 'Read-alouds'],
-  },
-  {
-    name: 'Creative Play',
-    dek: 'Supplies that invite making without turning the table into a project factory.',
-    href: `${shopMyBase}/collections/creative-play`,
-    color: 'bg-rose/45',
-    items: ['Drawing', 'Paper', 'Clay', 'STEM toys'],
-  },
-  {
-    name: 'Family Outings',
-    dek: 'Museum bags, field kits, snack helpers, and travel pieces for curious days out.',
-    href: `${shopMyBase}/collections/family-outings`,
-    color: 'bg-sky/55',
-    items: ['Travel', 'Museums', 'Nature walks', 'Car bag'],
-  },
-];
-
-const proofPoints = [
-  'Picked by a conservation architect, educator, and parent',
-  'Designed for Instagram and TikTok bio traffic',
-  'Fast paths to ShopMy collections and current favorites',
-];
-
-function ShopButton({
-  href,
-  children,
-  className = '',
-}: {
-  href: string;
-  children: ReactNode;
-  className?: string;
-}) {
+function FieldArtifacts() {
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className={`focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-5 py-3 text-center text-sm font-bold uppercase tracking-[.1em] transition hover:-translate-y-1 hover:shadow-soft ${className}`}
+    <div
+      className="relative min-h-[500px] md:min-h-[620px]"
+      aria-label="A field notebook arrangement of books, sketches, tickets, and travel notes"
     >
-      {children}
-      <ArrowUpRight size={18} />
-    </a>
-  );
-}
-
-function PhonePreview() {
-  return (
-    <div className="mx-auto w-full max-w-[380px] rounded-[2rem] border border-ink/15 bg-ink p-3 shadow-field">
-      <div className="overflow-hidden rounded-[1.45rem] bg-paper text-ink">
-        <div className="relative aspect-[4/3]">
+      <div className="absolute left-[8%] top-[4%] w-[70%] rotate-2 bg-[#ebe5d8] p-4 shadow-field">
+        <div className="relative aspect-[4/5] overflow-hidden">
           <Image
-            src="/images/field-notes/manasi-yellow-portrait.jpg"
-            alt="Manasi with a child-friendly field-note style backdrop"
+            src="/images/field-notes/manasi-yellow-house.jpg"
+            alt="Manasi seated in the deep window of a bright yellow house"
             fill
             priority
-            sizes="(min-width:1024px) 360px, 88vw"
+            sizes="(min-width:1024px) 35vw, 70vw"
             className="object-cover"
           />
         </div>
-        <div className="p-5">
-          <div className="flex items-center gap-2 text-xs uppercase tracking-[.14em] text-clay">
-            <Instagram size={16} />
-            <span>@architectmata</span>
-          </div>
-          <h2 className="mt-3 font-serif text-3xl leading-tight">The links from today&apos;s post</h2>
-          <div className="mt-5 space-y-2">
-            {quickLinks.slice(0,3).map((link) => (
-              <a
-                key={link.title}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className={`flex items-center justify-between rounded-2xl px-4 py-3 text-sm font-bold ${link.tone}`}
-              >
-                <span>{link.title}</span>
-                <ArrowUpRight size={17} />
-              </a>
-            ))}
-          </div>
-        </div>
+        <p className="mt-3 font-note text-sm text-ink/70">color / threshold / a window deep enough to sit in</p>
+      </div>
+
+      <div className="museum-ticket absolute right-0 top-[18%] w-48 rotate-6 bg-sun p-4 text-ink shadow-field">
+        <span className="block text-[9px] uppercase tracking-[.2em]">Admit one curious mind</span>
+        <strong className="mt-5 block font-serif text-2xl">Museum Day</strong>
+        <span className="mt-4 block border-t border-dashed border-ink/40 pt-2 text-[10px]">
+          COLLECTION 07 / LOOK SLOWLY
+        </span>
+      </div>
+
+      <div className="absolute bottom-[3%] left-0 w-52 -rotate-6 border border-ink/20 bg-paper p-5 text-ink shadow-field">
+        <span className="text-xs uppercase tracking-widest text-clay">मराठी पुस्तक</span>
+        <p className="mt-8 font-serif text-2xl leading-tight">Stories carried between two homes</p>
+        <div className="mt-8 h-px bg-ink/30" />
+      </div>
+
+      <div className="badge absolute bottom-[1%] right-[8%] grid h-36 w-36 rotate-12 place-items-center rounded-full border border-ink/40 bg-moss text-center text-paper shadow-field">
+        <span className="text-[10px] uppercase tracking-[.15em]">
+          Junior
+          <br />
+          <strong className="font-serif text-lg">Explorer</strong>
+          <br />
+          Pacific NW
+        </span>
       </div>
     </div>
   );
@@ -128,192 +62,215 @@ function PhonePreview() {
 export default function Home() {
   return (
     <>
-      <section className="blueprint-paper relative overflow-hidden px-5 pb-16 pt-28 md:px-10 md:pb-20 md:pt-32">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.05fr_.95fr]">
+      <section className="blueprint-paper relative min-h-screen overflow-hidden px-5 pb-20 pt-32 md:px-10 md:pt-40">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_.9fr]">
           <div className="relative z-10">
-            <div className="mb-7 flex items-center gap-4">
+            <div className="mb-9 flex items-center gap-4">
               <span className="h-px w-12 bg-clay" />
-              <Eyebrow>Architectmata shop guide</Eyebrow>
+              <Eyebrow>Field notes by Manasi</Eyebrow>
             </div>
-            <h1 className="max-w-4xl font-serif text-5xl leading-[.96] md:text-7xl xl:text-[6.5rem]">
-              Thoughtful finds for curious kids and family days.
+            <h1 className="font-serif text-6xl leading-[.94] tracking-tight md:text-8xl xl:text-[7.25rem]">
+              Places become
+              <br />
+              stories when
+              <br />
+              <span className="scribble italic text-clay">children notice.</span>
             </h1>
-            <p className="mt-7 max-w-2xl border-l border-pencil pl-5 text-lg leading-relaxed text-ink/72 dark:text-paper/75 md:text-xl">
-              Books, art materials, travel helpers, and small family-life upgrades, curated by Manasi of Architectmata for parents arriving from Instagram and TikTok.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ShopButton href={shopMyBase} className="bg-ink text-paper">
-                Shop my favorites
-              </ShopButton>
-              <Link
-                href="#quick-links"
-                className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/20 bg-paper/80 px-5 py-3 text-center text-sm font-bold uppercase tracking-[.1em] transition hover:-translate-y-1 dark:border-paper/20 dark:bg-ink/60"
-              >
-                Find a category
-                <ArrowRight size={18} />
-              </Link>
+            <div className="mt-9 max-w-2xl border-l border-pencil pl-6">
+              <p className="text-lg leading-relaxed text-ink/75 dark:text-paper/75">
+                I’m <strong className="font-semibold text-ink dark:text-paper">Manasi</strong>—a conservation architect
+                from India, an educator, and a mother raising a curious child in the Pacific Northwest.
+              </p>
+              <p className="mt-4 leading-relaxed text-ink/65 dark:text-paper/65">
+                Architectmata is my field notebook for exploring how books, old buildings, museums, art, travel, and
+                family memory can teach children to read the world around them.
+              </p>
             </div>
-            <div className="mt-8 grid gap-3 text-sm text-ink/65 dark:text-paper/65 md:grid-cols-3">
-              {proofPoints.map((point) => (
-                <p key={point} className="border-t border-pencil pt-3">
-                  {point}
-                </p>
-              ))}
-            </div>
+            <Link
+              className="focus-ring mt-9 inline-flex items-center gap-3 border-b border-clay pb-2 text-sm font-bold uppercase tracking-[.12em] transition hover:gap-5"
+              href="/about"
+            >
+              Read Manasi’s story <ArrowRight />
+            </Link>
           </div>
-          <PhonePreview />
+          <FieldArtifacts />
         </div>
-        <span className="absolute bottom-5 left-5 font-note text-xs text-ink/45 md:left-10">
-          Save this page as the link in bio.
+        <span className="absolute bottom-6 left-6 font-note text-xs text-ink/45 md:left-10">
+          48.7° N · a notebook kept between India and the Pacific Northwest
         </span>
       </section>
 
-      <section id="quick-links" className="paper-section px-5 py-16 md:px-10 md:py-20">
-        <div className="mx-auto max-w-3xl text-center">
-          <Eyebrow>Fastest path to ShopMy</Eyebrow>
-          <h2 className="font-serif text-4xl leading-tight md:text-6xl">Tap the list you came for.</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-ink/65 dark:text-paper/65">
-            Built for one-handed scrolling from Instagram Stories, Reels, TikTok captions, and saved posts.
-          </p>
-        </div>
-        <div className="mx-auto mt-10 grid max-w-5xl gap-3">
-          {quickLinks.map((link) => (
-            <a
-              key={link.title}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className={`focus-ring group grid gap-2 rounded-[1.5rem] p-5 transition hover:-translate-y-1 hover:shadow-soft md:grid-cols-[1fr_auto] md:items-center ${link.tone}`}
-            >
-              <span>
-                <span className="block font-serif text-2xl leading-tight md:text-3xl">{link.title}</span>
-                <span className="mt-1 block max-w-xl text-sm opacity-75">{link.note}</span>
-              </span>
-              <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/22 transition group-hover:translate-x-1">
-                <ArrowUpRight />
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section className="tracing-paper px-5 py-20 md:px-10">
+      <section className="paper-section px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 grid gap-5 border-y border-pencil py-5 md:grid-cols-[.8fr_1.2fr] md:items-end">
-            <Eyebrow>Shop by family rhythm</Eyebrow>
-            <h2 className="font-serif text-4xl leading-tight md:text-6xl">
-              Fewer random links. Better little libraries, bags, shelves, and tables.
-            </h2>
+          <div className="mb-14 grid gap-5 border-y border-pencil py-5 md:grid-cols-[1fr_2fr]">
+            <Eyebrow>Five ways in</Eyebrow>
+            <p className="max-w-2xl font-serif text-2xl leading-snug md:text-3xl">
+              Not subjects to master, but habits of attention to practice together.
+            </p>
           </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {collections.map((collection) => (
-              <a
-                key={collection.name}
-                href={collection.href}
-                target="_blank"
-                rel="noreferrer"
-                className="focus-ring group flex min-h-[390px] flex-col border border-ink/15 bg-paper p-5 shadow-field transition hover:-translate-y-2 dark:bg-ink"
+          <div className="grid gap-px bg-ink/15 md:grid-cols-5">
+            {chapters.map((c) => (
+              <Link
+                key={c.name}
+                href={c.href}
+                className={`group relative min-h-72 p-6 ${c.className} bg-paper dark:bg-ink`}
               >
-                <div className={`relative mb-6 aspect-[4/3] overflow-hidden ${collection.color}`}>
-                  <div className="absolute left-6 top-6 h-24 w-16 rotate-[-8deg] border border-ink/25 bg-paper/70" />
-                  <div className="absolute bottom-6 right-6 h-24 w-28 rotate-6 border border-ink/25 bg-white/35" />
-                  <span className="absolute bottom-5 left-5 font-note text-sm text-ink/60">Architectmata list</span>
+                <span className="font-note text-xs opacity-50">{c.mark} / FIELD</span>
+                <div className="absolute left-6 right-6 top-20 h-24">
+                  <span
+                    className={`block h-full w-full ${c.className} transition group-hover:-rotate-2 group-hover:scale-105`}
+                  />
                 </div>
-                <h3 className="font-serif text-3xl">{collection.name}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink/65 dark:text-paper/65">{collection.dek}</p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {collection.items.map((item) => (
-                    <span key={item} className="rounded-full border border-ink/15 px-3 py-1 text-xs dark:border-paper/15">
-                      {item}
-                    </span>
-                  ))}
-                </div>
-                <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-bold uppercase tracking-[.12em] text-clay">
-                  Open on ShopMy
-                  <ArrowRight size={17} />
-                </span>
-              </a>
+                <h2 className="absolute bottom-16 font-serif text-3xl">{c.name}</h2>
+                <p className="absolute bottom-6 text-xs opacity-60">{c.note}</p>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="paper-section px-5 py-20 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-          <div className="relative min-h-[430px]">
-            <div className="absolute left-0 top-0 w-[72%] -rotate-2 bg-[#ebe5d8] p-4 shadow-field">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <Image
-                  src="/images/field-notes/what-can-you-do-with-a-rock.jpg"
-                  alt="A recommended children's book photographed as a field note"
-                  fill
-                  sizes="(min-width:1024px) 420px, 72vw"
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-3 font-note text-sm text-ink/70">book / pocket treasure / nature walk</p>
-            </div>
-            <div className="absolute bottom-0 right-0 w-56 rotate-3 bg-sun p-5 text-ink shadow-field">
-              <span className="text-[10px] uppercase tracking-[.18em]">Featured pick</span>
-              <h3 className="mt-10 font-serif text-3xl leading-tight">A starter shelf for noticing the world</h3>
-            </div>
+      <section className="tracing-paper px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <SectionHead
+            eyebrow="READ / Shelf notes"
+            title="Books we carry with us"
+            link="Open the book library"
+            href="/books"
+          />
+          <div className="grid gap-9 md:grid-cols-3">
+            {books.slice(0, 3).map((b, i) => (
+              <article key={b.title} className={`${i === 1 ? 'md:mt-12' : ''}`}>
+                <div className={`book-object aspect-[4/5] ${b.color} p-6 text-ink shadow-field`}>
+                  <div className="flex h-full flex-col justify-between border border-ink/25 p-6">
+                    <div>
+                      <span className="text-[10px] uppercase tracking-[.18em]">Architectmata shelf / {b.category}</span>
+                      <div className="mt-5 h-px bg-ink/25" />
+                    </div>
+                    <h3 className="font-serif text-3xl leading-tight">{b.title}</h3>
+                    <span className="font-note text-sm">for readers {b.age}</span>
+                  </div>
+                </div>
+                <p className="mt-5 border-l border-clay pl-4 text-sm leading-relaxed opacity-65">{b.why}</p>
+              </article>
+            ))}
           </div>
-          <div>
-            <Eyebrow>Why these links convert</Eyebrow>
-            <h2 className="font-serif text-4xl leading-tight md:text-6xl">Every recommendation has a reason to exist in family life.</h2>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink/70 dark:text-paper/70">
-              Architectmata is not a giant storefront. It is a trusted shortcut for parents who want products that support curiosity: a better book basket, a calmer outing bag, a more inviting art shelf, and gifts that do more than fill a closet.
-            </p>
-            <div className="mt-8 grid gap-3 sm:grid-cols-2">
-              {['Used in our home or classes', 'Grouped by real parent use cases', 'Easy to browse from social posts', 'Ready for affiliate conversion'].map((item) => (
-                <p key={item} className="border-l border-clay bg-white/35 p-4 text-sm shadow-field dark:bg-white/5">
-                  {item}
-                </p>
-              ))}
-            </div>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ShopButton href={shopMyBase} className="bg-clay text-paper">
-                Open the full ShopMy
-              </ShopButton>
+        </div>
+      </section>
+
+      <section className="paper-section px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <SectionHead
+            eyebrow="EXPLORE / Postcards from the field"
+            title="Places worth noticing"
+            link="Open the travel folio"
+            href="/travel"
+          />
+          <div className="grid gap-8 md:grid-cols-3">
+            {destinations.map((d, i) => (
               <Link
-                href="/books"
-                className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-ink/20 px-5 py-3 text-center text-sm font-bold uppercase tracking-[.1em] transition hover:-translate-y-1 dark:border-paper/20"
+                key={d.name}
+                href="/travel"
+                className={`postcard group block border border-ink/20 bg-[#f4efe3] p-3 text-ink shadow-field transition hover:-translate-y-2 ${
+                  i === 0 ? '-rotate-1' : i === 2 ? 'rotate-1' : ''
+                }`}
               >
-                Read book notes
-                <ArrowRight size={18} />
+                <PlaceholderImage className="aspect-[4/3] rounded-none" tone={d.color} label={`${d.name}, ${d.place}`} />
+                <div className="grid grid-cols-[1fr_auto] gap-4 p-3 pt-5">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[.18em] text-clay">{d.place}</p>
+                    <h3 className="mt-1 font-serif text-2xl">{d.name}</h3>
+                  </div>
+                  <div className="stamp grid h-14 w-14 place-items-center rounded-full border border-clay text-center text-[8px] uppercase text-clay">
+                    Field
+                    <br />
+                    Note
+                    <br />
+                    {String(i + 1).padStart(2, '0')}
+                  </div>
+                </div>
+                <p className="border-t border-pencil p-3 text-xs opacity-60">{d.tags.join(' · ')}</p>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-moss px-5 py-24 text-paper md:px-10">
+        <div className="mx-auto grid max-w-7xl gap-14 md:grid-cols-[.7fr_1.3fr]">
+          <div>
+            <Eyebrow>CREATE / At the table</Eyebrow>
+            <h2 className="font-serif text-5xl leading-none md:text-7xl">
+              Making is
+              <br />
+              another way
+              <br />
+              of <em className="text-sun">looking.</em>
+            </h2>
+            <Link className="mt-9 inline-flex items-center gap-3 border-b border-paper/50 pb-2 text-sm" href="/art-classes">
+              Visit the studio <ArrowRight />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="-rotate-2 bg-paper p-3 text-ink shadow-field">
+              <div className="aspect-square border border-dashed border-ink/30 bg-clay/30 p-5">
+                <span className="font-note text-sm">sketch / cut / fold / ask again</span>
+              </div>
+            </div>
+            <div className="mt-10 rotate-2 bg-paper p-3 text-ink shadow-field">
+              <div className="aspect-square border border-dashed border-ink/30 bg-sun/40 p-5">
+                <span className="font-note text-sm">today’s material: light + paper</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-moss px-5 py-20 text-paper md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[1fr_1.2fr] md:items-end">
-          <div>
-            <Eyebrow>For the bio link</Eyebrow>
-            <h2 className="font-serif text-5xl leading-none md:text-7xl">Send every post to one clear next step.</h2>
-          </div>
-          <div>
-            <p className="max-w-2xl text-lg leading-relaxed text-paper/75">
-              Use this page when a caption says "links in bio." The top buttons catch impulse clicks, the category cards help browsers self-select, and the repeated ShopMy CTAs keep the route obvious.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <ShopButton href={shopMyBase} className="bg-sun text-ink">
-                Shop Architectmata picks
-              </ShopButton>
-              <a
-                href="https://www.instagram.com/architectmata/"
-                target="_blank"
-                rel="noreferrer"
-                className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-paper/35 px-5 py-3 text-sm font-bold uppercase tracking-[.1em] transition hover:-translate-y-1"
+      <section className="tracing-paper px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <SectionHead
+            eyebrow="REMEMBER / Notes to keep"
+            title="Fresh from Manasi’s notebook"
+            link="Read all field notes"
+            href="/blog"
+          />
+          <div className="divide-y divide-pencil border-y border-pencil">
+            {posts.slice(0, 3).map((p, i) => (
+              <Link
+                key={p.title}
+                href="/blog"
+                className="group grid gap-3 py-7 md:grid-cols-[80px_150px_1fr_1fr_auto] md:items-center"
               >
-                Follow on Instagram
-                <Instagram size={18} />
-              </a>
-            </div>
+                <span className="font-note text-sm opacity-45">N° 0{i + 1}</span>
+                <span className="text-xs uppercase tracking-widest text-clay">{p.category}</span>
+                <h3 className="font-serif text-2xl group-hover:italic">{p.title}</h3>
+                <p className="text-sm opacity-60">{p.excerpt}</p>
+                <ArrowRight />
+              </Link>
+            ))}
           </div>
         </div>
       </section>
+
+      <section className="paper-section px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <SectionHead eyebrow="A page from our days" title="Pinned from Instagram" />
+          <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+            {['bg-sky', 'bg-clay', 'bg-moss', 'bg-rose'].map((c, i) => (
+              <div
+                key={c}
+                className={`taped relative aspect-square ${c} ${i % 2 ? 'rotate-1' : '-rotate-1'} shadow-field`}
+              >
+                <span className="absolute bottom-4 left-4 font-note text-xs text-ink/65">
+                  observation {String(i + 1).padStart(2, '0')}
+                </span>
+                <Instagram className="absolute bottom-4 right-4 text-ink" size={18} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Newsletter />
     </>
   );
 }

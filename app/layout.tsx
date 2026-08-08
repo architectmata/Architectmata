@@ -6,14 +6,14 @@ import Footer from '@/components/footer';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Architectmata - Kids books, family finds & ShopMy picks',
+    default: 'Architectmata — Architecture, books & wonder',
     template: '%s | Architectmata',
   },
   description:
-    'Thoughtful kids books, art supplies, family travel helpers, and product recommendations curated for parents from Architectmata.',
+    'A Conservation Architect, educator, and mother exploring how children connect with books, architecture, art, travel, and heritage.',
   openGraph: {
-    title: 'Architectmata Shop Guide',
-    description: 'Kids books, family finds, and ShopMy quick links for curious families.',
+    title: 'Architectmata',
+    description: 'Architecture, books, art, and small adventures for curious children.',
     type: 'website',
   },
 };
