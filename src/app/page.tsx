@@ -112,7 +112,7 @@ function NotebookHero() {
             <a className="button-primary" href="#observe">
               Start observing <ArrowRight aria-hidden size={18} />
             </a>
-            <a className="button-outline" href="#read">
+            <a className="button-outline" href="/read">
               Open the book shelf
             </a>
           </div>
