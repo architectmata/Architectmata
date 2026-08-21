@@ -16,7 +16,7 @@ import {
 export const navItems = [
   { label: "About", href: "#about" },
   { label: "Observe", href: "#observe" },
-  { label: "Read", href: "#read" },
+  { label: "Read", href: "/read" },
   { label: "Explore", href: "#explore" },
   { label: "Create", href: "#create" },
   { label: "Remember", href: "#remember" },
@@ -66,7 +66,7 @@ export const ideaSections = [
   },
   {
     verb: "Read",
-    href: "#read",
+    href: "/read",
     title: "Children's books as maps for curiosity",
     note: "Picture books, Marathi books, STEM, architecture shelves, chapter books, and reviews that connect reading with looking.",
     icon: BookOpen,

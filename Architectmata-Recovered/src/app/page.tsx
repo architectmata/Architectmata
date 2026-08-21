@@ -112,7 +112,7 @@ function NotebookHero() {
             <a className="button-primary" href="#observe">
               Start observing <ArrowRight aria-hidden size={18} />
             </a>
-            <a className="button-outline" href="#read">
+            <a className="button-outline" href="/read">
               Open the book shelf
             </a>
           </div>
@@ -290,7 +290,7 @@ function IdeaCard({ idea, index }: { idea: (typeof ideaSections)[number]; index:
   const Icon = idea.icon;
 
   return (
-    <Reveal id={idea.verb === "Observe" ? "observe" : undefined} className="idea-card" delay={index * 0.06}>
+    <Reveal id={idea.verb === "Observe" ? "observe" : `idea-${idea.verb.toLowerCase()}`} className="idea-card" delay={index * 0.06}>
       <div className={`idea-icon ${accentClass[idea.accent]}`}>
         <Icon aria-hidden size={24} />
       </div>
