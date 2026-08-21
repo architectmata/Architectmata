@@ -290,7 +290,7 @@ function IdeaCard({ idea, index }: { idea: (typeof ideaSections)[number]; index:
   const Icon = idea.icon;
 
   return (
-    <Reveal id={idea.verb.toLowerCase()} className="idea-card" delay={index * 0.06}>
+    <Reveal id={idea.verb === "Observe" ? "observe" : undefined} className="idea-card" delay={index * 0.06}>
       <div className={`idea-icon ${accentClass[idea.accent]}`}>
         <Icon aria-hidden size={24} />
       </div>
