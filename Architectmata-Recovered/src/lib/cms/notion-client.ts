@@ -69,21 +69,10 @@ export async function queryPublishedDatabase(key: NotionDatabaseKey) {
   let cursor: string | undefined;
 
   do {
-    const data = await notionRequest<NotionQueryResponse>(`/databases/${databaseId}/query`, {
-      filter: {
-        property: "Published",
-        checkbox: {
-          equals: true
-        }
-      },
-      sorts: [
-        {
-          property: "Date",
-          direction: "descending"
-        }
-      ],
-      start_cursor: cursor
-    });
+    const filter = key === "bookReviews"
+      ? { property: "Website", checkbox: { equals: true } }
+      : { and: [{ property: "Website", checkbox: { equals: true } }, { property: "Status", select: { equals: "Use" } }] };
+    const data = await notionRequest<NotionQueryResponse>(`/databases/${databaseId}/query`, {filter,start_cursor:cursor});
 
     pages.push(...data.results);
     cursor = data.next_cursor ?? undefined;

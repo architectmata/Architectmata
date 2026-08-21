@@ -61,21 +61,25 @@ export function getCoverImage(page: NotionPage) {
 
 export function mapNotionBookReview(page: NotionPage) {
   return {
-    title: getTitle(page),
-    category: getSelect(page, "Category") || "Book Review",
-    age: getRichText(page, "Age Range"),
-    learns: getRichText(page, "What Children Learn"),
-    why: getRichText(page, "Why It Matters"),
+    title: getTitle(page, "Book"),
+    category: getMultiSelect(page, "Category")[0] || "Book Review",
+    age: getMultiSelect(page, "Age").join(", ") || "All ages",
+    learns: getRichText(page, "Try This") || getRichText(page, "Themes"),
+    why: getRichText(page, "Why I Recommend It") || getRichText(page, "Parent Note"),
     slug: getRichText(page, "Slug"),
     tags: getMultiSelect(page, "Tags"),
     featured: getCheckbox(page, "Featured"),
     date: getDate(page, "Date"),
-    coverImage: getFirstFile(page, "Cover Image") || getCoverImage(page),
+    coverImage: getFirstFile(page, "Cover") || getCoverImage(page),
     imageCaption: getRichText(page, "Image Caption"),
     imagePermissionStatus: getSelect(page, "Image Permission Status"),
     excerpt: getRichText(page, "Excerpt"),
     body: getRichText(page, "Body Content")
   };
+}
+
+export function mapNotionMedia(page: NotionPage) {
+  return {src:getFirstFile(page,"Photo")||getCoverImage(page),caption:getRichText(page,"Caption")||getTitle(page,"Photo / Asset")};
 }
 
 export function mapNotionTravelGuide(page: NotionPage) {
