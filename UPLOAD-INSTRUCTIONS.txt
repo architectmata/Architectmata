@@ -1,0 +1,17 @@
+ARCHITECTMATA NOTION UPDATE
+
+These files connect the website Books page to the existing Notion Book Library.
+
+UPLOAD TO GITHUB
+1. Open https://github.com/architectmata/Architectmata
+2. Click Add file, then Upload files.
+3. Unzip this package on your computer.
+4. Drag the CONTENTS of the architectmata-notion-update folder into the upload area.
+5. Confirm replacement if the browser asks.
+6. Under Commit changes, enter: Connect book library to Notion CMS
+7. Choose Commit directly to the main branch.
+8. Click Commit changes.
+
+The .env.example file contains database IDs only. It does not contain a private Notion key.
+
+After upload, add NOTION_API_KEY privately in Vercel. Never put that key in GitHub.
