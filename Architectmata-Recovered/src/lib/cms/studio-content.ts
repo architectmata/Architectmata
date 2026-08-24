@@ -1,11 +1,11 @@
 import "server-only";
 
 import { getNotionConfig } from "./notion-config";
-import { queryNotionDatabase } from "./notion-client";
+import { queryNotionDataSource } from "./notion-client";
 import { getFirstFile, getRichText, getTitle } from "./notion-mappers";
 
-const DEFAULT_CLASSES_DATABASE_ID = "40d63ecb763e420fb886af5160544565";
-const DEFAULT_MEDIA_DATABASE_ID = "d1859b65b3c24bc393b2e7ba9254c604";
+const DEFAULT_CLASSES_DATA_SOURCE_ID = "a7e4de701851432096958f2735bbce14";
+const DEFAULT_MEDIA_DATA_SOURCE_ID = "17d529478c0248d2b5c7ba085b00d8df";
 
 export type PublicStudioClass = {
   id: string;
@@ -28,8 +28,9 @@ export type PublicStudioContent = {
 };
 
 async function getPublicClasses() {
-  const databaseId = process.env.NOTION_CLASSES_DATABASE_ID ?? DEFAULT_CLASSES_DATABASE_ID;
-  const pages = await queryNotionDatabase(databaseId, {
+  const dataSourceId =
+    process.env.NOTION_CLASSES_DATA_SOURCE_ID ?? DEFAULT_CLASSES_DATA_SOURCE_ID;
+  const pages = await queryNotionDataSource(dataSourceId, {
     filter: {
       property: "Publish to website",
       checkbox: { equals: true }
@@ -57,8 +58,8 @@ async function getPublicClasses() {
 }
 
 async function getPublicImages() {
-  const databaseId = process.env.NOTION_MEDIA_DATABASE_ID ?? DEFAULT_MEDIA_DATABASE_ID;
-  const pages = await queryNotionDatabase(databaseId, {
+  const dataSourceId = process.env.NOTION_MEDIA_DATA_SOURCE_ID ?? DEFAULT_MEDIA_DATA_SOURCE_ID;
+  const pages = await queryNotionDataSource(dataSourceId, {
     filter: {
       and: [
         { property: "Website", checkbox: { equals: true } },

@@ -31,7 +31,11 @@ export type NotionProperty =
   | { type: "email"; email: string | null }
   | { type: "phone_number"; phone_number: string | null };
 
-async function notionRequest<T>(path: string, body: Record<string, unknown>) {
+async function notionRequest<T>(
+  path: string,
+  body: Record<string, unknown>,
+  notionVersion = NOTION_VERSION
+) {
   const { token } = getNotionConfig();
 
   if (!token) {
@@ -43,7 +47,7 @@ async function notionRequest<T>(path: string, body: Record<string, unknown>) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
-      "Notion-Version": NOTION_VERSION
+      "Notion-Version": notionVersion
     },
     body: JSON.stringify(body),
     next: { revalidate: 300 }
@@ -69,6 +73,30 @@ export async function queryNotionDatabase(
       ...query,
       start_cursor: cursor
     });
+
+    pages.push(...data.results);
+    cursor = data.next_cursor ?? undefined;
+  } while (cursor);
+
+  return pages;
+}
+
+export async function queryNotionDataSource(
+  dataSourceId: string,
+  query: Record<string, unknown> = {}
+) {
+  const pages: NotionPage[] = [];
+  let cursor: string | undefined;
+
+  do {
+    const data = await notionRequest<NotionQueryResponse>(
+      `/data_sources/${dataSourceId}/query`,
+      {
+        ...query,
+        start_cursor: cursor
+      },
+      "2026-03-11"
+    );
 
     pages.push(...data.results);
     cursor = data.next_cursor ?? undefined;
