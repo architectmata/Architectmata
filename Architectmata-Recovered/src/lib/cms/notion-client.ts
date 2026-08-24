@@ -57,31 +57,16 @@ async function notionRequest<T>(path: string, body: Record<string, unknown>) {
   return (await response.json()) as T;
 }
 
-export async function queryPublishedDatabase(key: NotionDatabaseKey) {
-  const { databaseIds } = getNotionConfig();
-  const databaseId = databaseIds[key];
-
-  if (!databaseId) {
-    return [];
-  }
-
+export async function queryNotionDatabase(
+  databaseId: string,
+  query: Record<string, unknown> = {}
+) {
   const pages: NotionPage[] = [];
   let cursor: string | undefined;
 
   do {
     const data = await notionRequest<NotionQueryResponse>(`/databases/${databaseId}/query`, {
-      filter: {
-        property: "Published",
-        checkbox: {
-          equals: true
-        }
-      },
-      sorts: [
-        {
-          property: "Date",
-          direction: "descending"
-        }
-      ],
+      ...query,
       start_cursor: cursor
     });
 
@@ -90,4 +75,28 @@ export async function queryPublishedDatabase(key: NotionDatabaseKey) {
   } while (cursor);
 
   return pages;
+}
+
+export async function queryPublishedDatabase(key: NotionDatabaseKey) {
+  const { databaseIds } = getNotionConfig();
+  const databaseId = databaseIds[key];
+
+  if (!databaseId) {
+    return [];
+  }
+
+  return queryNotionDatabase(databaseId, {
+    filter: {
+      property: "Published",
+      checkbox: {
+        equals: true
+      }
+    },
+    sorts: [
+      {
+        property: "Date",
+        direction: "descending"
+      }
+    ]
+  });
 }

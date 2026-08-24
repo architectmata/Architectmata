@@ -81,6 +81,13 @@ function Navigation() {
         </div>
         <ThemeToggle />
       </nav>
+      <div className="mobile-nav-ribbon" aria-label="Section shortcuts">
+        {navItems.map((item) => (
+          <a href={item.href} key={item.label}>
+            {item.label}
+          </a>
+        ))}
+      </div>
     </header>
   );
 }
@@ -382,18 +389,20 @@ function StudioSection({ programs }: { programs: StudioProgram[] }) {
       <div className="studio-section">
         <Reveal id="art-classes" className="studio-copy">
           <MuseumCaption>Architectmata Studio</MuseumCaption>
-          <h2>Art classes for observing, remembering, and making.</h2>
+          <h2>Art that begins with looking closely.</h2>
           <p>
-            {studioDetails.philosophy} Classes are {studioDetails.format.toLowerCase()} in{" "}
-            {studioDetails.location}, with fees {studioDetails.fees.toLowerCase()}.
+            {studioDetails.philosophy} The goal is not perfect artwork. It is to help children
+            observe more closely, think creatively, and trust their own ideas. Classes are offered
+            in small groups in {studioDetails.location}, with space for individual guidance and
+            thoughtful making.
           </p>
           <div className="studio-facts">
             {studioDetails.ageGroups.map((group) => (
               <span key={group}>{group}</span>
             ))}
           </div>
-          <a className="button-primary mt-8" href="#contact">
-            Inquire about classes <Send aria-hidden size={17} />
+          <a className="button-primary mt-8" href="/art-classes">
+            Inquire about enrollment <Send aria-hidden size={17} />
           </a>
         </Reveal>
         <Reveal className="program-list" delay={0.1}>

@@ -20,7 +20,7 @@ export const navItems = [
   { label: "Explore", href: "#explore" },
   { label: "Create", href: "#create" },
   { label: "Remember", href: "#remember" },
-  { label: "Art Classes", href: "#art-classes" },
+  { label: "Art Classes", href: "/art-classes" },
   { label: "Explorer Club", href: "#explorer-club" },
   { label: "Contact", href: "#contact" }
 ];
@@ -216,19 +216,19 @@ export const notebookEntries = [
 ];
 
 export const studioDetails = {
-  ageGroups: ["5-7 years", "Future groups for older children"],
+  ageGroups: ["Children ages 5-7", "Small groups", "Enrollment open"],
   format: "Primarily in-person",
   location: "Redmond, Washington",
-  fees: "Available on inquiry",
+  fees: "Shared on inquiry",
   philosophy:
-    "Children become confident artists and observers by drawing, experimenting, asking questions, and looking closely at the world around them."
+    "Art begins with looking closely. Children draw, build, print, fold, experiment, and explore while becoming curious observers and confident makers."
 };
 
 export const studioPrograms = [
-  "Architecture through sketching",
-  "Mapmaking and memory walks",
-  "Museum-inspired art projects",
-  "Nature journals and texture studies"
+  "Observational drawing without fear of getting it wrong",
+  "Paper engineering, folding, pop-ups, and handmade books",
+  "Printmaking, colour, texture, and mixed-media experiments",
+  "Sketchbook habits for noticing, thinking, and remembering"
 ];
 
 export const resources = [
