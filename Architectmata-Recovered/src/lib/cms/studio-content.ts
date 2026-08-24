@@ -92,7 +92,7 @@ async function getPublicImages() {
     })
     .map((page) => ({
       id: page.id,
-      src: getFirstFile(page, "Photo"),
+      src: getFirstFile(page, "Photo") || getFirstFile(page, "Files & media"),
       alt: getRichText(page, "Alt text") || "Making and artwork at Architectmata Studio"
     }))
     .filter((image) => image.src);
