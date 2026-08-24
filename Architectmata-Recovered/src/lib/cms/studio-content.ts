@@ -27,6 +27,22 @@ export type PublicStudioContent = {
   images: PublicStudioImage[];
 };
 
+function describeNotionFailure(error: unknown) {
+  if (!(error instanceof Error)) return "unknown error";
+
+  const match = error.message.match(/Notion API error (\d+):\s*(\{[\s\S]*\})/);
+  if (!match) return error.message === "NOTION_API_KEY is not configured."
+    ? error.message
+    : "unexpected Notion error";
+
+  try {
+    const payload = JSON.parse(match[2]) as { code?: string; message?: string };
+    return [match[1], payload.code, payload.message].filter(Boolean).join(" ");
+  } catch {
+    return `HTTP ${match[1]}`;
+  }
+}
+
 async function getPublicClasses() {
   const dataSourceId =
     process.env.NOTION_CLASSES_DATA_SOURCE_ID ?? DEFAULT_CLASSES_DATA_SOURCE_ID;
@@ -86,12 +102,16 @@ export async function getPublicStudioContent(): Promise<PublicStudioContent> {
   }
 
   const [classes, images] = await Promise.all([
-    getPublicClasses().catch(() => {
-      console.error("Notion Classes query failed. Using static Art Classes fallback.");
+    getPublicClasses().catch((error) => {
+      console.error(
+        `Notion Classes query failed (${describeNotionFailure(error)}). Using static Art Classes fallback.`
+      );
       return [];
     }),
-    getPublicImages().catch(() => {
-      console.error("Notion Media query failed. Using studio image placeholders.");
+    getPublicImages().catch((error) => {
+      console.error(
+        `Notion Media query failed (${describeNotionFailure(error)}). Using studio image placeholders.`
+      );
       return [];
     })
   ]);
