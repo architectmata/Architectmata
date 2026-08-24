@@ -392,7 +392,7 @@ function StudioSection({ programs }: { programs: StudioProgram[] }) {
               <span key={group}>{group}</span>
             ))}
           </div>
-          <a className="button-primary mt-8" href="#contact">
+          <a className="button-primary mt-8" href="/art-classes">
             Inquire about classes <Send aria-hidden size={17} />
           </a>
         </Reveal>

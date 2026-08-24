@@ -57,6 +57,26 @@ async function notionRequest<T>(path: string, body: Record<string, unknown>) {
   return (await response.json()) as T;
 }
 
+export async function queryNotionDatabase(
+  databaseId: string,
+  query: Record<string, unknown> = {}
+) {
+  const pages: NotionPage[] = [];
+  let cursor: string | undefined;
+
+  do {
+    const data = await notionRequest<NotionQueryResponse>(`/databases/${databaseId}/query`, {
+      ...query,
+      start_cursor: cursor
+    });
+
+    pages.push(...data.results);
+    cursor = data.next_cursor ?? undefined;
+  } while (cursor);
+
+  return pages;
+}
+
 export async function queryPublishedDatabase(key: NotionDatabaseKey) {
   const { databaseIds } = getNotionConfig();
   const databaseId = databaseIds[key];
@@ -65,18 +85,14 @@ export async function queryPublishedDatabase(key: NotionDatabaseKey) {
     return [];
   }
 
-  const pages: NotionPage[] = [];
-  let cursor: string | undefined;
-
-  do {
-    const filter = key === "bookReviews"
+  return queryNotionDatabase(databaseId, {
+    filter: key === "bookReviews"
       ? { property: "Website", checkbox: { equals: true } }
-      : { and: [{ property: "Website", checkbox: { equals: true } }, { property: "Status", select: { equals: "Use" } }] };
-    const data = await notionRequest<NotionQueryResponse>(`/databases/${databaseId}/query`, {filter,start_cursor:cursor});
-
-    pages.push(...data.results);
-    cursor = data.next_cursor ?? undefined;
-  } while (cursor);
-
-  return pages;
+      : {
+          and: [
+            { property: "Website", checkbox: { equals: true } },
+            { property: "Status", select: { equals: "Use" } }
+          ]
+        }
+  });
 }

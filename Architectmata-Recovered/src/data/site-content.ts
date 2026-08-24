@@ -20,7 +20,7 @@ export const navItems = [
   { label: "Explore", href: "#explore" },
   { label: "Create", href: "#create" },
   { label: "Remember", href: "#remember" },
-  { label: "Art Classes", href: "#art-classes" },
+  { label: "Art Classes", href: "/art-classes" },
   { label: "Explorer Club", href: "#explorer-club" },
   { label: "Contact", href: "#contact" }
 ];
