@@ -84,11 +84,16 @@ export async function getPublicStudioContent(): Promise<PublicStudioContent> {
     return { classes: [], images: [] };
   }
 
-  try {
-    const [classes, images] = await Promise.all([getPublicClasses(), getPublicImages()]);
-    return { classes, images };
-  } catch (error) {
-    console.error("Notion studio fetch failed. Using local Art Classes fallback.", error);
-    return { classes: [], images: [] };
-  }
+  const [classes, images] = await Promise.all([
+    getPublicClasses().catch(() => {
+      console.error("Notion Classes query failed. Using static Art Classes fallback.");
+      return [];
+    }),
+    getPublicImages().catch(() => {
+      console.error("Notion Media query failed. Using studio image placeholders.");
+      return [];
+    })
+  ]);
+
+  return { classes, images };
 }
