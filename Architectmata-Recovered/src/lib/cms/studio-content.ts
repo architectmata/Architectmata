@@ -79,13 +79,17 @@ async function getPublicImages() {
     filter: {
       and: [
         { property: "Website", checkbox: { equals: true } },
-        { property: "Status", select: { equals: "Use" } },
-        { property: "Use", multi_select: { contains: "Studio" } }
+        { property: "Status", select: { equals: "Use" } }
       ]
     }
   });
 
   return pages
+    .filter((page) => {
+      const use = page.properties.Use;
+      return use?.type === "multi_select"
+        && use.multi_select.some((option) => option.name.includes("Studio"));
+    })
     .map((page) => ({
       id: page.id,
       src: getFirstFile(page, "Photo"),
