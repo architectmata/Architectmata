@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 
 import { ClassEnquiryForm } from "@/components/class-enquiry-form";
-import { getPublicStudioContent, type PublicStudioClass } from "@/lib/cms/studio-content";
+import { getPublicStudioContent } from "@/lib/cms/studio-content";
 
 export const metadata: Metadata = {
   title: "Art Classes | Architectmata",
@@ -14,36 +14,7 @@ export const metadata: Metadata = {
 
 const WHATSAPP_URL = "https://wa.me/12068250337";
 
-const fallbackClasses: PublicStudioClass[] = [
-  {
-    id: "little-makers",
-    name: "Little Makers",
-    ages: "4–6",
-    description: "Playful drawing, colour, shape and visual exploration designed for younger children.",
-    availability: "Upcoming October batch · Enquire for schedule and availability",
-    displayOrder: 1
-  },
-  {
-    id: "studio-explorers",
-    name: "Studio Explorers",
-    ages: "7–10",
-    description:
-      "Drawing, observation, colour, composition and projects that encourage children to make their own creative choices.",
-    availability: "Upcoming October batch · Enquire for schedule and availability",
-    displayOrder: 2
-  },
-  {
-    id: "young-artists",
-    name: "Young Artists",
-    ages: "11–14",
-    description:
-      "More developed drawing and visual-thinking projects with room for personal ideas, experimentation and individual expression.",
-    availability: "Upcoming October batch · Enquire for schedule and availability",
-    displayOrder: 3
-  }
-];
-
-const focusAreas = ["Drawing", "Colour", "Observation", "Creative expression"];
+const focusAreas = ["Observation", "Line", "Shape", "Proportion", "Colour", "Composition"];
 
 function Caption({ children }: { children: React.ReactNode }) {
   return (
@@ -55,7 +26,6 @@ function Caption({ children }: { children: React.ReactNode }) {
 
 export default async function ArtClassesPage() {
   const notionContent = await getPublicStudioContent();
-  const classes = notionContent.classes.length ? notionContent.classes : fallbackClasses;
 
   return (
     <main className="min-h-screen overflow-hidden bg-plaster text-teak dark:bg-[#12150f] dark:text-plaster">
@@ -84,15 +54,14 @@ export default async function ArtClassesPage() {
           <div className="max-w-4xl">
             <Caption>Architectmata Studio · Redmond, Washington</Caption>
             <h1 className="mt-5 font-serif text-5xl leading-[0.96] sm:text-6xl md:text-8xl">
-              Drawing, colour, observation and creative expression.
+              We learn to see before we learn to draw.
             </h1>
             <p className="mt-7 max-w-2xl border-l border-marigold/70 pl-5 text-base leading-8 text-limewash/80 sm:text-lg">
-              Small-group art classes for children, designed to help them look closely, explore
-              ideas, work confidently with drawing and colour, and develop their own way of
-              expressing what they see and imagine.
+              Small-group drawing classes where children build confidence and visual thinking by
+              observing closely and working with line, shape, proportion, colour and composition.
             </p>
-            <a className="button-primary mt-8" href={WHATSAPP_URL}>
-              October batches — enquire about availability <ArrowRight aria-hidden size={17} />
+            <a className="button-primary mt-8" href="#enquire">
+              Ask about current openings <ArrowRight aria-hidden size={17} />
             </a>
           </div>
         </div>
@@ -102,16 +71,16 @@ export default async function ArtClassesPage() {
         <div>
           <Caption>Class philosophy</Caption>
           <h2 className="mt-4 font-serif text-4xl leading-tight sm:text-5xl">
-            A space to look closely and make freely
+            Art is not about making the same thing
           </h2>
         </div>
         <div>
           <p className="max-w-3xl text-lg leading-8 text-teak/75 dark:text-plaster/75">
-            Architectmata Studio focuses on drawing, colour, observation and creative expression.
-            Children are encouraged to notice details, make their own visual choices and enjoy the
-            process of creating rather than simply copying a finished result.
+            Children observe closely, notice what is distinctive and make their own visual
+            decisions. The process of looking, trying, changing and discovering matters as much as
+            the finished drawing, so every child can develop confidence in their own way of seeing.
           </p>
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {focusAreas.map((area) => (
               <span className="border border-teak/20 bg-limewash/60 px-4 py-4 text-center text-sm dark:border-plaster/20 dark:bg-plaster/5" key={area}>
                 {area}
@@ -123,30 +92,59 @@ export default async function ArtClassesPage() {
 
       <section className="bg-limewash/60 px-5 py-20 dark:bg-plaster/5 sm:px-8 md:py-28">
         <div className="mx-auto max-w-7xl">
-          <Caption>Age groups</Caption>
-          <h2 className="mt-4 font-serif text-4xl sm:text-5xl">Find their studio</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {classes.map((studioClass, index) => {
-              const [availability, detail] = studioClass.availability.split("·").map((item) => item.trim());
-              const accents = ["border-terracotta", "border-peacock", "border-olive"];
+          <Caption>Inside the drawing studio</Caption>
+          <h2 className="mt-4 font-serif text-4xl sm:text-5xl">What we are working on now</h2>
+          <p className="mt-4 max-w-2xl leading-7 text-teak/65 dark:text-plaster/65">
+            A look at the ideas, observation and drawing happening in our current classes.
+          </p>
 
-              return (
-                <article className={`flex min-h-80 flex-col border-t-4 bg-plaster p-7 shadow-line dark:bg-[#1b2018] ${accents[index % accents.length]}`} key={studioClass.id}>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-terracotta dark:text-marigold">
-                    Ages {studioClass.ages}
-                  </p>
-                  <h3 className="mt-8 font-serif text-3xl">{studioClass.name}</h3>
-                  <p className="mt-4 flex-1 leading-7 text-teak/70 dark:text-plaster/70">
-                    {studioClass.description}
-                  </p>
-                  <div className="mt-8 border-t border-teak/15 pt-5 text-sm dark:border-plaster/15">
-                    <strong className="block">{availability}</strong>
-                    <span className="mt-1 block text-teak/65 dark:text-plaster/65">{detail}</span>
+          {notionContent.images.length ? (
+            <div className="mt-10 grid gap-6 sm:grid-cols-2">
+              {notionContent.images.map((photo) => (
+                <figure key={photo.id}>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-plaster dark:bg-[#1b2018]">
+                    <Image
+                      alt={photo.alt}
+                      className="object-cover"
+                      fill
+                      sizes="(min-width: 640px) 50vw, 100vw"
+                      src={photo.src}
+                    />
                   </div>
-                </article>
-              );
-            })}
-          </div>
+                  <figcaption className="mt-3 text-sm leading-6 text-teak/65 dark:text-plaster/65">
+                    {photo.alt}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          ) : (
+            <p className="mt-8 border-l-2 border-terracotta pl-4 text-teak/65 dark:text-plaster/65">
+              Studio photographs are being prepared. Please check back soon.
+            </p>
+          )}
+
+          {notionContent.classes.length ? (
+            <div className="mt-12 border-t border-teak/15 pt-8 dark:border-plaster/15">
+              <h3 className="font-serif text-2xl">Current class information</h3>
+              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {notionContent.classes.map((studioClass) => (
+                  <div className="border border-teak/15 bg-plaster/70 p-5 dark:border-plaster/15 dark:bg-plaster/5" key={studioClass.id}>
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-terracotta dark:text-marigold">
+                      Ages {studioClass.ages}
+                    </p>
+                    <h4 className="mt-2 font-serif text-xl">{studioClass.name}</h4>
+                    <p className="mt-2 text-sm leading-6 text-teak/65 dark:text-plaster/65">
+                      {studioClass.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          <a className="button-primary mt-10" href="#enquire">
+            Ask about current openings <ArrowRight aria-hidden size={17} />
+          </a>
         </div>
       </section>
 
@@ -181,11 +179,11 @@ export default async function ArtClassesPage() {
       <section className="bg-indigo px-5 py-20 text-limewash sm:px-8 md:py-28" id="enquire">
         <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.75fr_1.25fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-marigold">October batches</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-marigold">Art classes</p>
             <h2 className="mt-4 font-serif text-4xl sm:text-5xl">Enquire about a class</h2>
             <p className="mt-5 max-w-md leading-7 text-limewash/75">
-              Tell us your child’s age and what days or times may work for your family. Schedules
-              will be shaped around interest and availability.
+              Tell us your child’s age and what days or times may work for your family. We’ll share
+              current openings and the most suitable group.
             </p>
             <a className="button-primary mt-8" href={WHATSAPP_URL}>
               Message on WhatsApp <ArrowRight aria-hidden size={17} />
@@ -195,33 +193,6 @@ export default async function ArtClassesPage() {
             <ClassEnquiryForm />
           </div>
         </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
-        <Caption>Inside the studio</Caption>
-        <h2 className="mt-4 font-serif text-4xl sm:text-5xl">A glimpse of the space</h2>
-        <p className="mt-4 max-w-2xl leading-7 text-teak/65 dark:text-plaster/65">
-          {notionContent.images.length
-            ? "A few details from Architectmata Studio—children making, experimenting and following their ideas."
-            : "Real studio photographs will be added here soon. These spaces are reserved for images from Architectmata Studio—not stock photography."}
-        </p>
-        {notionContent.images.length ? (
-          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3">
-            {notionContent.images.map((photo, index) => (
-              <div className={`relative aspect-square overflow-hidden ${index % 2 ? "mt-8" : ""}`} key={photo.id}>
-                <Image alt={photo.alt} className="object-cover" fill sizes="(min-width: 768px) 33vw, 50vw" src={photo.src} />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
-            {["bg-sandstone/45", "bg-peacock/25", "bg-terracotta/30", "bg-olive/30"].map((tone, index) => (
-              <div className={`aspect-square border border-teak/15 ${tone} ${index % 2 ? "mt-8" : ""}`} key={tone}>
-                <span className="flex h-full items-end p-5 text-sm italic text-teak/65">Studio photograph coming soon</span>
-              </div>
-            ))}
-          </div>
-        )}
       </section>
 
       <footer className="border-t border-teak/15 px-5 py-8 dark:border-plaster/15 sm:px-8">
