@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, Download, Instagram, Mail, PenLine, Send } from "lucide-react";
 import { Reveal } from "@/components/motion";
+import { MobileNavigation } from "@/components/mobile-navigation";
 import { ProtectedDrawing } from "@/components/protected-drawing";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { getHomepageCmsContent } from "@/lib/cms/fallback-content";
@@ -56,12 +57,12 @@ export default async function Home() {
 function Navigation() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-teak/15 bg-[rgba(255,250,240,0.95)] backdrop-blur-md dark:border-plaster/15 dark:bg-[rgba(18,21,15,0.95)]">
-      <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3 sm:gap-4 sm:px-6 lg:px-8">
         <a className="flex items-center gap-3" href="#home" aria-label="Architectmata home">
           <span className="grid h-10 w-10 place-items-center border border-teak/35 bg-terracotta text-sm font-semibold text-limewash dark:border-plaster/30">
             A
           </span>
-          <span>
+          <span className="hidden sm:block">
             <span className="block font-serif text-xl font-semibold leading-none">Architectmata</span>
             <span className="hidden text-[0.68rem] uppercase tracking-[0.22em] text-teak/65 dark:text-plaster/65 sm:block">
               {brandBasics.tagline}
@@ -79,6 +80,7 @@ function Navigation() {
             </a>
           ))}
         </div>
+        <MobileNavigation />
         <ThemeToggle />
       </nav>
     </header>
@@ -489,13 +491,19 @@ function Newsletter() {
           </p>
         </Reveal>
         <Reveal className="newsletter-panel" delay={0.1}>
-          <label htmlFor="email">Email address</label>
-          <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-            <input id="email" type="email" placeholder="you@example.com" />
-            <button type="button">
-              Join <Mail aria-hidden size={17} />
-            </button>
-          </div>
+          <p className="font-serif text-2xl font-semibold">The newsletter is coming soon.</p>
+          <p className="mt-3 text-teak/70 dark:text-plaster/70">
+            Until subscriptions open, email Manasi to ask about new notes, resources, and studio
+            updates.
+          </p>
+          <a
+            className="button-primary mt-6"
+            href={`mailto:${brandBasics.email}?subject=${encodeURIComponent(
+              "Architectmata newsletter updates"
+            )}`}
+          >
+            Ask for updates <Mail aria-hidden size={17} />
+          </a>
         </Reveal>
       </div>
     </section>
@@ -510,21 +518,18 @@ function Footer() {
           <MuseumCaption>Contact</MuseumCaption>
           <h2>For classes, collaborations, reading lists, drawings, and thoughtful hello notes.</h2>
         </div>
-        <form className="contact-form">
-          <label>
-            Name
-            <input type="text" />
-          </label>
-          <label>
-            Email
-            <input type="email" />
-          </label>
-          <label>
-            Message
-            <textarea rows={4} />
-          </label>
-          <button type="button">Send note</button>
-        </form>
+        <div className="contact-form">
+          <p className="font-serif text-2xl font-semibold">Send Manasi a note by email.</p>
+          <p className="text-teak/70 dark:text-plaster/70">
+            This opens your email app with the address and subject ready for you to write and review.
+          </p>
+          <a
+            className="button-primary w-full justify-center sm:w-fit"
+            href={`mailto:${brandBasics.email}?subject=${encodeURIComponent("A note for Architectmata")}`}
+          >
+            Send note by email <Send aria-hidden size={17} />
+          </a>
+        </div>
       </div>
       <div className="footer-links">
         <a href={`mailto:${brandBasics.email}`}>
