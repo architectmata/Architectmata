@@ -64,6 +64,7 @@ export function mapNotionBookReview(page: NotionPage) {
     title: getTitle(page, "Book"),
     category: getMultiSelect(page, "Category")[0] || "Book Review",
     age: getMultiSelect(page, "Age").join(", ") || "All ages",
+    readingHistory: getSelect(page, "My Reading History"),
     learns: getRichText(page, "Try This") || getRichText(page, "Themes"),
     why: getRichText(page, "Why I Recommend It") || getRichText(page, "Parent Note"),
     slug: getRichText(page, "Slug"),
