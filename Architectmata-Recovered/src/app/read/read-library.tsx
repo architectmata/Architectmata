@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useMemo, useState } from "react";
 
-type Book={id:string;title:string;author:string;category:string;categories:string[];age:string;language:string;readingLevel:string;readingHistory?:string;learns:string;why:string;coverImage?:string};
+type Book={id:string;title:string;author:string;category:string;categories:string[];age:string;language:string;readingLevel:string;readingHistory?:string;learns:string;why:string;coverImage?:string;instagramLink?:string};
 
 const readingHistoryLabels: Record<string, string> = {
  "Read as a child": "Read as a child",
@@ -39,7 +39,8 @@ export function ReadLibrary({books,unavailable}:{books:Book[];unavailable:boolea
    <h2>{book.title}</h2>
    {book.author&&<p className="read-meta">by {book.author}</p>}
    {book.learns&&<div><strong>What children notice</strong><p>{book.learns}</p></div>}
-   {book.why&&<div><strong>{whyHeading(book.readingHistory)}</strong><p>{book.why}</p></div>}</div>
+   {book.why&&<div><strong>{whyHeading(book.readingHistory)}</strong><p>{book.why}</p></div>}
+   {book.instagramLink&&<a className="mt-4 inline-flex text-xs font-semibold uppercase tracking-[0.1em] text-terracotta underline-offset-4 hover:underline focus:outline-none focus:ring-2 focus:ring-marigold dark:text-marigold" href={book.instagramLink} target="_blank" rel="noreferrer">Instagram review ↗</a>}</div>
   </article>)}</div>
   {unavailable?<p className="read-empty">Book library temporarily unavailable.</p>:!shown.length&&<p className="read-empty">No books match those filters yet.</p>}
  </section>;

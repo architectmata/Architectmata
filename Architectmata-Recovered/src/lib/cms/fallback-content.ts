@@ -11,11 +11,7 @@ import { queryNotionDataSource, queryPublishedDatabase } from "./notion-client";
 import {
   getSelect,
   mapNotionBookReview,
-  mapNotionMedia,
-  mapNotionNotebookEntry,
-  mapNotionResource,
-  mapNotionStudioUpdate,
-  mapNotionTravelGuide
+  mapNotionMedia
 } from "./notion-mappers";
 import { getNotionConfig } from "./notion-config";
 
