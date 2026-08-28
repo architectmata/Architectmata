@@ -53,6 +53,32 @@ export async function getBookLibraryContent() {
   }
 }
 
+export async function getBookLibraryBook(slug: string) {
+  const { isConnected, dataSourceIds } = getNotionConfig();
+
+  if (!isConnected || !dataSourceIds.bookReviews) {
+    return { book: null, unavailable: true };
+  }
+
+  try {
+    const notionBookReviews = await queryNotionDataSource(dataSourceIds.bookReviews, {
+      filter: {
+        and: [
+          { property: "Slug", rich_text: { equals: slug } },
+          { property: "Status", select: { does_not_equal: "Archive" } }
+        ]
+      },
+      page_size: 1
+    });
+    const page = notionBookReviews.find((item) => getSelect(item, "Status") !== "Archive");
+
+    return { book: page ? mapNotionBookReview(page) : null, unavailable: false };
+  } catch (error) {
+    console.error("Notion book review fetch failed.", error);
+    return { book: null, unavailable: true };
+  }
+}
+
 export async function getHomepageCmsContent() {
   const { isConnected, dataSourceIds, databaseIds } = getNotionConfig();
 

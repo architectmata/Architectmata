@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Download, Instagram, Mail, PenLine, Send } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { MobileNavigation } from "@/components/mobile-navigation";
@@ -39,7 +40,7 @@ export default async function Home() {
       <Navigation />
       <NotebookHero />
       <FieldImageStrip images={cmsContent.homepageFeatures.fieldImages} />
-      <ArchiveGrid items={cmsContent.homepageFeatures.archiveItems} />
+      <ArchiveGrid items={cmsContent.homepageFeatures.archiveItems} books={cmsContent.bookReviews} />
       <DrawingDetails />
       <AboutManasi />
       <IdeasSection />
@@ -166,7 +167,7 @@ function FieldImageStrip({ images }: { images: FieldImage[] }) {
   );
 }
 
-function ArchiveGrid({ items }: { items: ArchiveItem[] }) {
+function ArchiveGrid({ items, books }: { items: ArchiveItem[]; books: BookReview[] }) {
   return (
     <section aria-label="Field notebook archive" className="section-shell">
       <div className="archive-header">
@@ -174,14 +175,18 @@ function ArchiveGrid({ items }: { items: ArchiveItem[] }) {
         <h2>Small exhibits from the living notebook</h2>
       </div>
       <div className="archive-grid archive-grid-finished">
-        {items.slice(0, 6).map((item, index) => (
-          <Reveal className="archive-slip" delay={index * 0.05} key={item.title}>
+        {items.slice(0, 6).map((item, index) => {
+          const pinnedBook = item.label === "Pinned book" ? books.find((book) => book.title === item.title) : undefined;
+          const slug = pinnedBook && "slug" in pinnedBook && typeof pinnedBook.slug === "string" ? pinnedBook.slug : "";
+
+          return <Reveal className={`archive-slip ${slug ? "archive-slip-link" : ""}`} delay={index * 0.05} key={item.title}>
+            {slug && <Link href={`/read/${slug}`} className="absolute inset-0 z-10 focus:outline-none"><span className="sr-only">Read the review of {item.title}</span></Link>}
             <span className="archive-mark">{item.mark}</span>
             <MuseumCaption>{item.label}</MuseumCaption>
             <h2>{item.title}</h2>
             <p>{item.detail}</p>
-          </Reveal>
-        ))}
+          </Reveal>;
+        })}
       </div>
     </section>
   );

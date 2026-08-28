@@ -315,6 +315,10 @@ body::before {
     @apply relative min-h-56 border border-teak/15 bg-limewash/70 p-5 shadow-line dark:border-plaster/15 dark:bg-plaster/5;
   }
 
+  .archive-slip-link {
+    @apply transition duration-200 hover:border-terracotta/50 hover:shadow-md focus-within:border-terracotta focus-within:ring-2 focus-within:ring-terracotta focus-within:ring-offset-2 focus-within:ring-offset-plaster dark:hover:border-marigold/50 dark:focus-within:border-marigold dark:focus-within:ring-marigold dark:focus-within:ring-offset-[#12150f];
+  }
+
   .archive-slip::after {
     content: "";
     @apply absolute -top-3 left-10 h-6 w-20 rotate-[-2deg] bg-marigold/30;
