@@ -22,7 +22,7 @@ function whyHeading(readingHistory?: string) {
  return "Why I recommend it";
 }
 
-export function ReadLibrary({books}:{books:Book[]}){
+export function ReadLibrary({books,unavailable}:{books:Book[];unavailable:boolean}){
  const [query,setQuery]=useState(""); const [category,setCategory]=useState("All");
  const categories=["All",...Array.from(new Set(books.map(b=>b.category).filter(Boolean)))];
  const shown=useMemo(()=>books.filter(b=>(category==="All"||b.category===category)&&`${b.title} ${b.category} ${b.age} ${b.readingHistory ?? ""} ${readingHistoryLabel(b.readingHistory)} ${b.learns} ${b.why}`.toLowerCase().includes(query.toLowerCase())),[books,category,query]);
@@ -40,6 +40,6 @@ export function ReadLibrary({books}:{books:Book[]}){
    {book.learns&&<div><strong>What children notice</strong><p>{book.learns}</p></div>}
    {book.why&&<div><strong>{whyHeading(book.readingHistory)}</strong><p>{book.why}</p></div>}</div>
   </article>)}</div>
-  {!shown.length&&<p className="read-empty">No books match those filters yet.</p>}
+  {unavailable?<p className="read-empty">Book library temporarily unavailable.</p>:!shown.length&&<p className="read-empty">No books match those filters yet.</p>}
  </section>;
 }

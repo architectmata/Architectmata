@@ -7,8 +7,9 @@ import {
   studioPrograms,
   travelStories
 } from "@/data/site-content";
-import { queryPublishedDatabase } from "./notion-client";
+import { queryNotionDatabase, queryPublishedDatabase } from "./notion-client";
 import {
+  getSelect,
   mapNotionBookReview,
   mapNotionMedia,
   mapNotionNotebookEntry,
@@ -29,6 +30,26 @@ export const fallbackCmsContent = {
   printableResources: resources,
   studioAnnouncements: studioPrograms
 };
+
+export async function getBookLibraryContent() {
+  const { isConnected, databaseIds } = getNotionConfig();
+
+  if (!isConnected || !databaseIds.bookReviews) {
+    return { books: [], unavailable: true };
+  }
+
+  try {
+    const notionBookReviews = await queryNotionDatabase(databaseIds.bookReviews);
+    const books = notionBookReviews
+      .filter((page) => getSelect(page, "Status") !== "Archive")
+      .map(mapNotionBookReview);
+
+    return { books, unavailable: false };
+  } catch (error) {
+    console.error("Notion book library fetch failed.", error);
+    return { books: [], unavailable: true };
+  }
+}
 
 export async function getHomepageCmsContent() {
   const { isConnected, databaseIds } = getNotionConfig();
