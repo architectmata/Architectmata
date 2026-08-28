@@ -33,6 +33,13 @@ export const fallbackCmsContent = {
 
 export async function getBookLibraryContent() {
   const { isConnected, databaseIds } = getNotionConfig();
+  const hasApiKey = Boolean(process.env.NOTION_API_KEY);
+  const hasBookLibraryDatabaseId = Boolean(process.env.NOTION_BOOK_LIBRARY_DATABASE_ID);
+
+  console.info("Notion book library configuration.", {
+    hasApiKey,
+    hasBookLibraryDatabaseId
+  });
 
   if (!isConnected || !databaseIds.bookReviews) {
     return { books: [], unavailable: true };
@@ -48,7 +55,21 @@ export async function getBookLibraryContent() {
 
     return { books, unavailable: false };
   } catch (error) {
-    console.error("Notion book library fetch failed.", error);
+    const details = error as {
+      name?: unknown;
+      code?: unknown;
+      status?: unknown;
+      statusCode?: unknown;
+      message?: unknown;
+      response?: { status?: unknown };
+    };
+
+    console.error("Notion book library fetch failed.", {
+      name: details.name ?? "UnknownError",
+      code: details.code,
+      status: details.status ?? details.statusCode ?? details.response?.status,
+      message: details.message ?? String(error)
+    });
     return { books: [], unavailable: true };
   }
 }
