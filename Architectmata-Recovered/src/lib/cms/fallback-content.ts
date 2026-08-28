@@ -86,33 +86,40 @@ export async function getHomepageCmsContent() {
     return fallbackCmsContent;
   }
 
-  try {
-    const [notionBookReviews, notionMedia] = await Promise.all([
-      dataSourceIds.bookReviews ? queryPublishedDatabase("bookReviews") : Promise.resolve([]),
-      databaseIds.media ? queryPublishedDatabase("media") : Promise.resolve([])
-    ]);
+  const [bookResult, mediaResult] = await Promise.allSettled([
+    dataSourceIds.bookReviews ? queryPublishedDatabase("bookReviews") : Promise.resolve([]),
+    databaseIds.media ? queryPublishedDatabase("media") : Promise.resolve([])
+  ]);
 
-    const mappedResources =
-      resources;
-
-    const mappedNotebookEntries =
-      notebookEntries;
-
-    return {
-      homepageFeatures: {...fallbackCmsContent.homepageFeatures,fieldImages:notionMedia.length?notionMedia.map(mapNotionMedia):fieldImages},
-      bookReviews:
-        notionBookReviews.length > 0 ? notionBookReviews.map(mapNotionBookReview) : bookReviews,
-      travelGuides:
-        travelStories,
-      notebookEntries: mappedNotebookEntries,
-      printableResources: mappedResources,
-      studioAnnouncements:
-        studioPrograms
-    };
-  } catch (error) {
-    console.error("Notion CMS fetch failed. Falling back to local content.", error);
-    return fallbackCmsContent;
+  if (bookResult.status === "rejected") {
+    const error = bookResult.reason;
+    console.error(
+      "Notion homepage books fetch failed. Using local book reviews.",
+      error instanceof Error ? `${error.name}: ${error.message}` : "Unknown error"
+    );
   }
 
-  return fallbackCmsContent;
+  if (mediaResult.status === "rejected") {
+    const error = mediaResult.reason;
+    console.error(
+      "Notion homepage media fetch failed. Using local field images.",
+      error instanceof Error ? `${error.name}: ${error.message}` : "Unknown error"
+    );
+  }
+
+  const notionBookReviews = bookResult.status === "fulfilled" ? bookResult.value : [];
+  const notionMedia = mediaResult.status === "fulfilled" ? mediaResult.value : [];
+
+  return {
+    homepageFeatures: {
+      ...fallbackCmsContent.homepageFeatures,
+      fieldImages: notionMedia.length ? notionMedia.map(mapNotionMedia) : fieldImages
+    },
+    bookReviews:
+      notionBookReviews.length > 0 ? notionBookReviews.map(mapNotionBookReview) : bookReviews,
+    travelGuides: travelStories,
+    notebookEntries,
+    printableResources: resources,
+    studioAnnouncements: studioPrograms
+  };
 }
