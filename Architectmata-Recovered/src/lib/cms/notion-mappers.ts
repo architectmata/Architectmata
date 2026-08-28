@@ -42,6 +42,16 @@ export function getDate(page: NotionPage, name: string) {
   return value?.type === "date" ? value.date?.start ?? "" : "";
 }
 
+export function getUrl(page: NotionPage, name: string) {
+  const value = property(page, name);
+  return value?.type === "url" ? value.url ?? "" : "";
+}
+
+export function getNumber(page: NotionPage, name: string) {
+  const value = property(page, name);
+  return value?.type === "number" ? value.number : null;
+}
+
 function fileUrl(file?: NotionFileObject | null) {
   if (!file) {
     return "";
@@ -60,22 +70,35 @@ export function getCoverImage(page: NotionPage) {
 }
 
 export function mapNotionBookReview(page: NotionPage) {
+  const categories = getMultiSelect(page, "Category");
+
   return {
+    id: page.id,
     title: getTitle(page, "Book"),
-    category: getMultiSelect(page, "Category")[0] || "Book Review",
-    age: getMultiSelect(page, "Age").join(", ") || "All ages",
+    author: getRichText(page, "Author"),
+    category: categories[0] ?? "",
+    categories,
+    age: getMultiSelect(page, "Age").join(", "),
+    language: getMultiSelect(page, "Language").join(", "),
+    readingLevel: getSelect(page, "Reading Level"),
     readingHistory: getSelect(page, "My Reading History"),
+    status: getSelect(page, "Status"),
     learns: getRichText(page, "Try This") || getRichText(page, "Themes"),
     why: getRichText(page, "Why I Recommend It") || getRichText(page, "Parent Note"),
     slug: getRichText(page, "Slug"),
     tags: getMultiSelect(page, "Tags"),
     featured: getCheckbox(page, "Featured"),
     date: getDate(page, "Date"),
+    architectmataPick: getCheckbox(page, "Architectmata Pick"),
+    reviewOrder: getNumber(page, "Review Order"),
     coverImage: getFirstFile(page, "Cover") || getCoverImage(page),
     imageCaption: getRichText(page, "Image Caption"),
     imagePermissionStatus: getSelect(page, "Image Permission Status"),
     excerpt: getRichText(page, "Excerpt"),
-    body: getRichText(page, "Body Content")
+    body: getRichText(page, "Body Content"),
+    buyLink: getUrl(page, "Buy Link"),
+    amazonLink: getUrl(page, "Amazon / Storefront"),
+    instagramLink: getUrl(page, "Instagram Link")
   };
 }
 

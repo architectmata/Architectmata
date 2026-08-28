@@ -39,7 +39,9 @@ export async function getBookLibraryContent() {
   }
 
   try {
-    const notionBookReviews = await queryNotionDatabase(databaseIds.bookReviews);
+    const notionBookReviews = await queryNotionDatabase(databaseIds.bookReviews, {
+      filter: { property: "Status", select: { does_not_equal: "Archive" } }
+    });
     const books = notionBookReviews
       .filter((page) => getSelect(page, "Status") !== "Archive")
       .map(mapNotionBookReview);
