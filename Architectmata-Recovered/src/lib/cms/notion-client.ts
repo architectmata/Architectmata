@@ -1,4 +1,4 @@
-import { NOTION_VERSION, getNotionConfig, type NotionDatabaseKey } from "./notion-config";
+import { NOTION_DATA_SOURCE_VERSION, NOTION_VERSION, getNotionConfig, type NotionDatabaseKey } from "./notion-config";
 
 type NotionQueryResponse = {
   results: NotionPage[];
@@ -95,7 +95,7 @@ export async function queryNotionDataSource(
         ...query,
         start_cursor: cursor
       },
-      "2026-03-11"
+      NOTION_DATA_SOURCE_VERSION
     );
 
     pages.push(...data.results);
@@ -106,21 +106,30 @@ export async function queryNotionDataSource(
 }
 
 export async function queryPublishedDatabase(key: NotionDatabaseKey) {
-  const { databaseIds } = getNotionConfig();
-  const databaseId = databaseIds[key];
+  const { dataSourceIds, databaseIds } = getNotionConfig();
+
+  if (key === "bookReviews") {
+    const dataSourceId = dataSourceIds.bookReviews;
+
+    return dataSourceId
+      ? queryNotionDataSource(dataSourceId, {
+          filter: { property: "Website", checkbox: { equals: true } }
+        })
+      : [];
+  }
+
+  const databaseId = databaseIds.media;
 
   if (!databaseId) {
     return [];
   }
 
   return queryNotionDatabase(databaseId, {
-    filter: key === "bookReviews"
-      ? { property: "Website", checkbox: { equals: true } }
-      : {
-          and: [
-            { property: "Website", checkbox: { equals: true } },
-            { property: "Status", select: { equals: "Use" } }
-          ]
-        }
+    filter: {
+      and: [
+        { property: "Website", checkbox: { equals: true } },
+        { property: "Status", select: { equals: "Use" } }
+      ]
+    }
   });
 }

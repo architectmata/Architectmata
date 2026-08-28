@@ -7,7 +7,7 @@ import {
   studioPrograms,
   travelStories
 } from "@/data/site-content";
-import { queryNotionDatabase, queryPublishedDatabase } from "./notion-client";
+import { queryNotionDataSource, queryPublishedDatabase } from "./notion-client";
 import {
   getSelect,
   mapNotionBookReview,
@@ -32,21 +32,14 @@ export const fallbackCmsContent = {
 };
 
 export async function getBookLibraryContent() {
-  const { isConnected, databaseIds } = getNotionConfig();
-  const hasApiKey = Boolean(process.env.NOTION_API_KEY);
-  const hasBookLibraryDatabaseId = Boolean(process.env.NOTION_BOOK_LIBRARY_DATABASE_ID);
+  const { isConnected, dataSourceIds } = getNotionConfig();
 
-  console.info("Notion book library configuration.", {
-    hasApiKey,
-    hasBookLibraryDatabaseId
-  });
-
-  if (!isConnected || !databaseIds.bookReviews) {
+  if (!isConnected || !dataSourceIds.bookReviews) {
     return { books: [], unavailable: true };
   }
 
   try {
-    const notionBookReviews = await queryNotionDatabase(databaseIds.bookReviews, {
+    const notionBookReviews = await queryNotionDataSource(dataSourceIds.bookReviews, {
       filter: { property: "Status", select: { does_not_equal: "Archive" } }
     });
     const books = notionBookReviews
@@ -55,27 +48,13 @@ export async function getBookLibraryContent() {
 
     return { books, unavailable: false };
   } catch (error) {
-    const details = error as {
-      name?: unknown;
-      code?: unknown;
-      status?: unknown;
-      statusCode?: unknown;
-      message?: unknown;
-      response?: { status?: unknown };
-    };
-
-    console.error("Notion book library fetch failed.", {
-      name: details.name ?? "UnknownError",
-      code: details.code,
-      status: details.status ?? details.statusCode ?? details.response?.status,
-      message: details.message ?? String(error)
-    });
+    console.error("Notion book library fetch failed.", error);
     return { books: [], unavailable: true };
   }
 }
 
 export async function getHomepageCmsContent() {
-  const { isConnected, databaseIds } = getNotionConfig();
+  const { isConnected, dataSourceIds, databaseIds } = getNotionConfig();
 
   if (!isConnected) {
     return fallbackCmsContent;
@@ -83,7 +62,7 @@ export async function getHomepageCmsContent() {
 
   try {
     const [notionBookReviews, notionMedia] = await Promise.all([
-      databaseIds.bookReviews ? queryPublishedDatabase("bookReviews") : Promise.resolve([]),
+      dataSourceIds.bookReviews ? queryPublishedDatabase("bookReviews") : Promise.resolve([]),
       databaseIds.media ? queryPublishedDatabase("media") : Promise.resolve([])
     ]);
 
