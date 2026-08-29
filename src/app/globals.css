@@ -336,6 +336,11 @@ body::before {
     @apply mt-5 text-sm leading-6 text-teak/70 dark:text-plaster/70;
   }
 
+  .archive-link,
+  .book-link {
+    @apply mt-5 inline-flex items-center gap-2 text-sm font-semibold text-terracotta hover:text-sienna dark:text-marigold;
+  }
+
   .drawing-details-intro {
     @apply max-w-3xl border-l-4 border-indigo pl-6 dark:border-marigold;
   }
@@ -521,7 +526,7 @@ body::before {
   }
 
   .resource-card {
-    @apply grid min-h-28 grid-cols-[auto_1fr_auto] items-center gap-4 border border-teak/15 bg-plaster/70 p-4 transition hover:border-terracotta hover:text-terracotta dark:border-plaster/15 dark:bg-[#12150f]/45 dark:hover:border-marigold dark:hover:text-marigold;
+    @apply grid min-h-28 grid-cols-[auto_1fr] items-center gap-4 border border-teak/15 bg-plaster/70 p-4 dark:border-plaster/15 dark:bg-[#12150f]/45;
   }
 
   .resource-card p {

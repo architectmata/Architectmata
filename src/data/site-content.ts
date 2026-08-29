@@ -29,7 +29,7 @@ export const brandBasics = {
   tagline: "Architecture through a child's eyes.",
   instagram: "@architectmata",
   instagramUrl: "https://www.instagram.com/architectmata/",
-  email: "manasi.pundlik@gmail.com",
+  email: "hello.architectmata@gmail.com",
   location: "Redmond, Washington",
   copyright:
     "All drawings, photographs, field notes, and original content by Manasi Chaudhari / Architectmata unless noted. Please do not reproduce without permission."

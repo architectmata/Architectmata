@@ -56,6 +56,8 @@ export default async function ArtClasses() {
           </p>
           <a
             href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
             className="focus-ring mt-9 inline-flex rounded-full bg-ink px-6 py-4 text-sm font-bold text-paper transition hover:-translate-y-1 dark:bg-paper dark:text-ink sm:px-8"
           >
             October batches — enquire about availability
@@ -161,6 +163,8 @@ export default async function ArtClasses() {
                 </p>
                 <a
                   href={whatsappUrl}
+                  target="_blank"
+                  rel="noreferrer"
                   className="focus-ring mt-7 inline-flex rounded-full bg-ink px-7 py-4 font-bold text-paper transition hover:-translate-y-1 dark:bg-paper dark:text-ink"
                 >
                   Message on WhatsApp

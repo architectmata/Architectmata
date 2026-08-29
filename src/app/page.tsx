@@ -180,6 +180,11 @@ function ArchiveGrid({ items }: { items: ArchiveItem[] }) {
             <MuseumCaption>{item.label}</MuseumCaption>
             <h2>{item.title}</h2>
             <p>{item.detail}</p>
+            {item.label === "Pinned book" && (
+              <a className="archive-link" href="/read">
+                Open the book shelf <ArrowRight aria-hidden size={15} />
+              </a>
+            )}
           </Reveal>
         ))}
       </div>
@@ -340,6 +345,9 @@ function BookReviewCard({ book, delay }: { book: BookReview; delay: number }) {
         <h3>{book.title}</h3>
         <p>{book.learns}</p>
         <strong>{book.why}</strong>
+        <a className="book-link" href="/read">
+          View book shelf <ArrowRight aria-hidden size={15} />
+        </a>
       </div>
     </Reveal>
   );
@@ -371,13 +379,11 @@ function TravelStoryCard({ story, delay }: { story: TravelStory; delay: number }
       <MuseumCaption>{story.place}</MuseumCaption>
       <h3>{story.title}</h3>
       <p>{story.note}</p>
-      <a
-        href={story.url ?? "#contact"}
-        rel={story.url ? "noreferrer" : undefined}
-        target={story.url ? "_blank" : undefined}
-      >
-        {story.url ? "See full story" : "Read field guide"} <ArrowRight aria-hidden size={15} />
-      </a>
+      {story.url && (
+        <a href={story.url} rel="noreferrer" target="_blank">
+          See full story <ArrowRight aria-hidden size={15} />
+        </a>
+      )}
     </Reveal>
   );
 }
@@ -424,7 +430,7 @@ function ExplorerClubSection({ resourcesList }: { resourcesList: PrintableResour
             <MuseumCaption>Explorer Club</MuseumCaption>
             <h2>Printables for small observers</h2>
           </div>
-          <a className="button-outline dark-button" href="#resources">
+          <a className="button-outline dark-button" href="/resources">
             View resources <Download aria-hidden size={16} />
           </a>
         </div>
@@ -448,7 +454,6 @@ function ResourceCard({ resource, delay }: { resource: PrintableResource; delay:
         <h3>{resource.title}</h3>
         <p>{resource.type}</p>
       </div>
-      <ArrowRight aria-hidden size={15} />
     </Reveal>
   );
 }
@@ -495,13 +500,10 @@ function Newsletter() {
           </p>
         </Reveal>
         <Reveal className="newsletter-panel" delay={0.1}>
-          <label htmlFor="email">Email address</label>
-          <div className="mt-3 flex flex-col gap-3 sm:flex-row">
-            <input id="email" type="email" placeholder="you@example.com" />
-            <button type="button">
-              Join <Mail aria-hidden size={17} />
-            </button>
-          </div>
+          <p>Newsletter signup is coming soon. Until then, email Architectmata to stay in touch.</p>
+          <a className="button-primary mt-5" href={`mailto:${brandBasics.email}?subject=Architectmata%20newsletter`}>
+            Email Architectmata <Mail aria-hidden size={17} />
+          </a>
         </Reveal>
       </div>
     </section>
@@ -516,21 +518,12 @@ function Footer() {
           <MuseumCaption>Contact</MuseumCaption>
           <h2>For classes, collaborations, reading lists, drawings, and thoughtful hello notes.</h2>
         </div>
-        <form className="contact-form">
-          <label>
-            Name
-            <input type="text" />
-          </label>
-          <label>
-            Email
-            <input type="email" />
-          </label>
-          <label>
-            Message
-            <textarea rows={4} />
-          </label>
-          <button type="button">Send note</button>
-        </form>
+        <div className="contact-form">
+          <p>Send a note directly by email and Manasi will reply as soon as she can.</p>
+          <a className="button-primary justify-self-start" href={`mailto:${brandBasics.email}`}>
+            Email Architectmata <Mail aria-hidden size={17} />
+          </a>
+        </div>
       </div>
       <div className="footer-links">
         <a href={`mailto:${brandBasics.email}`}>
