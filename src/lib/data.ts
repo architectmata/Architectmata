@@ -1,5 +1,5 @@
 export const nav=[['Home','/'],['About','/about'],['Books','/books'],['Travel','/travel'],['Architecture','/architecture'],['Art Classes','/art-classes'],['Explorer Club','/explorer-club'],['Blog','/blog'],['Resources','/resources'],['Contact','/contact']] as const;
-export type Book={title:string;category:string;age:string;color:string;summary:string;learn:string;why:string;image?:string};
+export type Book={title:string;author?:string;category:string;age:string;language?:string;color:string;summary:string;learn:string;why:string;image?:string};
 export const books:Book[]=[
  {title:'What Can You Do with a Rock?',category:'Nature',age:'3–8',color:'bg-sky',image:'/images/field-notes/what-can-you-do-with-a-rock.jpg',summary:'A poetic invitation to collect, sort, build with, and wonder about rocks.',learn:'Observation, imaginative play, geology, and the stories held by ordinary things.',why:'It begins with something children already love to pocket and turns it into a world of questions.'},
  {title:'Iggy Peck, Architect',category:'Architecture',age:'4–8',color:'bg-sun',summary:'A joyful story about a child who cannot stop building.',learn:'Creative problem-solving, structure, and perseverance.',why:'It makes architecture feel playful, possible, and close at hand.'},
