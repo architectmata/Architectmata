@@ -369,8 +369,12 @@ function TravelStoryCard({ story, delay }: { story: TravelStory; delay: number }
       <MuseumCaption>{story.place}</MuseumCaption>
       <h3>{story.title}</h3>
       <p>{story.note}</p>
-      <a href="#contact">
-        Read field guide <ArrowRight aria-hidden size={15} />
+      <a
+        href={story.url ?? "#contact"}
+        rel={story.url ? "noreferrer" : undefined}
+        target={story.url ? "_blank" : undefined}
+      >
+        {story.url ? "See full story" : "Read field guide"} <ArrowRight aria-hidden size={15} />
       </a>
     </Reveal>
   );

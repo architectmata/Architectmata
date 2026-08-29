@@ -178,6 +178,13 @@ export const fieldImages = [
 
 export const travelStories = [
   {
+    title: "A Piece of India in Manhattan",
+    place: "New York City | Architecture + India",
+    note:
+      "After first discovering Charles Correa through Bharat Bhavan in architecture school, seeing the Permanent Mission of India to the UN felt deeply personal: modern architecture carrying Indian identity and a quiet sense of home.",
+    url: "https://www.instagram.com/p/DQ-taQdEfq_/"
+  },
+  {
     title: "Yellowstone Without Rushing",
     place: "Yellowstone National Park | Family travel",
     note: "Wildlife, visitor centers, landscapes, and Junior Ranger activities became a way to learn through exploration rather than racing between viewpoints."
