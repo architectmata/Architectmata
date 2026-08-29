@@ -289,54 +289,137 @@ body::before {
   }
 
   .archive-grid {
-    @apply grid gap-4 md:grid-cols-2 lg:grid-cols-3;
+    @apply grid gap-4;
   }
 
   .archive-header {
-    @apply mb-8 max-w-4xl;
+    @apply mb-10;
   }
 
   .archive-header h2 {
-    @apply font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+    @apply max-w-4xl font-serif text-5xl font-semibold leading-[.95] sm:text-6xl lg:text-7xl;
   }
 
-  .archive-grid-finished {
-    @apply lg:grid-cols-6;
+  .archive-title-row {
+    @apply grid items-center gap-8 lg:grid-cols-[1fr_18rem];
   }
 
-  .archive-grid-finished .archive-slip {
-    @apply lg:col-span-2;
+  .archive-title-sketch {
+    @apply relative hidden h-48 rotate-2 border border-teak/10 bg-limewash/55 dark:border-plaster/10 dark:bg-plaster/5 lg:block;
   }
 
-  .archive-grid-finished .archive-slip:nth-child(1),
-  .archive-grid-finished .archive-slip:nth-child(5) {
-    @apply lg:col-span-3;
+  .archive-title-sketch::before {
+    content: "";
+    @apply absolute -top-3 left-8 h-7 w-24 -rotate-3 bg-sandstone/45;
+  }
+
+  .archive-title-sketch > span {
+    @apply absolute bottom-8 w-12 border-x border-t border-teak/40 dark:border-plaster/40;
+  }
+
+  .archive-title-sketch > span:nth-child(1) {
+    @apply left-10 h-20;
+  }
+
+  .archive-title-sketch > span:nth-child(2) {
+    @apply left-[5.4rem] h-28;
+  }
+
+  .archive-title-sketch > span:nth-child(3) {
+    @apply left-[8.8rem] h-16;
+  }
+
+  .archive-title-sketch small {
+    @apply absolute bottom-5 right-4 -rotate-3 font-serif text-base italic leading-6 text-indigo/75 dark:text-marigold/80;
   }
 
   .archive-slip {
-    @apply relative min-h-56 border border-teak/15 bg-limewash/70 p-5 shadow-line dark:border-plaster/15 dark:bg-plaster/5;
+    @apply relative grid min-h-64 items-center gap-6 overflow-hidden border border-teak/20 bg-limewash/60 p-5 shadow-[0_10px_35px_rgba(91,54,37,.06)] transition duration-300 hover:-translate-y-0.5 hover:border-terracotta/45 dark:border-plaster/15 dark:bg-plaster/5 dark:hover:border-marigold/45 sm:p-7 md:grid-cols-[8rem_1fr] lg:grid-cols-[10rem_1fr_15rem];
   }
 
   .archive-slip::after {
     content: "";
-    @apply absolute -top-3 left-10 h-6 w-20 rotate-[-2deg] bg-marigold/30;
+    @apply absolute -top-3 left-10 h-7 w-24 rotate-[-2deg] bg-sandstone/35;
   }
 
   .archive-mark {
-    @apply absolute right-4 top-4 font-serif text-5xl text-teak/10 dark:text-plaster/10;
+    @apply absolute right-4 top-3 font-serif text-4xl text-teak/10 dark:text-plaster/10;
+  }
+
+  .archive-illustration {
+    @apply relative grid aspect-square w-full max-w-32 place-items-center overflow-hidden border-b border-teak/25 text-teak/75 dark:border-plaster/25 dark:text-plaster/75;
+  }
+
+  .archive-illustration svg {
+    @apply relative z-10 h-20 w-20;
+  }
+
+  .archive-grid-lines {
+    @apply absolute inset-0 opacity-30;
+    background-image: linear-gradient(rgba(91,54,37,.18) 1px, transparent 1px), linear-gradient(90deg, rgba(91,54,37,.18) 1px, transparent 1px);
+    background-size: 14px 14px;
+  }
+
+  .archive-copy {
+    @apply self-center;
   }
 
   .archive-slip h2 {
-    @apply mt-10 max-w-xs font-serif text-2xl font-semibold leading-tight;
+    @apply mt-4 max-w-xl font-serif text-3xl font-medium leading-tight;
   }
 
   .archive-slip p {
-    @apply mt-5 text-sm leading-6 text-teak/70 dark:text-plaster/70;
+    @apply mt-4 max-w-xl text-sm leading-6 text-teak/70 dark:text-plaster/70;
+  }
+
+  .archive-aside {
+    @apply hidden self-center lg:grid lg:gap-5;
+  }
+
+  .archive-aside em {
+    @apply -rotate-2 font-serif text-lg leading-6 text-indigo/80 dark:text-plaster/75;
+  }
+
+  .archive-stamp {
+    @apply inline-flex w-fit rotate-[-4deg] border-2 px-4 py-2 text-xs font-bold uppercase tracking-[.16em];
+  }
+
+  .archive-stamp-1 {
+    @apply border-indigo text-indigo dark:border-[#8bb5d6] dark:text-[#8bb5d6];
+  }
+
+  .archive-stamp-2 {
+    @apply border-terracotta text-terracotta dark:border-marigold dark:text-marigold;
+  }
+
+  .archive-stamp-3 {
+    @apply border-olive text-olive dark:border-[#a8b16f] dark:text-[#a8b16f];
   }
 
   .archive-link,
   .book-link {
     @apply mt-5 inline-flex items-center gap-2 text-sm font-semibold text-terracotta hover:text-sienna dark:text-marigold;
+  }
+
+  .archive-link-full {
+    @apply absolute bottom-5 right-5 z-10 m-0 grid h-11 w-11 place-items-center border border-transparent p-0 hover:border-terracotta/40 focus:outline-none focus:ring-2 focus:ring-marigold;
+  }
+
+  .archive-closing-note {
+    @apply relative mx-4 mt-10 flex items-center gap-5 border border-teak/10 bg-limewash/65 px-6 py-5 shadow-[0_8px_24px_rgba(91,54,37,.08)] dark:border-plaster/10 dark:bg-plaster/5 sm:mx-8;
+  }
+
+  .archive-closing-note::before {
+    content: "";
+    @apply absolute -top-3 left-10 h-7 w-24 -rotate-2 bg-sandstone/40;
+  }
+
+  .archive-closing-note svg {
+    @apply shrink-0 text-terracotta dark:text-marigold;
+  }
+
+  .archive-closing-note p {
+    @apply font-serif text-lg leading-7 sm:text-xl;
   }
 
   .drawing-details-intro {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, Download, Instagram, Mail, PenLine, Send } from "lucide-react";
+import { ArrowRight, BookOpenText, Download, Instagram, Landmark, Mail, PenLine, Search, Send } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { ProtectedDrawing } from "@/components/protected-drawing";
 import { SiteSearch } from "@/components/site-search";
@@ -169,26 +169,60 @@ function FieldImageStrip({ images }: { images: FieldImage[] }) {
 }
 
 function ArchiveGrid({ items }: { items: ArchiveItem[] }) {
+  const exhibitDetails = [
+    { icon: Search, stamp: "Look closer", note: "Measuring, noticing, and documenting.", href: "#observe" },
+    { icon: BookOpenText, stamp: "Open bookshelf", note: "Books that build curiosity and connection.", href: "/read" },
+    { icon: Landmark, stamp: "Field notes", note: "Architecture, heritage, and places.", href: "/travel" },
+    { icon: PenLine, stamp: "Make a mark", note: "Prompts for drawing memory and place.", href: "/art-classes" },
+    { icon: Landmark, stamp: "Measured work", note: "Fragments from conservation practice.", href: "/architecture" },
+    { icon: Search, stamp: "Notice slowly", note: "Season, texture, patience, and memory.", href: "/journal" }
+  ];
+
   return (
-    <section aria-label="Field notebook archive" className="section-shell">
+    <section aria-label="Field notebook archive" className="section-shell notebook-exhibits">
       <div className="archive-header">
         <SketchDivider label="Pinned archive" />
-        <h2>Small exhibits from the living notebook</h2>
+        <div className="archive-title-row">
+          <h2>Small exhibits from the living notebook</h2>
+          <div className="archive-title-sketch" aria-hidden>
+            <span />
+            <span />
+            <span />
+            <small>observe<br />document<br />understand<br />share</small>
+          </div>
+        </div>
       </div>
       <div className="archive-grid archive-grid-finished">
-        {items.slice(0, 6).map((item, index) => (
-          <Reveal className="archive-slip" delay={index * 0.05} key={item.title}>
-            <span className="archive-mark">{item.mark}</span>
-            <MuseumCaption>{item.label}</MuseumCaption>
-            <h2>{item.title}</h2>
-            <p>{item.detail}</p>
-            {item.label === "Pinned book" && (
-              <a className="archive-link" href="/read">
-                Open the book shelf <ArrowRight aria-hidden size={15} />
+        {items.slice(0, 6).map((item, index) => {
+          const detail = exhibitDetails[index];
+          const Icon = detail.icon;
+
+          return (
+            <Reveal className="archive-slip" delay={index * 0.05} key={item.title}>
+              <div className="archive-illustration" aria-hidden>
+                <Icon strokeWidth={1.15} />
+                <span className="archive-grid-lines" />
+              </div>
+              <div className="archive-copy">
+                <MuseumCaption>{item.label}</MuseumCaption>
+                <h2>{item.title}</h2>
+                <p>{item.detail}</p>
+              </div>
+              <div className="archive-aside">
+                <span className={`archive-stamp archive-stamp-${(index % 3) + 1}`}>{detail.stamp}</span>
+                <em>{detail.note}</em>
+              </div>
+              <a className="archive-link archive-link-full" href={detail.href} aria-label={`${detail.stamp}: ${item.title}`}>
+                <ArrowRight aria-hidden size={24} />
               </a>
-            )}
-          </Reveal>
-        ))}
+              <span className="archive-mark">{item.mark}</span>
+            </Reveal>
+          );
+        })}
+      </div>
+      <div className="archive-closing-note">
+        <PenLine aria-hidden size={28} />
+        <p>This space is always evolving.<br />Thank you for being here as it takes shape.</p>
       </div>
     </section>
   );
