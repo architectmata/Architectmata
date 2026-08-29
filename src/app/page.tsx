@@ -91,11 +91,11 @@ function NotebookHero() {
   return (
     <section id="home" className="hero-immersive">
       <Image
-        alt="Garden at Shaniwar Wada framed by a traditional Maratha interior arch"
-        src="/images/architectmata/shaniwar-wada-interior-arch.jpeg"
+        alt="Manasi sketching during heritage documentation on a traditional timber roof"
+        src="/images/architectmata/site-sketching-roof.jpg"
         fill
         priority
-        className="hero-background object-cover"
+        className="object-cover"
         sizes="100vw"
       />
       <div className="hero-shade" />
