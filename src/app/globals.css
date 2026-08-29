@@ -68,8 +68,12 @@ body::before {
     @apply relative min-h-[94vh] overflow-hidden bg-teak pt-24 text-limewash;
   }
 
+  .hero-background {
+    object-position: center 48%;
+  }
+
   .hero-shade {
-    @apply absolute inset-0 bg-[linear-gradient(90deg,rgba(36,20,9,.9),rgba(36,20,9,.58)_42%,rgba(36,20,9,.08))];
+    @apply absolute inset-0 bg-[linear-gradient(90deg,rgba(20,12,7,.6),rgba(20,12,7,.34)_46%,rgba(20,12,7,.08))];
   }
 
   .hero-frame {
@@ -638,6 +642,10 @@ body::before {
 
   .hero-copy h1 {
     font-size: 3rem;
+  }
+
+  .hero-background {
+    object-position: 43% center;
   }
 
   .field-board {
