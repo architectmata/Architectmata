@@ -14,6 +14,51 @@ export type NotionPage = {
   properties: Record<string, NotionProperty>;
 };
 
+export type NotionRichText = {
+  plain_text: string;
+  href: string | null;
+  annotations: {
+    bold: boolean;
+    italic: boolean;
+    strikethrough: boolean;
+    underline: boolean;
+    code: boolean;
+    color: string;
+  };
+};
+
+type NotionTextBlockValue = {
+  rich_text: NotionRichText[];
+  color: string;
+};
+
+export type NotionBlock = {
+  id: string;
+  type: string;
+  has_children: boolean;
+  children?: NotionBlock[];
+  paragraph?: NotionTextBlockValue;
+  heading_1?: NotionTextBlockValue;
+  heading_2?: NotionTextBlockValue;
+  heading_3?: NotionTextBlockValue;
+  bulleted_list_item?: NotionTextBlockValue;
+  numbered_list_item?: NotionTextBlockValue;
+  quote?: NotionTextBlockValue;
+  divider?: Record<string, never>;
+  image?: {
+    type: "external" | "file";
+    external?: { url: string };
+    file?: { url: string; expiry_time?: string };
+    caption: NotionRichText[];
+  };
+};
+
+type NotionBlockChildrenResponse = {
+  results: NotionBlock[];
+  has_more: boolean;
+  next_cursor: string | null;
+};
+
 export type NotionFileObject =
   | { type: "external"; external: { url: string } }
   | { type: "file"; file: { url: string; expiry_time: string } };
@@ -56,6 +101,28 @@ async function notionRequest<T>(
   if (!response.ok) {
     const text = await response.text();
     throw new Error(`Notion API error ${response.status}: ${text}`);
+  }
+
+  return (await response.json()) as T;
+}
+
+async function notionGet<T>(path: string, notionVersion = NOTION_DATA_SOURCE_VERSION) {
+  const { token } = getNotionConfig();
+
+  if (!token) {
+    throw new Error("Notion is not configured.");
+  }
+
+  const response = await fetch(`https://api.notion.com/v1${path}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Notion-Version": notionVersion
+    },
+    next: { revalidate: 300 }
+  });
+
+  if (!response.ok) {
+    throw new Error(`Notion request failed with status ${response.status}.`);
   }
 
   return (await response.json()) as T;
@@ -118,6 +185,23 @@ export async function queryPublishedDatabase(key: NotionDatabaseKey) {
       : [];
   }
 
+  if (key === "contentBank") {
+    const dataSourceId = dataSourceIds.contentBank;
+
+    return dataSourceId
+      ? queryNotionDataSource(dataSourceId, {
+          filter: {
+            and: [
+              { property: "Website", checkbox: { equals: true } },
+              { property: "Status", select: { equals: "Ready" } },
+              { property: "Stage", select: { equals: "Publish" } },
+              { property: "Output", select: { equals: "Blog Article" } }
+            ]
+          }
+        })
+      : [];
+  }
+
   const databaseId = databaseIds.media;
 
   if (!databaseId) {
@@ -132,4 +216,30 @@ export async function queryPublishedDatabase(key: NotionDatabaseKey) {
       ]
     }
   });
+}
+
+export async function getNotionBlockChildren(blockId: string): Promise<NotionBlock[]> {
+  const blocks: NotionBlock[] = [];
+  let cursor: string | undefined;
+
+  do {
+    const params = new URLSearchParams({ page_size: "100" });
+    if (cursor) {
+      params.set("start_cursor", cursor);
+    }
+
+    const data = await notionGet<NotionBlockChildrenResponse>(
+      `/blocks/${blockId}/children?${params.toString()}`
+    );
+    blocks.push(...data.results);
+    cursor = data.next_cursor ?? undefined;
+  } while (cursor);
+
+  return Promise.all(
+    blocks.map(async (block) =>
+      block.has_children
+        ? { ...block, children: await getNotionBlockChildren(block.id) }
+        : block
+    )
+  );
 }

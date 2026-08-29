@@ -17,6 +17,7 @@ export const navItems = [
   { label: "About", href: "#about" },
   { label: "Observe", href: "#observe" },
   { label: "Read", href: "/read" },
+  { label: "Journal", href: "/journal" },
   { label: "Explore", href: "#explore" },
   { label: "Create", href: "#create" },
   { label: "Remember", href: "#remember" },

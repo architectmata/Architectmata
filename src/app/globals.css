@@ -110,7 +110,9 @@ body::before {
   }
 
   .hero-copy h1 {
-    @apply mt-5 max-w-4xl font-serif text-5xl font-semibold leading-[0.98] sm:text-6xl lg:text-7xl;
+    @apply mt-5 max-w-4xl font-serif font-semibold;
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+    line-height: 1.15;
   }
 
   .hero-statement {
@@ -537,6 +539,26 @@ body::before {
     @apply min-h-72 border border-teak/15 bg-limewash/60 p-6 dark:border-plaster/15 dark:bg-plaster/5;
   }
 
+  .homepage-journal-grid {
+    @apply mt-10 grid gap-4 lg:grid-cols-3;
+  }
+
+  .homepage-journal-card {
+    @apply min-h-64 border-t-2 border-terracotta bg-plaster/70 p-6 dark:bg-[#12150f]/45;
+  }
+
+  .homepage-journal-card h3 {
+    @apply mt-5 font-serif text-2xl font-semibold leading-tight;
+  }
+
+  .homepage-journal-card h3 a {
+    @apply transition hover:text-terracotta dark:hover:text-marigold;
+  }
+
+  .homepage-journal-card > p:last-child {
+    @apply mt-4 line-clamp-3 leading-7 text-teak/70 dark:text-plaster/70;
+  }
+
   .sandstone-band {
     @apply bg-sandstone/20 dark:bg-teak/30;
   }
@@ -639,10 +661,6 @@ body::before {
   .section-shell {
     padding-top: 4rem;
     padding-bottom: 4rem;
-  }
-
-  .hero-copy h1 {
-    font-size: 3rem;
   }
 
   .field-board {

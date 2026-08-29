@@ -170,3 +170,16 @@ export function mapNotionStudioUpdate(page: NotionPage) {
     body: getRichText(page, "Body Content")
   };
 }
+
+export function mapNotionJournalEntry(page: NotionPage) {
+  return {
+    id: page.id,
+    title: getTitle(page),
+    hook: getRichText(page, "Hook") || getRichText(page, "Notes"),
+    pillar: getSelect(page, "Pillar"),
+    category: getSelect(page, "Category") || getMultiSelect(page, "Category").join(", "),
+    date: getDate(page, "Date"),
+    slug: getRichText(page, "Slug"),
+    featured: getCheckbox(page, "Featured")
+  };
+}

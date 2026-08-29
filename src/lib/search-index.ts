@@ -60,6 +60,12 @@ const routeItems: SearchItem[] = [
     category: "Blog"
   },
   {
+    title: "Architectmata Journal",
+    description: "Editorial stories about architecture, books, travel, culture, making, memory, and childhood observation.",
+    href: "/journal",
+    category: "Journal"
+  },
+  {
     title: "Explorer Club",
     description: "Printable expeditions, observation prompts, neighborhood activities, and family field notes.",
     href: "/explorer-club",

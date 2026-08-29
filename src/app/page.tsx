@@ -5,6 +5,7 @@ import { ProtectedDrawing } from "@/components/protected-drawing";
 import { SiteSearch } from "@/components/site-search";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { getHomepageCmsContent } from "@/lib/cms/fallback-content";
+import { getJournalEntries, type JournalEntry } from "@/lib/cms/journal";
 import {
   aboutManasi,
   brandBasics,
@@ -32,7 +33,7 @@ type PrintableResource = HomepageCmsContent["printableResources"][number];
 type NotebookEntry = HomepageCmsContent["notebookEntries"][number];
 
 export default async function Home() {
-  const cmsContent = await getHomepageCmsContent();
+  const [cmsContent, journal] = await Promise.all([getHomepageCmsContent(), getJournalEntries()]);
 
   return (
     <main className="min-h-screen overflow-hidden bg-plaster text-teak transition-colors dark:bg-[#12150f] dark:text-plaster">
@@ -48,6 +49,7 @@ export default async function Home() {
       <StudioSection programs={cmsContent.studioAnnouncements} />
       <ExplorerClubSection resourcesList={cmsContent.printableResources} />
       <NotebookEntries entries={cmsContent.notebookEntries} />
+      <JournalPreview entries={journal.entries.slice(0, 3)} />
       <Newsletter />
       <Footer />
     </main>
@@ -385,6 +387,33 @@ function TravelStoryCard({ story, delay }: { story: TravelStory; delay: number }
         </a>
       )}
     </Reveal>
+  );
+}
+
+function JournalPreview({ entries }: { entries: JournalEntry[] }) {
+  if (!entries.length) return null;
+
+  return (
+    <section className="wide-band">
+      <div className="section-shell">
+        <div className="resource-heading">
+          <div>
+            <MuseumCaption>From the Journal</MuseumCaption>
+            <h2>Recent stories for looking closer.</h2>
+          </div>
+          <a className="button-outline dark-button" href="/journal">Visit the Journal <ArrowRight aria-hidden size={16} /></a>
+        </div>
+        <div className="homepage-journal-grid">
+          {entries.map((entry, index) => (
+            <Reveal className="homepage-journal-card" delay={index * 0.06} key={entry.id}>
+              <MuseumCaption>{[entry.pillar, entry.category].filter(Boolean).join(" · ")}</MuseumCaption>
+              <h3><a href={`/journal/${entry.slug}`}>{entry.title}</a></h3>
+              {entry.hook && <p>{entry.hook}</p>}
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
