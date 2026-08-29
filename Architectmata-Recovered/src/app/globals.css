@@ -73,7 +73,7 @@ body::before {
   }
 
   .hero-frame {
-    @apply relative mx-auto grid min-h-[calc(94vh-6rem)] max-w-7xl items-center gap-8 px-4 pb-24 pt-16 sm:px-6 lg:grid-cols-[1fr_20rem] lg:px-8;
+    @apply relative mx-auto grid min-h-[calc(94vh-6rem)] max-w-7xl items-center px-4 py-12 sm:px-6 lg:px-8;
   }
 
   .hero-immersive .museum-caption {
@@ -82,6 +82,22 @@ body::before {
 
   .hero-immersive .hero-copy h1 {
     @apply max-w-4xl text-limewash;
+  }
+
+  .hero-intro {
+    @apply mt-6 max-w-xl text-base leading-7 text-limewash/90 sm:text-lg;
+  }
+
+  .hero-prompt {
+    @apply mt-7 font-serif text-lg text-marigold sm:text-xl;
+  }
+
+  .hero-choice-grid {
+    @apply mt-4 grid max-w-xl gap-2;
+  }
+
+  .hero-choice {
+    @apply flex min-h-11 items-center justify-between border border-limewash/45 bg-limewash/10 px-4 py-2.5 text-sm font-semibold text-limewash backdrop-blur-sm transition hover:border-marigold hover:bg-limewash/15 hover:text-marigold focus:outline-none focus:ring-2 focus:ring-marigold focus:ring-offset-2 focus:ring-offset-teak;
   }
 
   .hero-immersive .hero-statement {
@@ -640,8 +656,35 @@ body::before {
     padding-bottom: 4rem;
   }
 
+  .hero-immersive {
+    min-height: 100svh;
+    padding-top: 5rem;
+  }
+
+  .hero-frame {
+    min-height: calc(100svh - 5rem);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
   .hero-copy h1 {
-    font-size: 3rem;
+    margin-top: 0.75rem;
+    max-width: 100%;
+    font-size: clamp(2rem, 9.5vw, 2.4rem);
+  }
+
+  .hero-intro {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .hero-prompt {
+    margin-top: 1rem;
+  }
+
+  .hero-choice-grid {
+    margin-top: 0.75rem;
   }
 
   .field-board {

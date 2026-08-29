@@ -102,29 +102,22 @@ function NotebookHero() {
       <div className="hero-shade" />
       <div className="hero-frame">
         <Reveal className="hero-copy">
-          <MuseumCaption>Notebook 01 | Architecture, childhood, memory</MuseumCaption>
-          <h1>I&apos;m Manasi, a conservation architect, educator, and mother.</h1>
-          <div className="hero-statement">
-            <p>
-              I believe children don&apos;t just learn from books-they learn from buildings,
-              streets, museums, forests, conversations, and the people who tell stories about them.
-            </p>
-            <p>Architectmata is my notebook of those discoveries.</p>
-          </div>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a className="button-primary" href="#observe">
-              Start observing <ArrowRight aria-hidden size={18} />
+          <MuseumCaption>Architecture · Childhood · Memory</MuseumCaption>
+          <h1>Architecture, childhood<br />&amp; the way we learn.</h1>
+          <p className="hero-intro">I&apos;m Manasi — conservation architect,<br />educator, and mother.</p>
+          <p className="hero-prompt">What are you here for?</p>
+          <div className="hero-choice-grid">
+            <a className="hero-choice" href="#observe">
+              <span>Architecture &amp; Heritage</span><span aria-hidden>→</span>
             </a>
-            <a className="button-outline" href="/read">
-              Open the book shelf
+            <a className="hero-choice" href="/read">
+              <span>Parenting &amp; Curious Kids</span><span aria-hidden>→</span>
+            </a>
+            <a className="hero-choice" href="/art-classes">
+              <span>For Educators</span><span aria-hidden>→</span>
             </a>
           </div>
         </Reveal>
-        <div className="hero-note" aria-hidden>
-          <span>fieldwork</span>
-          <span>timber roof study</span>
-          <span>Redrawn as family learning</span>
-        </div>
       </div>
     </section>
   );
