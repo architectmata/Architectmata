@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { SiteSearch } from "@/components/site-search";
 import { getHomepageCmsContent } from "@/lib/cms/fallback-content";
 import { ReadLibrary } from "./read-library";
 
@@ -10,7 +11,10 @@ export default async function ReadPage() {
   return <main className="read-page min-h-screen bg-plaster text-teak dark:bg-[#12150f] dark:text-plaster">
     <header className="read-header">
       <Link href="/" className="read-back"><ArrowLeft size={17}/> Architectmata</Link>
-      <p>Architecture through a child&apos;s eyes.</p>
+      <div className="flex items-center gap-3">
+        <p>Architecture through a child&apos;s eyes.</p>
+        <SiteSearch variant="read" />
+      </div>
     </header>
     <section className="read-intro">
       <span>THE BOOKSHELF</span>

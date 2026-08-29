@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight, Download, Instagram, Mail, PenLine, Send } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { ProtectedDrawing } from "@/components/protected-drawing";
+import { SiteSearch } from "@/components/site-search";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { getHomepageCmsContent } from "@/lib/cms/fallback-content";
 import {
@@ -79,6 +80,7 @@ function Navigation() {
             </a>
           ))}
         </div>
+        <SiteSearch />
         <ThemeToggle />
       </nav>
     </header>
