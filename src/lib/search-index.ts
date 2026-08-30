@@ -95,7 +95,7 @@ const generatedItems: SearchItem[] = [
   ...archiveItems.map((item) => ({
     title: item.title,
     description: item.detail,
-    href: "/#observe",
+    href: "/observe",
     category: item.label
   })),
   ...bookReviews.map((book) => ({

@@ -113,7 +113,7 @@ function NotebookHero() {
             <p>Architectmata is my notebook of those discoveries.</p>
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a className="button-primary" href="#observe">
+            <a className="button-primary" href="/observe">
               Start observing <ArrowRight aria-hidden size={18} />
             </a>
             <a className="button-outline" href="/read">
@@ -170,7 +170,7 @@ function FieldImageStrip({ images }: { images: FieldImage[] }) {
 
 function ArchiveGrid({ items }: { items: ArchiveItem[] }) {
   const exhibitDetails = [
-    { icon: Search, stamp: "Look closer", note: "Measuring, noticing, and documenting.", href: "#observe" },
+    { icon: Search, stamp: "Look closer", note: "Measuring, noticing, and documenting.", href: "/observe" },
     { icon: BookOpenText, stamp: "Open bookshelf", note: "Books that build curiosity and connection.", href: "/read" },
     { icon: Landmark, stamp: "Field notes", note: "Architecture, heritage, and places.", href: "/travel" },
     { icon: PenLine, stamp: "Make a mark", note: "Prompts for drawing memory and place.", href: "/art-classes" },

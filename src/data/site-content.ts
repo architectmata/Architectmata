@@ -15,7 +15,7 @@ import {
 
 export const navItems = [
   { label: "About", href: "/about" },
-  { label: "Observe", href: "#observe" },
+  { label: "Observe", href: "/observe" },
   { label: "Read", href: "/read" },
   { label: "Journal", href: "/journal" },
   { label: "Explore", href: "#explore" },
@@ -59,7 +59,7 @@ export const aboutManasi = {
 export const ideaSections = [
   {
     verb: "Observe",
-    href: "#observe",
+    href: "/observe",
     title: "Architecture, cities, parenting, and everyday details",
     note: "Doorways, bus stops, balconies, museum fatigue, child development, street corners, and the small clues children notice first.",
     icon: Landmark,

@@ -60,6 +60,63 @@ body::before {
     @apply mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8;
   }
 
+  .observe-hero {
+    @apply pb-16 pt-24 sm:pb-20 sm:pt-28;
+  }
+
+  .observe-hero h1 {
+    @apply mt-5 max-w-5xl font-serif text-5xl font-semibold leading-[0.98] sm:text-6xl lg:text-7xl;
+  }
+
+  .observe-intro {
+    @apply mt-7 max-w-3xl border-l-2 border-terracotta/60 pl-5 text-lg leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .observe-layout {
+    @apply grid items-start gap-12 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,.65fr)];
+  }
+
+  .observe-note h2,
+  .observe-activity h2 {
+    @apply mt-4 font-serif font-semibold leading-tight;
+  }
+
+  .observe-note h2 {
+    @apply max-w-3xl text-4xl sm:text-5xl;
+  }
+
+  .observe-note-copy {
+    @apply mt-8 max-w-3xl space-y-6 text-lg leading-8 text-teak/80 dark:text-plaster/80;
+  }
+
+  .observe-note-copy p:last-child {
+    @apply border-l-2 border-marigold pl-5 font-serif text-2xl italic text-sienna dark:text-marigold;
+  }
+
+  .observe-activity {
+    @apply border border-teak/20 bg-limewash/55 p-6 shadow-line dark:border-plaster/20 dark:bg-plaster/5 sm:p-8;
+  }
+
+  .observe-activity h2 {
+    @apply text-3xl;
+  }
+
+  .observe-activity > p:not(.museum-caption) {
+    @apply mt-5 leading-7 text-teak/75 dark:text-plaster/75;
+  }
+
+  .observe-activity ol {
+    @apply mt-7 divide-y divide-teak/15 border-y border-teak/15 dark:divide-plaster/15 dark:border-plaster/15;
+  }
+
+  .observe-activity li {
+    @apply flex gap-3 py-4 leading-6;
+  }
+
+  .observe-activity li svg {
+    @apply mt-0.5 shrink-0 text-terracotta dark:text-marigold;
+  }
+
   .notebook-hero {
     @apply relative bg-plaster bg-paper dark:bg-[#12150f];
   }
