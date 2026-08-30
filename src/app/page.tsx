@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight, BookOpenText, Download, Instagram, Landmark, Mail, PenLine, Search, Send } from "lucide-react";
 import { Reveal } from "@/components/motion";
+import { MobileNavigation } from "@/components/mobile-navigation";
 import { ProtectedDrawing } from "@/components/protected-drawing";
 import { SiteSearch } from "@/components/site-search";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -85,11 +86,7 @@ function Navigation() {
         <SiteSearch />
         <ThemeToggle />
       </nav>
-      <div className="border-t border-teak/10 px-4 py-2 dark:border-plaster/10 lg:hidden">
-        <a className="button-outline mx-auto min-h-0 w-full justify-center py-2 sm:max-w-xs" href="/observe">
-          Observe <ArrowRight aria-hidden size={16} />
-        </a>
-      </div>
+      <MobileNavigation items={navItems.map(({ label, href }) => ({ label, href }))} />
     </header>
   );
 }
