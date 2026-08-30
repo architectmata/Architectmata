@@ -85,6 +85,11 @@ function Navigation() {
         <SiteSearch />
         <ThemeToggle />
       </nav>
+      <div className="border-t border-teak/10 px-4 py-2 dark:border-plaster/10 lg:hidden">
+        <a className="button-outline mx-auto min-h-0 w-full justify-center py-2 sm:max-w-xs" href="/observe">
+          Observe <ArrowRight aria-hidden size={16} />
+        </a>
+      </div>
     </header>
   );
 }
