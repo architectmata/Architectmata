@@ -289,6 +289,9 @@ function AboutManasi() {
           <h2>{aboutManasi.intro}</h2>
           <p>{aboutManasi.motherhood}</p>
           <p>{aboutManasi.why}</p>
+          <a className="button-outline mt-7" href="/about">
+            Read my story <ArrowRight aria-hidden size={17} />
+          </a>
         </Reveal>
         <Reveal className="credential-sheet" delay={0.1}>
           <div>

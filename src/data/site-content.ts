@@ -14,7 +14,7 @@ import {
 } from "lucide-react";
 
 export const navItems = [
-  { label: "About", href: "#about" },
+  { label: "About", href: "/about" },
   { label: "Observe", href: "#observe" },
   { label: "Read", href: "/read" },
   { label: "Journal", href: "/journal" },
