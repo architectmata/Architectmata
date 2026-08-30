@@ -10,6 +10,7 @@ import {
 import { queryNotionDataSource, queryPublishedDatabase } from "./notion-client";
 import {
   getSelect,
+  getTitle,
   mapNotionBookReview,
   mapNotionMedia
 } from "./notion-mappers";
@@ -71,6 +72,34 @@ export async function getBookLibraryBook(slug: string) {
     return { book: page ? mapNotionBookReview(page) : null, unavailable: false };
   } catch (error) {
     console.error("Notion book review fetch failed.", error);
+    return { book: null, unavailable: true };
+  }
+}
+
+export async function getBookLibraryBookByTitle(title: string) {
+  const { isConnected, dataSourceIds } = getNotionConfig();
+
+  if (!isConnected || !dataSourceIds.bookReviews) {
+    return { book: null, unavailable: true };
+  }
+
+  try {
+    const notionBookReviews = await queryNotionDataSource(dataSourceIds.bookReviews, {
+      filter: {
+        and: [
+          { property: "Book", title: { equals: title } },
+          { property: "Status", select: { does_not_equal: "Archive" } }
+        ]
+      },
+      page_size: 1
+    });
+    const page = notionBookReviews.find(
+      (item) => getSelect(item, "Status") !== "Archive" && getTitle(item, "Book") === title
+    );
+
+    return { book: page ? mapNotionBookReview(page) : null, unavailable: false };
+  } catch (error) {
+    console.error("Notion book title lookup failed.", error);
     return { book: null, unavailable: true };
   }
 }

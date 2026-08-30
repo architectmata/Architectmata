@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { SiteSearch } from "@/components/site-search";
+import { isPersonallyReviewedBook } from "@/lib/cms/book-review-status";
 import { getHomepageCmsContent } from "@/lib/cms/fallback-content";
 import { ReadLibrary } from "./read-library";
 
@@ -21,6 +22,11 @@ export default async function ReadPage() {
       <h1>Books that help children look closer.</h1>
       <p>A practical library for parents: architecture, Marathi stories, India and belonging, making, nature, STEM, and places worth noticing.</p>
     </section>
-    <ReadLibrary books={bookReviews}/>
+    <ReadLibrary
+      books={bookReviews.map((book) => ({
+        ...book,
+        reviewedByArchitectmata: isPersonallyReviewedBook(book)
+      }))}
+    />
   </main>;
 }

@@ -1,5 +1,6 @@
 import ContactForm from '@/components/contact-form';
-import {Eyebrow, PlaceholderImage, SectionHead} from '@/components/ui';
+import Image from 'next/image';
+import {Eyebrow, SectionHead} from '@/components/ui';
 import {getPublicStudioContent} from '@/lib/notion-classes';
 
 export const metadata = {title: 'Art Classes'};
@@ -68,11 +69,21 @@ export default async function ArtClasses() {
       <section className="px-5 py-20 md:px-10 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-center">
-            <PlaceholderImage
-              className="aspect-square"
-              tone="bg-clay"
-              label="A place for looking, drawing and making"
-            />
+            <figure>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-4xl bg-clay/20 shadow-field">
+                <Image
+                  src="/images/studio/shared-prompt-drawings.webp"
+                  alt="Two different drawings taking shape at the same studio table"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 42vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <figcaption className="mt-3 text-sm leading-relaxed opacity-60">
+                Different drawings taking shape at the same studio table.
+              </figcaption>
+            </figure>
             <div>
               <SectionHead eyebrow="Class philosophy" title="A space to look closely and make freely" />
               <p className="text-lg leading-relaxed opacity-70">
@@ -93,6 +104,54 @@ export default async function ArtClasses() {
               </div>
             </div>
           </div>
+
+          <section className="mt-24 md:mt-28">
+            <SectionHead eyebrow="Studio projects" title="The prompt is shared. The response is their own." />
+            <article className="grid gap-7 rounded-4xl border border-ink/15 p-6 sm:p-8 md:grid-cols-[.72fr_1.28fr] md:gap-12 md:p-10">
+              <div>
+                <Eyebrow>Turtle drawing project</Eyebrow>
+                <h3 className="mt-4 font-serif text-3xl md:text-4xl">Many ways to draw one turtle</h3>
+              </div>
+              <div className="space-y-5 leading-relaxed opacity-75">
+                <p>
+                  <strong className="text-ink dark:text-paper">The idea:</strong> Every child received
+                  the same basic instructions for drawing a turtle. The goal was not to copy one
+                  “correct” version.
+                </p>
+                <p>
+                  <strong className="text-ink dark:text-paper">What children explored:</strong>{' '}
+                  Observation, shape, proportion and the small decisions that turn an instruction
+                  into an individual drawing.
+                </p>
+                <p>
+                  <strong className="text-ink dark:text-paper">What their responses revealed:</strong>{' '}
+                  Each turtle was noticeably different. Together they showed interpretation,
+                  decision-making, confidence and each child’s own visual thinking.
+                </p>
+              </div>
+            </article>
+          </section>
+
+          <section className="mt-24 rounded-4xl bg-clay/10 p-6 sm:p-8 md:mt-28 md:p-10">
+            <div className="grid gap-8 md:grid-cols-[.72fr_1.28fr] md:gap-12">
+              <div>
+                <Eyebrow>Program archive</Eyebrow>
+                <h2 className="mt-4 font-serif text-4xl md:text-5xl">Summer Hangout</h2>
+              </div>
+              <div>
+                <p className="text-lg leading-relaxed opacity-75">
+                  A three-day creative hangout for ages 6–12, meeting for one hour each day. Through
+                  hands-on making, printmaking and related art-and-craft explorations, children tried
+                  materials, followed ideas and practiced creative problem-solving.
+                </p>
+                <p className="mt-5 border-l-2 border-clay pl-4 text-sm leading-relaxed opacity-70">
+                  The emphasis was not on identical finished crafts. Children could make choices,
+                  change direction and develop individual responses through experimentation and
+                  curiosity.
+                </p>
+              </div>
+            </div>
+          </section>
 
           <div className="mt-24 md:mt-28">
             <SectionHead eyebrow="Age groups" title="Find their studio" />
@@ -181,7 +240,7 @@ export default async function ArtClasses() {
             <p className="-mt-6 mb-8 max-w-2xl text-sm leading-relaxed opacity-65">
               {notionContent.images.length
                 ? 'A few details from Architectmata Studio—children making, experimenting and following their ideas.'
-                : 'Real studio photographs will be added here soon. These spaces are reserved for images from Architectmata Studio—not stock photography.'}
+                : 'More studio photographs are being prepared from the existing class archive.'}
             </p>
             {notionContent.images.length ? (
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
@@ -201,18 +260,7 @@ export default async function ArtClasses() {
                   </div>
                 ))}
               </div>
-            ) : (
-              <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                {['bg-sun', 'bg-sky', 'bg-clay', 'bg-rose'].map((tone, index) => (
-                  <PlaceholderImage
-                    key={tone}
-                    className={`aspect-square ${index % 2 ? 'mt-8' : ''}`}
-                    tone={tone}
-                    label="Studio photograph coming soon"
-                  />
-                ))}
-              </div>
-            )}
+            ) : null}
           </section>
         </div>
       </section>

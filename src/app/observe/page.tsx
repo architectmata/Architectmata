@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, Camera, Eye, Search, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { getBookLibraryBookByTitle } from "@/lib/cms/fallback-content";
 
 export const metadata: Metadata = {
   title: "Observe",
@@ -16,7 +17,9 @@ const observationSteps = [
   { label: "Try it", copy: "Photograph one detail in your neighborhood.", icon: Camera }
 ];
 
-export default function ObservePage() {
+export default async function ObservePage() {
+  const { book: bicycleBook } = await getBookLibraryBookByTitle("I Cannot Draw a Bicycle");
+
   return (
     <main className="min-h-screen bg-plaster text-teak transition-colors dark:bg-[#12150f] dark:text-plaster">
       <header className="read-header">
@@ -81,6 +84,22 @@ export default function ObservePage() {
                 </li>
               ))}
             </ol>
+            {bicycleBook ? (
+              <div className="mt-8 border-t border-teak/15 pt-6 dark:border-plaster/15">
+                <p className="museum-caption">Related reading</p>
+                <h3 className="mt-3 font-serif text-2xl italic">{bicycleBook.title}</h3>
+                {bicycleBook.author ? (
+                  <p className="mt-1 text-sm text-teak/60 dark:text-plaster/60">by {bicycleBook.author}</p>
+                ) : null}
+                <p className="mt-4 text-sm leading-6 text-teak/70 dark:text-plaster/70">
+                  A book about simple shapes, observation, perspective, experimentation and visual
+                  thinking—and why drawing is not only about making something look “correct.”
+                </p>
+                <Link className="mt-5 inline-flex text-sm font-semibold text-terracotta hover:underline dark:text-marigold" href="/read">
+                  Find it in the book library <ArrowRight aria-hidden size={15} />
+                </Link>
+              </div>
+            ) : null}
           </aside>
         </div>
       </section>
