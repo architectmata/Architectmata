@@ -1,3 +1,4 @@
+import { getLocalBookCover } from "@/lib/book-images";
 import type { NotionFileObject, NotionPage, NotionProperty } from "./notion-client";
 
 function property(page: NotionPage, name: string): NotionProperty | undefined {
@@ -71,10 +72,11 @@ export function getCoverImage(page: NotionPage) {
 
 export function mapNotionBookReview(page: NotionPage) {
   const categories = getMultiSelect(page, "Category");
+  const title = getTitle(page, "Book");
 
   return {
     id: page.id,
-    title: getTitle(page, "Book"),
+    title,
     author: getRichText(page, "Author"),
     category: categories[0] ?? "",
     categories,
@@ -91,7 +93,7 @@ export function mapNotionBookReview(page: NotionPage) {
     date: getDate(page, "Date"),
     architectmataPick: getCheckbox(page, "Architectmata Pick"),
     reviewOrder: getNumber(page, "Review Order"),
-    coverImage: getFirstFile(page, "Cover") || getCoverImage(page),
+    coverImage: getFirstFile(page, "Cover") || getCoverImage(page) || getLocalBookCover(title),
     imageCaption: getRichText(page, "Image Caption"),
     imagePermissionStatus: getSelect(page, "Image Permission Status"),
     excerpt: getRichText(page, "Excerpt"),
