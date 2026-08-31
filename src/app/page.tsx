@@ -143,14 +143,23 @@ function FieldImageStrip({ images }: { images: FieldImage[] }) {
             <MuseumCaption>What Architectmata feels like</MuseumCaption>
             <h2>A conservation architect&apos;s fieldwork, translated for families.</h2>
             <p>
-              Roof timbers, visitor centers, children&apos;s books, museum benches, sketchbooks,
-              leaves, construction sites, and home experiments become one way of learning: observe
-              first, name later.
+              Looking closely at buildings—their materials, details, stories, and signs of
+              change—and turning that way of seeing into something children and families can
+              explore together.
             </p>
           </Reveal>
           {images.map((image, index) => (
             <Reveal className={`field-strip-item field-item-${index + 1}`} delay={index * 0.06} key={image.src}>
-              {image.src.includes("protected-") ? (
+              {index === 2 ? (
+                <Image
+                  alt="Conservation architect documenting a historic carved wooden facade while standing on a ladder during fieldwork."
+                  src="/images/architectmata/conservation-fieldwork.jpg"
+                  width={720}
+                  height={480}
+                  className="fieldwork-image h-full w-full bg-teak/5"
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                />
+              ) : image.src.includes("protected-") ? (
                 <div className="field-strip-protected" style={{ backgroundImage: `url(${image.src})` }} />
               ) : (
                 <Image
@@ -162,7 +171,11 @@ function FieldImageStrip({ images }: { images: FieldImage[] }) {
                   sizes="(max-width: 768px) 100vw, 33vw"
                 />
               )}
-              <p>{image.caption}</p>
+              <p>
+                {index === 2
+                  ? "Documenting a historic carved wooden facade during conservation fieldwork."
+                  : image.caption}
+              </p>
             </Reveal>
           ))}
         </div>

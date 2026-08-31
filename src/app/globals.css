@@ -324,6 +324,10 @@ body::before {
     @apply lg:aspect-[4/5];
   }
 
+  .field-strip-item .fieldwork-image {
+    @apply object-contain;
+  }
+
   .field-strip-protected {
     @apply relative bg-cover bg-center opacity-100;
   }
