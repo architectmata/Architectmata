@@ -234,9 +234,9 @@ function ArchiveGrid({ items }: { items: ArchiveItem[] }) {
 function DrawingDetails() {
   const drawings = [
     {
-      src: "/images/architectmata/protected-bracket-detail.jpg",
-      alt: "Cropped watermarked pencil drawing of a heritage bracket detail",
-      caption: "Cropped conservation drawing detail by Manasi Chaudhari. All rights reserved."
+      src: "/images/architectmata/architectural-column-base-study.jpg",
+      alt: "Conservation fieldwork sheet documenting a carved stone column base, with site photograph and measured hand drawing",
+      caption: "Field documentation and hand drawing of a carved stone column base. Conservation study by Manasi Chaudhari."
     },
     {
       src: "/images/architectmata/protected-capital-detail.jpg",
