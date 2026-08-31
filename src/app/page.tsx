@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight, BookOpenText, Download, Instagram, Landmark, Mail, PenLine, Search, Send } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { MobileNavigation } from "@/components/mobile-navigation";
+import { NewsletterSignup } from "@/components/newsletter-signup";
 import { ProtectedDrawing } from "@/components/protected-drawing";
 import { SiteSearch } from "@/components/site-search";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -559,19 +560,24 @@ function Newsletter() {
   return (
     <section className="sandstone-band">
       <div className="section-shell newsletter-layout">
-        <Reveal>
+        <Reveal className="newsletter-story">
           <MuseumCaption>Newsletter</MuseumCaption>
-          <h2>A monthly letter from the field notebook.</h2>
-          <p>
-            Booklists, observation prompts, printable activities, studio updates, and quiet notes on
-            helping children notice the worlds they move through.
-          </p>
+          <h2><span lang="mr">मनाचे खेळ</span> · Manache Khel</h2>
+          <p className="newsletter-subtitle">Playful Mindplay</p>
+          <p className="newsletter-intro">A letter for parents raising curious children.</p>
+          <p>Books, places, art, architecture, culture, and little things worth noticing.</p>
         </Reveal>
         <Reveal className="newsletter-panel" delay={0.1}>
-          <p>Newsletter signup is coming soon. Until then, email Architectmata to stay in touch.</p>
-          <a className="button-primary mt-5" href={`mailto:${brandBasics.email}?subject=Architectmata%20newsletter`}>
-            Email Architectmata <Mail aria-hidden size={17} />
-          </a>
+          <div className="newsletter-image">
+            <Image
+              alt="Manasi sketching beneath a traditional timber roof"
+              src="/images/architectmata/conservation-roof-temple.jpg"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 48vw"
+            />
+          </div>
+          <NewsletterSignup />
         </Reveal>
       </div>
     </section>

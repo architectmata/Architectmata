@@ -708,7 +708,31 @@ body::before {
   }
 
   .newsletter-panel {
-    @apply border border-teak/15 bg-limewash/75 p-6 dark:border-plaster/15 dark:bg-plaster/5 sm:p-8;
+    @apply overflow-hidden border border-teak/15 bg-limewash/75 dark:border-plaster/15 dark:bg-plaster/5;
+  }
+
+  .newsletter-story .newsletter-subtitle {
+    @apply mt-3 font-serif text-2xl italic text-sienna dark:text-marigold;
+  }
+
+  .newsletter-story .newsletter-intro {
+    @apply mt-8 font-serif text-xl font-semibold text-teak dark:text-plaster;
+  }
+
+  .newsletter-image {
+    @apply relative aspect-[16/7] border-b border-teak/15 dark:border-plaster/15;
+  }
+
+  .newsletter-form {
+    @apply p-6 sm:p-8;
+  }
+
+  .newsletter-fields {
+    @apply grid min-w-0 gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end;
+  }
+
+  .newsletter-field {
+    @apply min-w-0;
   }
 
   .newsletter-panel label,
@@ -719,12 +743,32 @@ body::before {
   .newsletter-panel input,
   .contact-form input,
   .contact-form textarea {
-    @apply mt-2 w-full border border-teak/20 bg-plaster px-4 py-3 text-base outline-none transition placeholder:text-teak/40 focus:border-terracotta dark:border-plaster/20 dark:bg-[#12150f] dark:placeholder:text-plaster/40;
+    @apply mt-2 min-h-12 w-full min-w-0 border border-teak/20 bg-plaster px-4 py-3 text-base outline-none transition placeholder:text-teak/40 focus:border-terracotta focus:ring-2 focus:ring-terracotta/20 dark:border-plaster/20 dark:bg-[#12150f] dark:placeholder:text-plaster/40;
   }
 
   .newsletter-panel button,
   .contact-form button {
     @apply inline-flex min-h-12 items-center justify-center gap-2 border border-indigo bg-indigo px-6 font-semibold text-limewash transition hover:bg-peacock;
+  }
+
+  .newsletter-panel button:disabled {
+    @apply cursor-wait opacity-70;
+  }
+
+  .newsletter-errors {
+    @apply mt-4 list-none text-sm font-semibold text-terracotta dark:text-marigold;
+  }
+
+  .newsletter-errors:empty {
+    @apply hidden;
+  }
+
+  .newsletter-privacy {
+    @apply mt-4 text-xs leading-5 text-teak/55 dark:text-plaster/55;
+  }
+
+  .newsletter-form .formkit-alert-success {
+    @apply border-l-2 border-olive bg-olive/10 p-4 font-serif text-xl leading-7 text-teak dark:border-marigold dark:bg-marigold/10 dark:text-plaster;
   }
 
   .contact-grid {
