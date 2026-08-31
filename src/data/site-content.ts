@@ -147,18 +147,18 @@ export const bookReviews = [
     why: "One of the first books Manasi recommends because it encourages children to look differently at their own homes."
   },
   {
-    title: "A Monsoon Alphabet",
-    category: "Nature",
-    age: "3-6",
-    learns: "Seasonal observation, sound, color, waiting",
-    why: "Turns weather into vocabulary and invites children to listen before they name."
+    title: "Little Master Carroll — Alice in Wonderland",
+    category: "Early learning",
+    age: "Baby–preschool",
+    learns: "Colours, visual recognition, and an early introduction to a literary classic",
+    why: "A BabyLit colour primer that uses familiar elements from Alice in Wonderland to introduce colours through bold illustrations and simple language."
   },
   {
-    title: "The Fort on the Hill",
-    category: "Marathi",
-    age: "6-9",
-    learns: "Landscape, local history, courage, oral storytelling",
-    why: "Pairs beautifully with a short climb, a sketchbook, and a story from a grandparent."
+    title: "Books That Feel Like Home",
+    category: "India + diaspora",
+    age: "Family reading",
+    learns: "Culture, belonging, family vocabulary, clothing, food, and everyday connections to India",
+    why: "A growing Architectmata shelf of books such as Nani’s Walk to the Park and Ammama’s Sari that help children encounter Indian life through ordinary stories rather than only festivals and mythology."
   }
 ];
 
@@ -186,40 +186,49 @@ export const travelStories = [
     url: "https://www.instagram.com/p/DQ-taQdEfq_/"
   },
   {
-    title: "Yellowstone Without Rushing",
-    place: "Yellowstone National Park | Family travel",
-    note: "Wildlife, visitor centers, landscapes, and Junior Ranger activities became a way to learn through exploration rather than racing between viewpoints."
+    title: "Junior Rangers Changed How We Explore National Parks",
+    place: "National parks | Family learning",
+    note:
+      "The Junior Ranger program turned park visits into active exploration: asking questions, completing activities, talking with rangers, noticing wildlife and landscapes, and carrying home a badge connected to what was learned.",
+    href: "/journal/junior-rangers-national-parks-with-kids"
   },
   {
-    title: "The Visitor Center Is the First Museum",
+    title: "Why I Never Skip the Visitor Center",
     place: "National parks | Family travel",
-    note: "Maps, stamps, ranger desks, animal tracks, and why the practical room is often the best learning room."
+    note:
+      "Maps, exhibits, ranger desks, stamps, local stories, and practical information make the visitor center one of the best places to understand a park before heading into it.",
+    href: "/journal/why-i-never-skip-national-park-visitor-centers"
   },
   {
-    title: "A Museum Day When Nobody Finished the Gallery",
-    place: "Parenting | Art and fatigue",
-    note: "How to treat restlessness as feedback and turn one sculpture, one bench, and one postcard into enough."
+    title: "What My 5-Year-Old Remembered From Our Oregon Road Trip",
+    place: "Oregon | Family travel",
+    note:
+      "The moments children remember are not always the famous viewpoints. Small experiences, repeated rituals, discoveries, and conversations can become the real map of a family trip.",
+    href: "/journal/what-kids-remember-from-family-travel"
   }
 ];
 
 export const notebookEntries = [
   {
     section: "Observe",
-    title: "Children Read Buildings Before They Know the Word",
-    copy: "Construction sites became chances to talk about excavators, materials, and how places are made. Every building has clues children can already begin to read.",
-    icon: Shapes
-  },
-  {
-    section: "Remember",
-    title: "Pandemic Play From Everyday Materials",
-    copy: "Simple play experiences made from household materials taught Manasi that observation and imagination matter more than perfectly designed toys.",
-    icon: Feather
+    title: "Look Down: What a Manhole Cover Can Tell You",
+    copy: "Manhole covers can carry clues about a city’s history, infrastructure and identity. Chandigarh first taught me to look down, and I have been photographing these overlooked pieces of design ever since.",
+    icon: Shapes,
+    href: "/observe"
   },
   {
     section: "Create",
-    title: "Texture Exploration for Little Hands",
-    copy: "Cardboard, fabric, bubble wrap, leaves, paper, crayons, and paint become a sensory activity for ages 18 months to 5 years.",
-    icon: Sparkles
+    title: "The Spiky Fort",
+    copy: "I wanted to improve the sandcastle. My child had other plans. His spiky mountain fort became a reminder that sometimes the better question is not ‘How can I fix this?’ but ‘Tell me about what you made.’",
+    icon: Sparkles,
+    href: "/journal/the-spiky-fort-learning-not-to-correct-child-creativity"
+  },
+  {
+    section: "Remember",
+    title: "When Books Become Family Keepsakes",
+    copy: "Some books stop being only books. Teacher notes, park stamps, personalised pages and family memories can turn them into small archives of childhood.",
+    icon: Feather,
+    href: "/journal/when-books-become-family-keepsakes"
   }
 ];
 

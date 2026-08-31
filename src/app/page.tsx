@@ -407,7 +407,7 @@ function TravelStories({ stories }: { stories: TravelStory[] }) {
         </p>
       </div>
       <div className="story-grid">
-        {stories.slice(0, 3).map((story, index) => (
+        {stories.map((story, index) => (
           <TravelStoryCard story={story} delay={index * 0.08} key={story.title} />
         ))}
       </div>
@@ -416,13 +416,16 @@ function TravelStories({ stories }: { stories: TravelStory[] }) {
 }
 
 function TravelStoryCard({ story, delay }: { story: TravelStory; delay: number }) {
+  const href = story.href ?? story.url;
+  const isExternal = Boolean(href?.startsWith("http"));
+
   return (
     <Reveal className="travel-card" delay={delay}>
       <MuseumCaption>{story.place}</MuseumCaption>
       <h3>{story.title}</h3>
       <p>{story.note}</p>
-      {story.url && (
-        <a href={story.url} rel="noreferrer" target="_blank">
+      {href && (
+        <a href={href} rel={isExternal ? "noreferrer" : undefined} target={isExternal ? "_blank" : undefined}>
           See full story <ArrowRight aria-hidden size={15} />
         </a>
       )}
@@ -550,7 +553,7 @@ function NotebookEntryCard({ entry, delay }: { entry: NotebookEntry; delay: numb
     <Reveal className="entry-card" delay={delay}>
       <Icon aria-hidden size={22} />
       <MuseumCaption>{entry.section}</MuseumCaption>
-      <h3>{entry.title}</h3>
+      <h3>{entry.href ? <a href={entry.href}>{entry.title}</a> : entry.title}</h3>
       <p>{entry.copy}</p>
     </Reveal>
   );

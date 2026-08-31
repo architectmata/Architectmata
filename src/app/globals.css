@@ -612,6 +612,10 @@ body::before {
     @apply mt-3 font-serif text-2xl font-semibold leading-tight;
   }
 
+  .entry-card h3 a {
+    @apply transition hover:text-terracotta focus:outline-none focus:ring-2 focus:ring-marigold dark:hover:text-marigold;
+  }
+
   .book-card p,
   .travel-card p,
   .entry-card p {
@@ -623,7 +627,7 @@ body::before {
   }
 
   .story-grid {
-    @apply mt-10 grid gap-5 lg:grid-cols-3;
+    @apply mt-10 grid gap-5 md:grid-cols-2;
   }
 
   .travel-card {
