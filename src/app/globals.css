@@ -196,19 +196,19 @@ body::before {
   }
 
   .doors-heading h2 {
-    @apply mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+    @apply max-w-3xl font-serif text-3xl font-semibold uppercase leading-tight tracking-[0.04em] sm:text-4xl;
   }
 
   .doors-grid {
-    @apply mt-10 grid gap-6 md:grid-cols-2;
+    @apply mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-5;
   }
 
   .door-card {
-    @apply grid h-full overflow-hidden border border-teak/15 bg-limewash/65 transition hover:-translate-y-1 hover:border-terracotta hover:shadow-line focus:outline-none focus:ring-2 focus:ring-marigold dark:border-plaster/15 dark:bg-plaster/5 dark:hover:border-marigold;
+    @apply grid h-full grid-rows-[auto_1fr] overflow-hidden border border-teak/15 bg-limewash/65 transition hover:-translate-y-1 hover:border-terracotta focus:outline-none focus:ring-2 focus:ring-marigold dark:border-plaster/15 dark:bg-plaster/5 dark:hover:border-marigold;
   }
 
   .door-image {
-    @apply relative block aspect-[16/9] overflow-hidden border-b border-teak/15 dark:border-plaster/15;
+    @apply relative block h-40 overflow-hidden border-b border-teak/15 dark:border-plaster/15 sm:h-48 xl:h-40;
   }
 
   .door-image-shade {
@@ -216,23 +216,19 @@ body::before {
   }
 
   .door-copy {
-    @apply grid grid-cols-[minmax(0,1fr)_auto] gap-x-5 gap-y-4 p-5 sm:p-7;
-  }
-
-  .door-copy > span:first-child {
-    @apply flex items-baseline gap-3;
+    @apply flex min-w-0 flex-col items-start p-5 sm:p-6 xl:p-5;
   }
 
   .door-copy strong {
-    @apply font-serif text-3xl font-semibold uppercase tracking-[0.04em];
+    @apply mt-2 block font-serif text-2xl font-semibold uppercase leading-none tracking-[0.04em] sm:text-3xl xl:text-2xl;
   }
 
-  .door-copy > span:nth-child(2) {
-    @apply max-w-md text-base leading-7 text-teak/70 dark:text-plaster/70;
+  .door-description {
+    @apply mt-4 block text-sm leading-6 text-teak/70 dark:text-plaster/70;
   }
 
   .door-copy > svg {
-    @apply row-span-2 self-center text-terracotta transition group-hover:translate-x-1 dark:text-marigold;
+    @apply mt-6 text-terracotta transition group-hover:translate-x-1 dark:text-marigold xl:mt-auto xl:pt-6;
   }
 
   .door-number {
@@ -797,8 +793,16 @@ body::before {
     @apply grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center;
   }
 
-  .homepage-newsletter {
-    @apply grid gap-8 py-16 lg:grid-cols-[minmax(0,.85fr)_minmax(28rem,1.15fr)] lg:items-center;
+  .homepage-connect {
+    @apply grid gap-6 py-16 lg:grid-cols-2 lg:items-stretch;
+  }
+
+  .homepage-connect-card {
+    @apply border border-teak/15 bg-limewash/60 p-6 dark:border-plaster/15 dark:bg-plaster/5 sm:p-8;
+  }
+
+  .homepage-newsletter-card {
+    @apply flex flex-col;
   }
 
   .homepage-newsletter-copy h2 {
@@ -810,7 +814,7 @@ body::before {
   }
 
   .homepage-newsletter-panel {
-    @apply shadow-line;
+    @apply mt-8;
   }
 
   .newsletter-panel {
@@ -830,11 +834,11 @@ body::before {
   }
 
   .newsletter-form {
-    @apply p-6 sm:p-8;
+    @apply p-5 sm:p-6;
   }
 
   .newsletter-fields {
-    @apply grid min-w-0 gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end;
+    @apply grid min-w-0 gap-4 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end lg:grid-cols-1 xl:grid-cols-[minmax(0,1fr)_auto];
   }
 
   .newsletter-field {
@@ -875,6 +879,58 @@ body::before {
 
   .newsletter-form .formkit-alert-success {
     @apply border-l-2 border-olive bg-olive/10 p-4 font-serif text-xl leading-7 text-teak dark:border-marigold dark:bg-marigold/10 dark:text-plaster;
+  }
+
+  .instagram-card {
+    @apply flex flex-col;
+  }
+
+  .instagram-profile {
+    @apply flex items-center gap-4 border-b border-teak/15 pb-6 dark:border-plaster/15;
+  }
+
+  .instagram-profile-image {
+    @apply relative h-20 w-20 shrink-0 overflow-hidden rounded-full border-2 border-terracotta/60 bg-sandstone dark:border-marigold/60;
+  }
+
+  .instagram-profile div:last-child span {
+    @apply block;
+  }
+
+  .instagram-profile div:last-child span:last-child {
+    @apply mt-1 text-sm text-teak/60 dark:text-plaster/60;
+  }
+
+  .instagram-copy {
+    @apply mt-8;
+  }
+
+  .instagram-copy h2 {
+    @apply mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .instagram-copy > p:last-child {
+    @apply mt-5 max-w-xl text-lg leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .instagram-button {
+    @apply mt-8 self-start lg:mt-auto lg:pt-3;
+  }
+
+  .remember-intro {
+    @apply grid gap-10 md:grid-cols-2 md:items-center;
+  }
+
+  .remember-intro h1 {
+    @apply mt-5 max-w-2xl font-serif text-5xl font-semibold leading-[1.02] sm:text-6xl;
+  }
+
+  .remember-intro > div:first-child > p:last-of-type {
+    @apply mt-7 max-w-xl text-lg leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .remember-image {
+    @apply relative min-h-[24rem] overflow-hidden border border-teak/15 dark:border-plaster/15 md:min-h-[36rem];
   }
 
   .contact-grid {
@@ -967,7 +1023,53 @@ body::before {
   }
 }
 
+@media (min-width: 1024px) {
+  .entrance-hero {
+    min-height: 68vh;
+  }
+
+  .entrance-hero-frame {
+    min-height: calc(68vh - 4rem);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
 @media (max-width: 640px) {
+  .entrance-hero {
+    min-height: min(70svh, 39rem);
+  }
+
+  .entrance-hero-frame {
+    min-height: calc(min(70svh, 39rem) - 4rem);
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+    align-items: end;
+  }
+
+  .entrance-hero-copy h1 {
+    font-size: clamp(2.35rem, 11vw, 3.2rem);
+  }
+
+  .entrance-hero-intro {
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .entrance-hero-note {
+    margin-top: 1.25rem;
+    font-size: 1.25rem;
+  }
+
+  .door-image {
+    height: 9.5rem;
+  }
+
+  .door-copy strong {
+    font-size: 1.375rem;
+  }
+
   .section-shell {
     padding-top: 4rem;
     padding-bottom: 4rem;

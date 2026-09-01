@@ -36,6 +36,13 @@ const doors = [
     href: "/art-classes",
     image: "/images/studio/shared-prompt-drawings.webp",
     alt: "Children's drawings made from a shared creative prompt"
+  },
+  {
+    title: "Remember",
+    copy: "Keepsakes, family stories and ways of holding on to place.",
+    href: "/remember",
+    image: "/images/architectmata/architectural-column-base-study.jpg",
+    alt: "A hand-drawn architectural detail preserved as part of a family and place archive"
   }
 ] as const;
 
@@ -44,8 +51,8 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-plaster text-teak transition-colors dark:bg-[#12150f] dark:text-plaster">
       <Navigation />
       <Hero />
-      <FourDoors />
-      <Newsletter />
+      <FiveDoors />
+      <NewsletterAndInstagram />
       <Footer />
     </main>
   );
@@ -56,7 +63,7 @@ function Navigation() {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-teak/15 bg-[rgba(255,250,240,0.95)] backdrop-blur-md dark:border-plaster/15 dark:bg-[rgba(18,21,15,0.95)]">
       <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link className="flex items-center gap-3" href="/" aria-label="Architectmata home">
-          <span className="grid h-10 w-10 place-items-center border border-teak/35 bg-terracotta text-sm font-semibold text-limewash dark:border-plaster/30">A</span>
+          <span className="hidden h-10 w-10 place-items-center border border-teak/35 bg-terracotta text-sm font-semibold text-limewash dark:border-plaster/30 sm:grid">A</span>
           <span>
             <span className="block font-serif text-xl font-semibold leading-none">Architectmata</span>
             <span className="hidden text-[0.68rem] uppercase tracking-[0.22em] text-teak/65 dark:text-plaster/65 sm:block">{brandBasics.tagline}</span>
@@ -67,10 +74,12 @@ function Navigation() {
             <Link className="text-sm text-teak/75 transition hover:text-terracotta dark:text-plaster/75 dark:hover:text-marigold" href={item.href} key={item.label}>{item.label}</Link>
           ))}
         </div>
-        <SiteSearch />
-        <ThemeToggle />
+        <div className="ml-auto flex items-center gap-1.5 lg:ml-0">
+          <SiteSearch />
+          <ThemeToggle />
+          <MobileNavigation items={navItems} />
+        </div>
       </nav>
-      <MobileNavigation items={navItems} />
     </header>
   );
 }
@@ -78,7 +87,7 @@ function Navigation() {
 function Hero() {
   return (
     <section className="entrance-hero">
-      <Image alt="Manasi sketching during heritage documentation on a traditional timber roof" src="/images/architectmata/site-sketching-roof.jpg" fill priority className="object-cover" sizes="100vw" />
+      <Image alt="Manasi sketching during heritage documentation on a traditional timber roof" src="/images/architectmata/site-sketching-roof.jpg" fill priority className="object-cover object-[68%_center] sm:object-center" sizes="100vw" />
       <div className="entrance-hero-shade" />
       <div className="entrance-hero-frame">
         <Reveal className="entrance-hero-copy">
@@ -92,11 +101,10 @@ function Hero() {
   );
 }
 
-function FourDoors() {
+function FiveDoors() {
   return (
     <section className="section-shell homepage-doors" aria-labelledby="doors-heading">
       <Reveal className="doors-heading">
-        <p className="museum-caption">Four ways in</p>
         <h2 id="doors-heading">Where would you like to begin?</h2>
       </Reveal>
       <div className="doors-grid">
@@ -108,8 +116,9 @@ function FourDoors() {
                 <span className="door-image-shade" aria-hidden />
               </span>
               <span className="door-copy">
-                <span><span className="door-number">0{index + 1}</span><strong>{door.title}</strong></span>
-                <span>{door.copy}</span>
+                <span className="door-number">0{index + 1}</span>
+                <strong>{door.title}</strong>
+                <span className="door-description">{door.copy}</span>
                 <ArrowRight aria-hidden size={24} />
               </span>
             </Link>
@@ -120,17 +129,38 @@ function FourDoors() {
   );
 }
 
-function Newsletter() {
+function NewsletterAndInstagram() {
   return (
     <section className="sandstone-band" id="newsletter">
-      <div className="section-shell homepage-newsletter">
-        <Reveal className="homepage-newsletter-copy">
-          <p className="museum-caption">Newsletter</p>
-          <h2><span lang="mr">मनाचे खेळ</span> · Manache Khel</h2>
-          <p>A monthly letter for parents raising curious children — with books, places, observations and simple ideas to try together.</p>
+      <div className="section-shell homepage-connect">
+        <Reveal className="homepage-connect-card homepage-newsletter-card">
+          <div className="homepage-newsletter-copy">
+            <p className="museum-caption">Newsletter</p>
+            <h2><span lang="mr">मनाचे खेळ</span> · Manache Khel</h2>
+            <p>A monthly letter for parents raising curious children — with books, places, observations and simple ideas to try together.</p>
+          </div>
+          <div className="newsletter-panel homepage-newsletter-panel">
+            <NewsletterSignup buttonLabel="Subscribe" />
+          </div>
         </Reveal>
-        <Reveal className="newsletter-panel homepage-newsletter-panel" delay={0.08}>
-          <NewsletterSignup buttonLabel="Subscribe" />
+        <Reveal className="homepage-connect-card instagram-card" delay={0.08}>
+          <div className="instagram-profile" aria-hidden>
+            <div className="instagram-profile-image">
+              <Image src="/images/field-notes/manasi-portrait.jpg" alt="" fill className="object-cover" sizes="96px" />
+            </div>
+            <div>
+              <span className="font-serif text-xl font-semibold">Architectmata</span>
+              <span>@architectmata</span>
+            </div>
+          </div>
+          <div className="instagram-copy">
+            <p className="museum-caption">Instagram</p>
+            <h2>Follow along on Instagram</h2>
+            <p>Architecture, books, places and small things worth noticing. Children’s books, heritage, travel and everyday observations at @architectmata.</p>
+          </div>
+          <a className="button-primary instagram-button" href={brandBasics.instagramUrl} target="_blank" rel="noreferrer">
+            <Instagram aria-hidden size={18} /> Visit @architectmata
+          </a>
         </Reveal>
       </div>
     </section>
