@@ -110,6 +110,7 @@ function FiveDoors() {
                 </span>
                 <span className="door-description door-description-full">{door.copy}</span>
                 <span className="door-description door-description-mobile">{door.mobileCopy}</span>
+                <ArrowRight aria-hidden className="door-arrow-desktop" size={24} />
               </span>
             </Link>
           </Reveal>
