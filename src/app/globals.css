@@ -251,6 +251,12 @@ body::before {
     @apply border-y border-teak/15 bg-limewash/45 dark:border-plaster/15 dark:bg-plaster/5;
   }
 
+  .homepage-mobile-only,
+  .homepage-editorials.homepage-mobile-only,
+  .homepage-instagram-line {
+    display: none;
+  }
+
   .homepage-bookshelf-inner {
     @apply py-16 sm:py-20;
   }
@@ -1246,6 +1252,22 @@ body::before {
 
   .door-description-mobile {
     display: block;
+  }
+
+  .homepage-bookshelf.homepage-mobile-only {
+    display: block;
+  }
+
+  .homepage-editorials.homepage-mobile-only {
+    display: grid;
+  }
+
+  .homepage-instagram-line {
+    display: block;
+  }
+
+  .homepage-instagram-desktop {
+    display: none;
   }
 
   .homepage-book-row {

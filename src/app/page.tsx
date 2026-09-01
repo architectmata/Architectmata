@@ -122,7 +122,7 @@ function FiveDoors() {
 
 function BookshelfPreview() {
   return (
-    <section className="homepage-bookshelf" aria-labelledby="bookshelf-heading">
+    <section className="homepage-bookshelf homepage-mobile-only" aria-labelledby="bookshelf-heading">
       <div className="section-shell homepage-bookshelf-inner">
         <Reveal className="homepage-section-heading">
           <p className="museum-caption">Books for curious children</p>
@@ -149,7 +149,7 @@ function BookshelfPreview() {
 
 function EditorialFeatures() {
   return (
-    <section className="section-shell homepage-editorials" aria-label="Featured stories">
+    <section className="section-shell homepage-editorials homepage-mobile-only" aria-label="Featured stories">
       <Reveal>
         <Link className="homepage-feature homepage-feature-observe group" href="/observe#field-note-01">
           <span className="homepage-feature-image">
@@ -183,7 +183,7 @@ function EditorialFeatures() {
 function Newsletter() {
   return (
     <section className="sandstone-band" id="newsletter">
-      <div className="section-shell homepage-connect homepage-connect-single">
+      <div className="section-shell homepage-connect">
         <Reveal className="homepage-connect-card homepage-newsletter-card">
           <div className="homepage-newsletter-copy">
             <p className="museum-caption">Newsletter</p>
@@ -193,6 +193,25 @@ function Newsletter() {
           <div className="newsletter-panel homepage-newsletter-panel">
             <NewsletterSignup buttonLabel="Subscribe" />
           </div>
+        </Reveal>
+        <Reveal className="homepage-connect-card instagram-card homepage-instagram-desktop" delay={0.08}>
+          <div className="instagram-profile" aria-hidden>
+            <div className="instagram-profile-image">
+              <Image src="/images/field-notes/manasi-portrait.jpg" alt="" fill className="object-cover" sizes="96px" />
+            </div>
+            <div>
+              <span className="font-serif text-xl font-semibold">Architectmata</span>
+              <span>@architectmata</span>
+            </div>
+          </div>
+          <div className="instagram-copy">
+            <p className="museum-caption">Instagram</p>
+            <h2>Follow along on Instagram</h2>
+            <p>Architecture, books, places and small things worth noticing. Children’s books, heritage, travel and everyday observations at @architectmata.</p>
+          </div>
+          <a className="button-primary instagram-button" href={brandBasics.instagramUrl} target="_blank" rel="noreferrer">
+            <Instagram aria-hidden size={18} /> Visit @architectmata
+          </a>
         </Reveal>
       </div>
     </section>
