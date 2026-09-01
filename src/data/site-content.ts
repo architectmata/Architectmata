@@ -37,7 +37,7 @@ export const navItems = [
     href: "/travel",
     children: [
       { label: "Travel", href: "/travel" },
-      { label: "Junior Ranger", href: "/journal/junior-rangers-national-parks-with-kids" }
+      { label: "Travel Experiences with Kids", href: "/travel#travel-with-kids" }
     ]
   },
   {
