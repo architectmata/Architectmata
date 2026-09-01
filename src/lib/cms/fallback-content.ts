@@ -7,6 +7,7 @@ import {
   studioPrograms,
   travelStories
 } from "@/data/site-content";
+import { books as fallbackLibraryBooks } from "@/lib/data";
 import { queryNotionDataSource, queryPublishedDatabase } from "./notion-client";
 import {
   getSelect,
@@ -28,11 +29,23 @@ export const fallbackCmsContent = {
   studioAnnouncements: studioPrograms
 };
 
+const localBookLibrary = fallbackLibraryBooks.map((book) => ({
+  title: book.title,
+  author: book.author,
+  category: book.category,
+  categories: [book.category],
+  age: book.age,
+  language: book.language,
+  learns: book.learn,
+  why: book.why,
+  coverImage: book.image
+}));
+
 export async function getBookLibraryContent() {
   const { isConnected, dataSourceIds } = getNotionConfig();
 
   if (!isConnected || !dataSourceIds.bookReviews) {
-    return { books: [], unavailable: true };
+    return { books: localBookLibrary, unavailable: false };
   }
 
   try {
@@ -43,10 +56,13 @@ export async function getBookLibraryContent() {
       .filter((page) => getSelect(page, "Status") !== "Archive")
       .map(mapNotionBookReview);
 
-    return { books, unavailable: false };
+    return {
+      books: books.length > 0 ? books : localBookLibrary,
+      unavailable: false
+    };
   } catch (error) {
     console.error("Notion book library fetch failed.", error);
-    return { books: [], unavailable: true };
+    return { books: localBookLibrary, unavailable: false };
   }
 }
 

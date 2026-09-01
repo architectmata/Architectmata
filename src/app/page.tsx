@@ -1,12 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Instagram, Mail } from "lucide-react";
+import Header from "@/components/header";
 import { Reveal } from "@/components/motion";
-import { MobileNavigation } from "@/components/mobile-navigation";
 import { NewsletterSignup } from "@/components/newsletter-signup";
-import { SiteSearch } from "@/components/site-search";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { brandBasics, navItems } from "@/data/site-content";
+import { brandBasics } from "@/data/site-content";
 
 const doors = [
   {
@@ -49,38 +47,12 @@ const doors = [
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-plaster text-teak transition-colors dark:bg-[#12150f] dark:text-plaster">
-      <Navigation />
+      <Header />
       <Hero />
       <FiveDoors />
       <NewsletterAndInstagram />
       <Footer />
     </main>
-  );
-}
-
-function Navigation() {
-  return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-teak/15 bg-[rgba(255,250,240,0.95)] backdrop-blur-md dark:border-plaster/15 dark:bg-[rgba(18,21,15,0.95)]">
-      <nav aria-label="Main navigation" className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <Link className="flex items-center gap-3" href="/" aria-label="Architectmata home">
-          <span className="hidden h-10 w-10 place-items-center border border-teak/35 bg-terracotta text-sm font-semibold text-limewash dark:border-plaster/30 sm:grid">A</span>
-          <span>
-            <span className="block font-serif text-xl font-semibold leading-none">Architectmata</span>
-            <span className="hidden text-[0.68rem] uppercase tracking-[0.22em] text-teak/65 dark:text-plaster/65 sm:block">{brandBasics.tagline}</span>
-          </span>
-        </Link>
-        <div className="ml-auto hidden items-center gap-6 lg:flex">
-          {navItems.map((item) => (
-            <Link className="text-sm text-teak/75 transition hover:text-terracotta dark:text-plaster/75 dark:hover:text-marigold" href={item.href} key={item.label}>{item.label}</Link>
-          ))}
-        </div>
-        <div className="ml-auto flex items-center gap-1.5 lg:ml-0">
-          <SiteSearch />
-          <ThemeToggle />
-          <MobileNavigation items={navItems} />
-        </div>
-      </nav>
-    </header>
   );
 }
 

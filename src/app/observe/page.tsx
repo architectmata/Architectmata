@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, Camera, Eye, Search, Sparkles } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ArrowRight, Camera, Eye, Search, Sparkles } from "lucide-react";
+import Header from "@/components/header";
 import { getBookLibraryBookByTitle } from "@/lib/cms/fallback-content";
 
 export const metadata: Metadata = {
@@ -22,15 +22,7 @@ export default async function ObservePage() {
 
   return (
     <main className="min-h-screen bg-plaster text-teak transition-colors dark:bg-[#12150f] dark:text-plaster">
-      <header className="read-header">
-        <Link href="/" className="read-back">
-          <ArrowLeft aria-hidden size={17} /> Architectmata
-        </Link>
-        <div className="flex items-center gap-3">
-          <p>Architecture through a child&apos;s eyes.</p>
-          <ThemeToggle />
-        </div>
-      </header>
+      <Header />
 
       <section className="section-shell observe-hero">
         <p className="museum-caption">Observe</p>
@@ -43,7 +35,7 @@ export default async function ObservePage() {
 
       <section className="wide-band">
         <div className="section-shell observe-layout">
-          <article className="observe-note">
+          <article className="observe-note" id="field-note-01">
             <p className="museum-caption">Look Down · Field Note 01</p>
             <h2>What can a manhole cover tell you about a city?</h2>
             <div className="observe-note-copy">

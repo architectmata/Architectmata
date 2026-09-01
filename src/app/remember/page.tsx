@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Remember",
@@ -11,14 +12,7 @@ export const metadata: Metadata = {
 export default function RememberPage() {
   return (
     <main className="min-h-screen bg-plaster text-teak dark:bg-[#12150f] dark:text-plaster">
-      <header className="border-b border-teak/15 dark:border-plaster/15">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
-          <Link className="inline-flex items-center gap-2 text-sm font-semibold hover:text-terracotta dark:hover:text-marigold" href="/">
-            <ArrowLeft aria-hidden size={17} /> Home
-          </Link>
-          <Link className="font-serif text-xl font-semibold" href="/">Architectmata</Link>
-        </div>
-      </header>
+      <Header />
       <section className="section-shell remember-intro">
         <div>
           <p className="museum-caption">Remember</p>

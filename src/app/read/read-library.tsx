@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Book = {
   title: string;
@@ -53,7 +53,12 @@ function normalizeTopic(topic: string) {
 }
 
 function getBookTopics(book: Book) {
-  const source = book.categories?.length ? book.categories : book.category ? [book.category] : [];
+  const source = book.categories?.length ? [...book.categories] : book.category ? [book.category] : [];
+
+  if (book.language?.toLocaleLowerCase().includes("marathi")) {
+    source.push("Marathi");
+  }
+
   return Array.from(new Set(source.map(normalizeTopic).filter(Boolean)));
 }
 
@@ -61,9 +66,21 @@ function isExternalHttpUrl(value?: string) {
   return Boolean(value && /^https?:\/\//i.test(value));
 }
 
-export function ReadLibrary({ books }: { books: Book[] }) {
+export function ReadLibrary({ books, initialTopic = "All" }: { books: Book[]; initialTopic?: string }) {
   const [query, setQuery] = useState("");
-  const [topic, setTopic] = useState("All");
+  const [topic, setTopic] = useState(initialTopic);
+
+  function selectTopic(label: string) {
+    setTopic(label);
+
+    const url = new URL(window.location.href);
+    if (label === "All") {
+      url.searchParams.delete("topic");
+    } else {
+      url.searchParams.set("topic", label.toLocaleLowerCase());
+    }
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  }
 
   const topics = useMemo(() => {
     const frequency = new Map<string, number>();
@@ -85,8 +102,17 @@ export function ReadLibrary({ books }: { books: Book[] }) {
       return (frequency.get(b) ?? 0) - (frequency.get(a) ?? 0) || a.localeCompare(b);
     });
 
-    return ["All", ...labels.slice(0, 10)];
-  }, [books]);
+    const visibleLabels = labels.slice(0, 10);
+    if (initialTopic !== "All" && !visibleLabels.includes(initialTopic)) {
+      visibleLabels.push(initialTopic);
+    }
+
+    return ["All", ...visibleLabels];
+  }, [books, initialTopic]);
+
+  useEffect(() => {
+    setTopic(initialTopic);
+  }, [initialTopic]);
 
   const shown = useMemo(() => {
     const search = query.trim().toLocaleLowerCase();
@@ -134,7 +160,7 @@ export function ReadLibrary({ books }: { books: Book[] }) {
               key={label}
               aria-pressed={topic === label}
               className={topic === label ? "active" : ""}
-              onClick={() => setTopic(label)}
+              onClick={() => selectTopic(label)}
             >
               {label}
             </button>

@@ -14,12 +14,58 @@ import {
 } from "lucide-react";
 
 export const navItems = [
-  { label: "Observe", href: "/observe" },
-  { label: "Read", href: "/read" },
-  { label: "Explore", href: "/travel" },
-  { label: "Create", href: "/art-classes" },
-  { label: "Remember", href: "/remember" },
-  { label: "About", href: "/about" }
+  {
+    label: "Observe",
+    href: "/observe",
+    children: [
+      { label: "Architecture & Heritage", href: "/architecture" },
+      { label: "Field Notes", href: "/observe#field-note-01" },
+      { label: "Look Closer", href: "/observe#observation-walk-title" }
+    ]
+  },
+  {
+    label: "Read",
+    href: "/read",
+    children: [
+      { label: "Book Library", href: "/read" },
+      { label: "Book Reviews", href: "/read" },
+      { label: "Marathi Books", href: "/read?topic=marathi" }
+    ]
+  },
+  {
+    label: "Explore",
+    href: "/travel",
+    children: [
+      { label: "Travel", href: "/travel" },
+      { label: "Junior Ranger", href: "/journal/junior-rangers-national-parks-with-kids" }
+    ]
+  },
+  {
+    label: "Create",
+    href: "/art-classes",
+    children: [
+      { label: "Art Classes", href: "/art-classes" },
+      { label: "Activities", href: "/resources" },
+      { label: "Downloads", href: "/resources" }
+    ]
+  },
+  {
+    label: "Remember",
+    href: "/remember",
+    children: [
+      { label: "Keepsakes", href: "/journal/when-books-become-family-keepsakes" },
+      { label: "Family Stories", href: "/remember" },
+      { label: "Journal", href: "/journal" }
+    ]
+  },
+  {
+    label: "About",
+    href: "/about",
+    children: [
+      { label: "About Architectmata", href: "/about" },
+      { label: "Contact", href: "/contact" }
+    ]
+  }
 ];
 
 export const brandBasics = {
