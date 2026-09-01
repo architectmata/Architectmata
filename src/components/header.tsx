@@ -7,7 +7,7 @@ import { SiteSearch } from "@/components/site-search";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { brandBasics, navItems } from "@/data/site-content";
 
-export default function Header() {
+export default function Header({ homepageMobileMinimal = false }: { homepageMobileMinimal?: boolean }) {
   const pathname = usePathname();
 
   return (
@@ -60,8 +60,8 @@ export default function Header() {
           })}
         </nav>
         <div className="ml-auto flex items-center gap-1.5 lg:ml-0">
-          <SiteSearch />
-          <ThemeToggle />
+          <span className={homepageMobileMinimal ? "hidden sm:inline-flex" : "inline-flex"}><SiteSearch /></span>
+          <span className={homepageMobileMinimal ? "hidden sm:inline-flex" : "inline-flex"}><ThemeToggle /></span>
           <MobileNavigation items={navItems} />
         </div>
       </div>

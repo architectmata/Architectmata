@@ -5,11 +5,13 @@ import Header from "@/components/header";
 import { Reveal } from "@/components/motion";
 import { NewsletterSignup } from "@/components/newsletter-signup";
 import { brandBasics } from "@/data/site-content";
+import { getLocalBookCover } from "@/lib/book-images";
 
 const doors = [
   {
     title: "Observe",
     copy: "Look closer at buildings, streets and everyday places.",
+    mobileCopy: "Buildings, streets & everyday clues",
     href: "/observe",
     image: "/images/architectmata/conservation-fieldwork.jpg",
     alt: "Conservation architect documenting a carved wooden facade during fieldwork"
@@ -17,6 +19,7 @@ const doors = [
   {
     title: "Read",
     copy: "Books that help children understand places, people and the world.",
+    mobileCopy: "Books worth discovering together",
     href: "/read",
     image: "/images/books/A dragon on the roof.jpeg",
     alt: "Children's architecture book displayed as part of the Architectmata bookshelf"
@@ -24,6 +27,7 @@ const doors = [
   {
     title: "Explore",
     copy: "Travel, museums and places worth noticing together.",
+    mobileCopy: "Travel, museums & interesting places",
     href: "/travel",
     image: "/images/architectmata/shaniwar-wada-interior-arch.jpeg",
     alt: "Historic interior arch inviting families to look closely at a place"
@@ -31,6 +35,7 @@ const doors = [
   {
     title: "Create",
     copy: "Art, architecture activities and things to make.",
+    mobileCopy: "Art, architecture & making",
     href: "/art-classes",
     image: "/images/studio/shared-prompt-drawings.webp",
     alt: "Children's drawings made from a shared creative prompt"
@@ -38,19 +43,29 @@ const doors = [
   {
     title: "Remember",
     copy: "Keepsakes, family stories and ways of holding on to place.",
+    mobileCopy: "Family stories, keepsakes & place",
     href: "/remember",
     image: "/images/architectmata/architectural-column-base-study.jpg",
     alt: "A hand-drawn architectural detail preserved as part of a family and place archive"
   }
 ] as const;
 
+const featuredBooks = [
+  "Discovering Architecture",
+  "Know Your Forts",
+  "Aambe Kevha Yenar"
+].map((title) => ({ title, image: getLocalBookCover(title) }));
+
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-plaster text-teak transition-colors dark:bg-[#12150f] dark:text-plaster">
-      <Header />
+      <Header homepageMobileMinimal />
       <Hero />
       <FiveDoors />
-      <NewsletterAndInstagram />
+      <BookshelfPreview />
+      <EditorialFeatures />
+      <Newsletter />
+      <InstagramLine />
       <Footer />
     </main>
   );
@@ -93,7 +108,8 @@ function FiveDoors() {
                   <strong>{door.title}</strong>
                   <ArrowRight aria-hidden size={24} />
                 </span>
-                <span className="door-description">{door.copy}</span>
+                <span className="door-description door-description-full">{door.copy}</span>
+                <span className="door-description door-description-mobile">{door.mobileCopy}</span>
               </span>
             </Link>
           </Reveal>
@@ -103,10 +119,70 @@ function FiveDoors() {
   );
 }
 
-function NewsletterAndInstagram() {
+function BookshelfPreview() {
+  return (
+    <section className="homepage-bookshelf" aria-labelledby="bookshelf-heading">
+      <div className="section-shell homepage-bookshelf-inner">
+        <Reveal className="homepage-section-heading">
+          <p className="museum-caption">Books for curious children</p>
+          <h2 id="bookshelf-heading">From the Bookshelf</h2>
+          <p>Architecture · Marathi · India + Belonging</p>
+        </Reveal>
+        <div className="homepage-book-row">
+          {featuredBooks.map((book, index) => book.image ? (
+            <Reveal delay={index * 0.06} key={book.title}>
+              <Link className="homepage-book" href="/read" aria-label={`${book.title} in the bookshelf`}>
+                <span className="homepage-book-cover">
+                  <Image src={book.image} alt={`Cover of ${book.title}`} fill sizes="(max-width: 640px) 29vw, 180px" className="object-cover" />
+                </span>
+                <span>{book.title}</span>
+              </Link>
+            </Reveal>
+          ) : null)}
+        </div>
+        <Link className="homepage-text-link" href="/read">Explore the bookshelf <ArrowRight aria-hidden size={17} /></Link>
+      </div>
+    </section>
+  );
+}
+
+function EditorialFeatures() {
+  return (
+    <section className="section-shell homepage-editorials" aria-label="Featured stories">
+      <Reveal>
+        <Link className="homepage-feature homepage-feature-observe group" href="/observe#field-note-01">
+          <span className="homepage-feature-image">
+            <Image src="/images/architectmata/manhole-cover.jpg" alt="Decorative circular manhole cover photographed on a city pavement" fill sizes="(max-width: 768px) 100vw, 55vw" className="object-cover object-center transition duration-500 group-hover:scale-[1.02]" />
+          </span>
+          <span className="homepage-feature-copy">
+            <span className="museum-caption">Look Closer</span>
+            <h3>Why I photograph manhole covers</h3>
+            <span>Cities leave clues everywhere.</span>
+            <span className="homepage-text-link">Observe <ArrowRight aria-hidden size={17} /></span>
+          </span>
+        </Link>
+      </Reveal>
+      <Reveal delay={0.08}>
+        <Link className="homepage-feature homepage-feature-notebook group" href="/architecture">
+          <span className="homepage-feature-image">
+            <Image src="/images/architectmata/conservation-roof-temple.jpg" alt="Traditional roof structure documented during conservation fieldwork" fill sizes="(max-width: 768px) 100vw, 45vw" className="object-cover transition duration-500 group-hover:scale-[1.02]" />
+          </span>
+          <span className="homepage-feature-copy">
+            <span className="museum-caption">From an Architect&apos;s Notebook</span>
+            <h3>Looking closely is part of the job</h3>
+            <span>Materials, repairs, scale and observation are part of how architects learn to understand a place.</span>
+            <span className="homepage-text-link">Architecture &amp; heritage <ArrowRight aria-hidden size={17} /></span>
+          </span>
+        </Link>
+      </Reveal>
+    </section>
+  );
+}
+
+function Newsletter() {
   return (
     <section className="sandstone-band" id="newsletter">
-      <div className="section-shell homepage-connect">
+      <div className="section-shell homepage-connect homepage-connect-single">
         <Reveal className="homepage-connect-card homepage-newsletter-card">
           <div className="homepage-newsletter-copy">
             <p className="museum-caption">Newsletter</p>
@@ -117,27 +193,18 @@ function NewsletterAndInstagram() {
             <NewsletterSignup buttonLabel="Subscribe" />
           </div>
         </Reveal>
-        <Reveal className="homepage-connect-card instagram-card" delay={0.08}>
-          <div className="instagram-profile" aria-hidden>
-            <div className="instagram-profile-image">
-              <Image src="/images/field-notes/manasi-portrait.jpg" alt="" fill className="object-cover" sizes="96px" />
-            </div>
-            <div>
-              <span className="font-serif text-xl font-semibold">Architectmata</span>
-              <span>@architectmata</span>
-            </div>
-          </div>
-          <div className="instagram-copy">
-            <p className="museum-caption">Instagram</p>
-            <h2>Follow along on Instagram</h2>
-            <p>Architecture, books, places and small things worth noticing. Children’s books, heritage, travel and everyday observations at @architectmata.</p>
-          </div>
-          <a className="button-primary instagram-button" href={brandBasics.instagramUrl} target="_blank" rel="noreferrer">
-            <Instagram aria-hidden size={18} /> Visit @architectmata
-          </a>
-        </Reveal>
       </div>
     </section>
+  );
+}
+
+function InstagramLine() {
+  return (
+    <div className="section-shell homepage-instagram-line">
+      <a href={brandBasics.instagramUrl} target="_blank" rel="noreferrer">
+        <Instagram aria-hidden size={17} /> Also on Instagram <ArrowRight aria-hidden size={15} /> @architectmata
+      </a>
+    </div>
   );
 }
 
