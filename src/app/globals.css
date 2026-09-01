@@ -219,16 +219,20 @@ body::before {
     @apply flex min-w-0 flex-col items-start p-5 sm:p-6 xl:p-5;
   }
 
-  .door-copy strong {
-    @apply mt-2 block font-serif text-2xl font-semibold uppercase leading-none tracking-[0.04em] sm:text-3xl xl:text-2xl;
+  .door-title-row {
+    @apply mt-2 flex w-full min-w-0 items-center gap-2;
+  }
+
+  .door-title-row strong {
+    @apply block min-w-0 flex-1 font-serif text-2xl font-semibold uppercase leading-none tracking-[0.04em] sm:text-3xl xl:text-2xl;
   }
 
   .door-description {
     @apply mt-4 block text-sm leading-6 text-teak/70 dark:text-plaster/70;
   }
 
-  .door-copy > svg {
-    @apply mt-6 text-terracotta transition group-hover:translate-x-1 dark:text-marigold xl:mt-auto xl:pt-6;
+  .door-title-row > svg {
+    @apply h-10 w-10 shrink-0 p-2 text-terracotta transition group-hover:translate-x-1 dark:text-marigold;
   }
 
   .door-number {
@@ -1035,6 +1039,21 @@ body::before {
   }
 }
 
+@media (min-width: 1280px) {
+  .door-image {
+    height: 12.5rem;
+  }
+
+  .door-copy {
+    padding: 1rem;
+  }
+
+  .door-description {
+    margin-top: 0.625rem;
+    line-height: 1.45;
+  }
+}
+
 @media (max-width: 640px) {
   .entrance-hero {
     min-height: 29rem;
@@ -1082,25 +1101,24 @@ body::before {
   }
 
   .door-image {
-    height: 7rem;
+    height: 9rem;
   }
 
   .door-copy {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
   }
 
   .door-copy strong {
-    margin-top: 0.25rem;
     font-size: 1.375rem;
   }
 
-  .door-description {
-    margin-top: 0.5rem;
-    line-height: 1.45;
+  .door-title-row {
+    margin-top: 0.125rem;
   }
 
-  .door-copy > svg {
-    margin-top: 0.75rem;
+  .door-description {
+    margin-top: 0.25rem;
+    line-height: 1.45;
   }
 
   .section-shell {

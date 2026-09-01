@@ -89,9 +89,11 @@ function FiveDoors() {
               </span>
               <span className="door-copy">
                 <span className="door-number">0{index + 1}</span>
-                <strong>{door.title}</strong>
+                <span className="door-title-row">
+                  <strong>{door.title}</strong>
+                  <ArrowRight aria-hidden size={24} />
+                </span>
                 <span className="door-description">{door.copy}</span>
-                <ArrowRight aria-hidden size={24} />
               </span>
             </Link>
           </Reveal>
