@@ -14,16 +14,11 @@ import {
 } from "lucide-react";
 
 export const navItems = [
-  { label: "About", href: "/about" },
   { label: "Observe", href: "/observe" },
   { label: "Read", href: "/read" },
-  { label: "Journal", href: "/journal" },
-  { label: "Explore", href: "#explore" },
-  { label: "Create", href: "#create" },
-  { label: "Remember", href: "#remember" },
-  { label: "Art Classes", href: "/art-classes" },
-  { label: "Explorer Club", href: "#explorer-club" },
-  { label: "Contact", href: "#contact" }
+  { label: "Explore", href: "/travel" },
+  { label: "Create", href: "/art-classes" },
+  { label: "About", href: "/about" }
 ];
 
 export const brandBasics = {

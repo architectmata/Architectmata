@@ -9,7 +9,7 @@ const kitOptions = JSON.stringify({
   }
 });
 
-export function NewsletterSignup() {
+export function NewsletterSignup({ buttonLabel = "Join Manache Khel" }: { buttonLabel?: string }) {
   return (
     <form
       action="https://app.kit.com/forms/9863628/subscriptions"
@@ -36,7 +36,7 @@ export function NewsletterSignup() {
           />
         </div>
         <button type="submit" data-element="submit">
-          <span>Join Manache Khel</span>
+          <span>{buttonLabel}</span>
           <ArrowRight aria-hidden size={17} />
         </button>
       </div>

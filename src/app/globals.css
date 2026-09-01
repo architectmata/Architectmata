@@ -159,6 +159,86 @@ body::before {
     @apply border-b border-limewash/20 py-2;
   }
 
+  .entrance-hero {
+    @apply relative min-h-[78vh] overflow-hidden bg-teak pt-16 text-limewash;
+  }
+
+  .entrance-hero-shade {
+    @apply absolute inset-0 bg-[linear-gradient(90deg,rgba(36,20,9,.9),rgba(36,20,9,.55)_48%,rgba(36,20,9,.12))];
+  }
+
+  .entrance-hero-frame {
+    @apply relative mx-auto flex min-h-[calc(78vh-4rem)] max-w-7xl items-center px-4 py-20 sm:px-6 lg:px-8;
+  }
+
+  .entrance-hero-copy {
+    @apply max-w-4xl;
+  }
+
+  .entrance-hero-copy .museum-caption {
+    @apply text-marigold;
+  }
+
+  .entrance-hero-copy h1 {
+    @apply mt-5 max-w-4xl font-serif text-5xl font-semibold leading-[1.02] text-limewash sm:text-6xl lg:text-7xl;
+  }
+
+  .entrance-hero-intro {
+    @apply mt-7 max-w-2xl text-lg leading-8 text-limewash/90 sm:text-xl;
+  }
+
+  .entrance-hero-note {
+    @apply mt-8 border-l-2 border-marigold pl-5 font-serif text-2xl italic text-marigold;
+  }
+
+  .homepage-doors {
+    @apply py-20 sm:py-24;
+  }
+
+  .doors-heading h2 {
+    @apply mt-4 max-w-3xl font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .doors-grid {
+    @apply mt-10 grid gap-6 md:grid-cols-2;
+  }
+
+  .door-card {
+    @apply grid h-full overflow-hidden border border-teak/15 bg-limewash/65 transition hover:-translate-y-1 hover:border-terracotta hover:shadow-line focus:outline-none focus:ring-2 focus:ring-marigold dark:border-plaster/15 dark:bg-plaster/5 dark:hover:border-marigold;
+  }
+
+  .door-image {
+    @apply relative block aspect-[16/9] overflow-hidden border-b border-teak/15 dark:border-plaster/15;
+  }
+
+  .door-image-shade {
+    @apply absolute inset-0 bg-gradient-to-t from-teak/20 to-transparent;
+  }
+
+  .door-copy {
+    @apply grid grid-cols-[minmax(0,1fr)_auto] gap-x-5 gap-y-4 p-5 sm:p-7;
+  }
+
+  .door-copy > span:first-child {
+    @apply flex items-baseline gap-3;
+  }
+
+  .door-copy strong {
+    @apply font-serif text-3xl font-semibold uppercase tracking-[0.04em];
+  }
+
+  .door-copy > span:nth-child(2) {
+    @apply max-w-md text-base leading-7 text-teak/70 dark:text-plaster/70;
+  }
+
+  .door-copy > svg {
+    @apply row-span-2 self-center text-terracotta transition group-hover:translate-x-1 dark:text-marigold;
+  }
+
+  .door-number {
+    @apply text-xs font-semibold tracking-[0.18em] text-terracotta dark:text-marigold;
+  }
+
   .notebook-hero::before {
     content: "";
     @apply absolute inset-y-0 left-0 hidden w-20 border-r border-teak/10 bg-limewash/35 dark:border-plaster/10 dark:bg-plaster/5 lg:block;
@@ -717,6 +797,22 @@ body::before {
     @apply grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center;
   }
 
+  .homepage-newsletter {
+    @apply grid gap-8 py-16 lg:grid-cols-[minmax(0,.85fr)_minmax(28rem,1.15fr)] lg:items-center;
+  }
+
+  .homepage-newsletter-copy h2 {
+    @apply mt-4 font-serif text-4xl font-semibold leading-tight sm:text-5xl;
+  }
+
+  .homepage-newsletter-copy > p:last-child {
+    @apply mt-5 max-w-xl text-lg leading-8 text-teak/75 dark:text-plaster/75;
+  }
+
+  .homepage-newsletter-panel {
+    @apply shadow-line;
+  }
+
   .newsletter-panel {
     @apply overflow-hidden border border-teak/15 bg-limewash/75 dark:border-plaster/15 dark:bg-plaster/5;
   }
@@ -807,6 +903,26 @@ body::before {
 
   .image-rules p {
     @apply text-sm leading-6 text-teak/70 dark:text-plaster/70;
+  }
+
+  .homepage-footer {
+    @apply border-t border-teak/15 dark:border-plaster/15;
+  }
+
+  .homepage-footer-inner {
+    @apply grid gap-7 py-10 lg:grid-cols-[auto_1fr] lg:items-center;
+  }
+
+  .homepage-footer-links {
+    @apply flex flex-wrap gap-x-6 gap-y-3 lg:justify-end;
+  }
+
+  .homepage-footer-links a {
+    @apply inline-flex min-h-11 items-center gap-2 text-sm font-semibold transition hover:text-terracotta dark:hover:text-marigold;
+  }
+
+  .homepage-footer-inner > p {
+    @apply border-t border-teak/15 pt-6 text-xs leading-6 text-teak/55 dark:border-plaster/15 dark:text-plaster/55 lg:col-span-2;
   }
 
   .protected-drawing {
